@@ -2,8 +2,7 @@
    TP Candidate Microsite — app.js
    Requires: translations.js (window.I18N, window.CONTENT, window.getChatGPTPrompt)
    Purpose : Bind UI, render dynamic content, and keep things snappy on mobile
-   Updated : 2025-08-22 (Enh: URL-after language via hash; JA default; EN/KO supported;
-             link rewriting to persist lang; visible language button group)
+   Updated : 2025-08-24 (URL-based lang suffix; JP default; language buttons)
 ============================================================================ */
 
 /* ----------------------------------------------------------
@@ -38,89 +37,184 @@ function imageFallback(img, fallbackAlt = 'image') {
 }
 
 /* ----------------------------------------------------------
-   1) Language & i18n plumbing (ENHANCED)
+   1) Language & i18n plumbing (URL suffix style + graceful fallback)
+      - Supported styles we can parse:
+        * Suffix:  /page.html/ja, /page.html/en, /page.html/ko  (preferred)
+        * Query :  ?lang=ja|en|ko
+        * Hash  :  #ja|#en|#ko
+        * Prefix:  /ja/page.html, /en/page.html  (parsed but we rewrite to suffix)
+        * LocalStorage fallback (tp_lang)
+      - Default language: Japanese ('ja')
 -----------------------------------------------------------*/
 const I18N    = window.I18N    || { ja: {}, en: {}, ko: {} };
 const CONTENT = window.CONTENT || { links:{}, ja:{}, en:{}, ko:{} };
 
-const SUPPORTED_LANGS = ['ja', 'en', 'ko'];  // NEW
+const LANGS = ['ja', 'en', 'ko'];
 const LANG_STORAGE_KEY = 'tp_lang';
 
-/* Normalize variety to canonical: jp->ja, ja-JP->ja, en-US->en, ko-KR->ko */
-function normalizeLang(raw) {                // NEW
-  if (!raw) return '';
-  const s = String(raw).toLowerCase().trim();
-  if (s === 'jp') return 'ja';
-  if (s.startsWith('ja')) return 'ja';
-  if (s.startsWith('en')) return 'en';
-  if (s.startsWith('ko')) return 'ko';
-  return '';
-}
-
-/* Read lang AFTER URL using hash (#ja/#en/#ko); also support ?lang= and tolerate trailing /ja */
-function getLangFromURL() {                  // NEW
-  // 1) Hash
-  const hash = (location.hash || '').replace('#','').trim();
-  const h = normalizeLang(hash);
-  if (SUPPORTED_LANGS.includes(h)) return h;
-
-  // 2) Query ?lang=ja
-  const params = new URLSearchParams(location.search || '');
-  const q = normalizeLang(params.get('lang'));
-  if (SUPPORTED_LANGS.includes(q)) return q;
-
-  // 3) Trailing path segment /ja or /jp or /en or /ko (tolerate; we’ll mirror it to #)
-  const m = (location.pathname || '').match(/\/(ja|jp|en|ko)\/?$/i);
-  if (m && m[1]) {
-    const p = normalizeLang(m[1]);
-    if (SUPPORTED_LANGS.includes(p)) return p;
-  }
-  return '';
-}
-
-function getInitialLang() {
-  // Prefer URL (hash or query or tolerated trailing seg)
-  const fromURL = getLangFromURL();
-  if (fromURL) return fromURL;
-
-  // Storage
-  const saved = localStorage.getItem(LANG_STORAGE_KEY);
-  if (SUPPORTED_LANGS.includes(saved)) return saved;
-
-  // Default heuristic -> JA default unless browser clearly English/Korean
-  if (navigator.language) {
-    const auto = normalizeLang(navigator.language);
-    if (SUPPORTED_LANGS.includes(auto)) return auto;
-  }
+/** Normalize a language code to one of LANGS; default 'ja'. */
+function normalizeLang(x) {
+  if (!x) return 'ja';
+  const lc = (x + '').toLowerCase();
+  if (LANGS.includes(lc)) return lc;
+  if (lc.startsWith('en')) return 'en';
+  if (lc.startsWith('ko')) return 'ko';
   return 'ja';
 }
-let currentLang = getInitialLang();
 
-function applyLangToHtmlRoot() {
-  // Keep both attributes for CSS/JS
-  document.documentElement.setAttribute('lang', currentLang);
-  document.documentElement.setAttribute('data-lang', currentLang);
+/** Detect language from the current URL (suffix/query/hash/prefix). */
+function parseLangFromLocation() {
+  const { pathname, search, hash } = window.location;
+
+  // 1) Query ?lang=xx
+  const qs = new URLSearchParams(search);
+  const q = qs.get('lang');
+  if (q && LANGS.includes(q)) return { lang: q, style: 'query' };
+
+  // 2) Hash #xx
+  const h = (hash || '').replace(/^#/, '');
+  if (LANGS.includes(h)) return { lang: h, style: 'hash' };
+
+  // 3) Suffix /xx at the end (…/page.html/ja)
+  const parts = pathname.split('/').filter(Boolean);
+  const last = parts[parts.length - 1];
+  if (LANGS.includes(last)) return { lang: last, style: 'suffix' };
+
+  // 4) Prefix /xx/ at the beginning (…/en/page.html)
+  const first = parts[0];
+  if (LANGS.includes(first)) return { lang: first, style: 'prefix' };
+
+  // 5) None in URL
+  return { lang: null, style: 'none' };
 }
 
+/** Remove any visible lang tokens from URL path/search/hash (no navigation). */
+function stripLangFromURL() {
+  const { pathname, search, hash } = window.location;
+  let p = pathname;
+  let s = new URLSearchParams(search);
+  let h = hash;
+
+  // Remove suffix
+  const parts = p.split('/').filter(Boolean);
+  if (parts.length && LANGS.includes(parts[parts.length - 1])) {
+    parts.pop();
+    p = '/' + parts.join('/') + (p.endsWith('/') ? '/' : '');
+  }
+
+  // Remove prefix
+  const parts2 = p.split('/').filter(Boolean);
+  if (parts2.length && LANGS.includes(parts2[0])) {
+    parts2.shift();
+    p = '/' + parts2.join('/') + (p.endsWith('/') ? '/' : '');
+  }
+
+  // Remove ?lang
+  if (s.has('lang')) s.delete('lang');
+
+  // Remove #ja|#en|#ko
+  if (LANGS.includes((h || '').replace(/^#/, ''))) h = '';
+
+  return { pathname: p || '/', search: s.toString(), hash: h || '' };
+}
+
+/** Pretty-print current URL to suffix style …/page.html/<lang> without reloading. */
+function ensurePrettyLangURL(lang) {
+  const { pathname, search, hash } = stripLangFromURL();
+  const base = pathname.replace(/\/+$/, ''); // trim trailing slash
+  const suf = '/' + lang;
+  const qs  = search ? ('?' + search) : '';
+  const hh  = hash ? (hash.startsWith('#') ? hash : '#' + hash) : '';
+  const pretty = (base || '/') + suf + qs + hh;
+  if (window.location.pathname + window.location.search + window.location.hash !== pretty) {
+    window.history.replaceState({}, '', pretty);
+  }
+}
+
+/** Initial language picker: URL → localStorage → browser → default 'ja'. */
+function getInitialLang() {
+  // a) from URL
+  const { lang } = parseLangFromLocation();
+  if (lang) return normalizeLang(lang);
+
+  // b) from localStorage
+  const saved = localStorage.getItem(LANG_STORAGE_KEY);
+  if (saved && LANGS.includes(saved)) return saved;
+
+  // c) from browser
+  if (navigator.language) {
+    const guess = normalizeLang(navigator.language);
+    return guess;
+  }
+  // d) fallback
+  return 'ja';
+}
+
+let currentLang = getInitialLang();
+
+/** Apply lang codes to <html>, data attributes, and mark buttons. */
+function applyLangToHtmlRoot() {
+  document.documentElement.setAttribute('lang', currentLang);
+  document.documentElement.setAttribute('data-lang', currentLang);
+
+  // Update language buttons active state
+  $$('.lang-btn').forEach(btn => {
+    const lang = btn.getAttribute('data-lang');
+    if (lang === currentLang) {
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-current', 'true');
+    } else {
+      btn.classList.remove('is-active');
+      btn.removeAttribute('aria-current');
+    }
+  });
+}
+
+/** i18n getter */
 function t(key) {
   const dict = I18N[currentLang] || {};
   const val = dict[key];
   if (typeof val === 'function') return val;
-  return val ?? I18N.ja[key] ?? I18N.en[key] ?? I18N.ko?.[key] ?? '';
+  return val ?? I18N.ja[key] ?? I18N.en[key] ?? '';
 }
 
+/** Paint static text nodes with data-i18n or data-i18n-static. */
 function applyI18nStaticText() {
   $$('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
     const val = t(key);
     if (typeof val === 'string' || typeof val === 'number') el.innerHTML = val;
   });
-  // Some elements may use data-i18n-static to keep text-only (no HTML)
   $$('[data-i18n-static]').forEach((el) => {
     const key = el.getAttribute('data-i18n-static');
     const val = t(key);
     if (typeof val === 'string' || typeof val === 'number') el.textContent = val;
   });
+}
+
+/** Update both state and pretty URL, then re-render UI. */
+function setLang(lang) {
+  currentLang = normalizeLang(lang);
+  localStorage.setItem(LANG_STORAGE_KEY, currentLang);
+
+  // reflect to DOM
+  applyLangToHtmlRoot();
+  applyI18nStaticText();
+  renderAllDynamic();
+
+  // Update hero typewriter text
+  const heroNode = $('#heroType');
+  const heroTexts = I18N[currentLang].heroTexts || [];
+  typewriter(heroNode, heroTexts);
+
+  // Update Ask ChatGPT prompt
+  const ta = $('#chatgptPrompt');
+  if (ta && typeof window.getChatGPTPrompt === 'function') {
+    ta.value = window.getChatGPTPrompt(currentLang);
+  }
+
+  // Keep URL in the user's requested style: suffix
+  ensurePrettyLangURL(currentLang);
 }
 
 /* ----------------------------------------------------------
@@ -185,7 +279,9 @@ function observeReveal(node) {
 }
 
 /* ----------------------------------------------------------
-   4) Simple horizontal carousel
+   4) Simple horizontal carousel (Benefits)
+   - Fixed: prev ← moves left (index-1), next → moves right (index+1)
+   - Controls placed in section head (top row)
 -----------------------------------------------------------*/
 function makeCarousel(containerSel, prevBtnSel, nextBtnSel) {
   const track = $(containerSel);
@@ -234,11 +330,13 @@ function makeCarousel(containerSel, prevBtnSel, nextBtnSel) {
 
 /* ----------------------------------------------------------
    5) Dynamic renders (Why / Cities / Benefits / Process / Offices / Team / Voices / FAQ / Gallery)
+   - All data pulled from translations.js → window.CONTENT[currentLang]
+   - Do not hardcode names inside HTML (team/voices).
 -----------------------------------------------------------*/
 function renderWhyLists() {
   const lists = [
-    { id: '#whyList1', data: CONTENT[currentLang]?.why1 || [] },
-    { id: '#whyList2', data: CONTENT[currentLang]?.why2 || [] }
+    { id: '#whyList1', data: CONTENT[currentLang].why1 || [] },
+    { id: '#whyList2', data: CONTENT[currentLang].why2 || [] }
   ];
   lists.forEach(({ id, data }) => {
     const root = $(id);
@@ -258,7 +356,7 @@ function renderCities() {
   const root = $('#citiesCards');
   if (!root) return;
   root.innerHTML = '';
-  (CONTENT[currentLang]?.cities || []).forEach((c) => {
+  (CONTENT[currentLang].cities || []).forEach((c) => {
     const d = document.createElement('div');
     d.className = 'city';
     d.innerHTML = `
@@ -274,7 +372,7 @@ function renderBenefits() {
   const track = $('#benefitSlides');
   if (!track) return;
   track.innerHTML = '';
-  (CONTENT[currentLang]?.benefits || []).forEach((b) => {
+  (CONTENT[currentLang].benefits || []).forEach((b) => {
     const el = document.createElement('div');
     el.className = 'slide';
     el.innerHTML = `<h4 style="margin:0 0 6px">${b.t}</h4><p class="subtle" style="margin:0">${b.d}</p>`;
@@ -287,7 +385,7 @@ function renderProcess() {
   const root = $('#processList');
   if (!root) return;
   root.innerHTML = '';
-  (CONTENT[currentLang]?.processSteps || []).forEach((s) => {
+  (CONTENT[currentLang].processSteps || []).forEach((s) => {
     const li = document.createElement('li');
     li.innerHTML = `<strong>${s.k}</strong><div class="subtle" style="margin-top:6px">${s.v}</div>`;
     root.appendChild(li);
@@ -299,7 +397,7 @@ function renderOffices() {
   const root = $('#officeCards');
   if (!root) return;
   root.innerHTML = '';
-  (CONTENT[currentLang]?.offices || CONTENT.ja?.offices || []).forEach((o) => {
+  (CONTENT[currentLang].offices || CONTENT.ja.offices || []).forEach((o) => {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
@@ -318,7 +416,7 @@ function renderTeam() {
   const root = $('#teamGrid');
   if (!root) return;
   root.innerHTML = '';
-  (CONTENT[currentLang]?.team || []).forEach((m) => {
+  (CONTENT[currentLang].team || []).forEach((m) => {
     const card = document.createElement('div');
     card.className = 'member';
     card.innerHTML = `
@@ -336,7 +434,7 @@ function renderVoices() {
   const root = $('#voiceGrid');
   if (!root) return;
   root.innerHTML = '';
-  (CONTENT[currentLang]?.voices || []).forEach((v) => {
+  (CONTENT[currentLang].voices || []).forEach((v) => {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `<p class="quote" style="margin-top:0">${v.quote}</p><div class="subtle" style="margin-top:8px">${v.who}</div>`;
@@ -349,11 +447,11 @@ function renderFaq() {
   const root = $('#faqList');
   if (!root) return;
   root.innerHTML = '';
-  (CONTENT[currentLang]?.faq || []).forEach((q) => {
+  (CONTENT[currentLang].faq || []).forEach((q) => {
     const wrap = document.createElement('div');
     wrap.innerHTML = `
-      <button class="q">${q.q}</button>
-      <div class="a">${q.a}</div>`;
+      <button class="q" type="button">${q.q}</button>
+      <div class="a" style="display:none">${q.a}</div>`;
     root.appendChild(wrap);
   });
   // Wiring accordion behavior
@@ -371,7 +469,7 @@ function renderGallery() {
   const root = $('#gallery');
   if (!root) return;
   root.innerHTML = '';
-  (CONTENT[currentLang]?.galleryImgs || []).forEach((src, i) => {
+  (CONTENT[currentLang].galleryImgs || []).forEach((src, i) => {
     const img = document.createElement('img');
     img.src = src;
     img.alt = `gallery-${i+1}`;
@@ -385,8 +483,6 @@ function renderGallery() {
 
 /* ----------------------------------------------------------
    6) Priority / Secondary galleries (3×3 tiles with background connector)
-   - Uses your existing <a class="icon-card">…</a> in HTML and
-     upgrades each card into a photo tile with caption-under-image.
 -----------------------------------------------------------*/
 const PHOTO_SOURCES = {
   // culturally-friendly placeholder photos (Unsplash, no external JS needed)
@@ -409,8 +505,8 @@ const PHOTO_SOURCES = {
 };
 
 function decorateIconCard(a, key) {
-  // Expect structure: <a.icon-card><span.icon>…</span><span.meta><span.title>…</span><span.desc>…</span></span></a>
-  // We’ll inject a <div class="photo"> before meta, and keep SVG for accessibility.
+  // Expect structure: <a.icon-card><span.icon>…</span><span.meta>…</span></a>
+  // We’ll inject a <div class="photo"> before meta, and keep SVG/emoji for accessibility.
   const title = $('.title', a)?.textContent?.trim() || a.getAttribute('aria-label') || '';
   const photoURL = PHOTO_SOURCES[key] || PHOTO_SOURCES.about;
   let photo = $('.photo', a);
@@ -426,7 +522,6 @@ function decorateIconCard(a, key) {
     img.alt = title || key;
     imageFallback(img, title || key);
   }
-  // Normalize icon size (SVG stays small and centered above photo on hover)
   a.classList.add('is-photo-card');
 }
 
@@ -434,14 +529,9 @@ function renderPriorityGallery() {
   const root = $('section.icon-grid.priority');
   if (!root) return;
   const items = $$('.icon-card', root);
-  // Add subtle connector background
   injectConnectorBackground(root);
-  // Map each card to a key to pick a photo
-  const keyMap = [
-    'about','jobs','relocation','process','why','casual','testimonials','office','career'
-  ];
+  const keyMap = ['about','jobs','relocation','process','why','casual','testimonials','office','career'];
   items.forEach((a, i) => decorateIconCard(a, keyMap[i] || 'about'));
-  // enforce 3×3 layout via CSS utility classes (kept semantic)
   root.classList.add('priority-3x3');
   items.forEach((el) => observeReveal(el));
 }
@@ -463,21 +553,18 @@ function renderSecondaryGallery() {
 function injectConnectorBackground(sectionEl, opts = {}) {
   if (!sectionEl) return;
   const { density = 12, variant = 'grid' } = opts;
-  // If already present, skip
   if ($('.bg-connectors', sectionEl)) return;
 
   const svg = document.createElement('div');
   svg.className = 'bg-connectors';
   svg.setAttribute('aria-hidden', 'true');
 
-  // Create lightweight SVG pattern
   const w = sectionEl.clientWidth || 1200;
   const h = 320;
   const stroke = 'rgba(2, 32, 71, 0.06)';
   let svgInner = '';
 
   if (variant === 'dots') {
-    // Dotted connector
     const rows = 4, cols = density;
     const cellW = w / cols;
     const cellH = h / rows;
@@ -491,7 +578,6 @@ function injectConnectorBackground(sectionEl, opts = {}) {
     }
     svgInner += `</svg>`;
   } else {
-    // Thin grid/lines
     const cols = density;
     const cellW = w / cols;
     svgInner += `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">`;
@@ -519,7 +605,7 @@ function injectConnectorBackground(sectionEl, opts = {}) {
 }
 
 /* ----------------------------------------------------------
-   8) Language toggle + full refresh of dynamic sections (ENHANCED)
+   8) Language toggle + full refresh of dynamic sections
 -----------------------------------------------------------*/
 function renderAllDynamic() {
   // These only exist on the long single-page template.
@@ -541,142 +627,23 @@ function renderAllDynamic() {
   const y = String(new Date().getFullYear());
   const yNode = document.getElementById('year');
   if (yNode) yNode.textContent = y;
-
   const yNode2 = document.getElementById('year2');
   if (yNode2) yNode2.textContent = y;
 }
 
-/* Append #ja/#en/#ko to internal links to persist language across pages */
-function rewriteLocalLinksForLang() {                   // NEW
-  const keepers = [
-    ...$$('.site-nav a'),
-    ...$$('.drawer-nav a'),
-    ...$$('a.brand'),
-    ...$$('a[data-keep-lang="1"]')
-  ];
-  keepers.forEach((a) => {
-    const href = a.getAttribute('href') || '';
-    if (!href) return;
-    // Skip external/anchors/mailto/tel
-    if (/^(https?:|mailto:|tel:|#)/i.test(href)) return;
-    // Only rewrite local pages (e.g., *.html or relative paths)
-    const url = new URL(href, location.href);
-    // preserve query, but set hash to currentLang
-    url.hash = `#${currentLang}`;
-    a.setAttribute('href', url.pathname + url.search + url.hash);
-  });
-}
-
-/* Update the visible language button group (if present) */
-function updateLangButtonsUI() {                         // NEW
-  $$('.lang-group .lang-btn').forEach((btn) => {
-    const code = normalizeLang(btn.getAttribute('data-lang'));
-    if (code === currentLang) {
-      btn.classList.add('active');
-      btn.setAttribute('aria-current', 'true');
-    } else {
-      btn.classList.remove('active');
-      btn.removeAttribute('aria-current');
-    }
-  });
-}
-
-function setLang(lang, opts = {}) {
-  const { updateURL = true, fromHashChange = false } = opts;  // NEW options
-  const normalized = normalizeLang(lang) || 'ja';
-  currentLang = SUPPORTED_LANGS.includes(normalized) ? normalized : 'ja';
-
-  localStorage.setItem(LANG_STORAGE_KEY, currentLang);
-  applyLangToHtmlRoot();
-  applyI18nStaticText();
-  renderAllDynamic();
-
-  // Update hero typewriter text
-  const heroNode = $('#heroType');
-  const heroTexts = I18N[currentLang]?.heroTexts || [];
-  typewriter(heroNode, heroTexts);
-
-  // Update Ask ChatGPT prompt
-  const ta = $('#chatgptPrompt');
-  if (ta && typeof window.getChatGPTPrompt === 'function') {
-    ta.value = window.getChatGPTPrompt(currentLang);
-  }
-
-  // Update legacy single-toggle (kept for compatibility)
-  const langBtn = $('#langBtn');
-  if (langBtn) langBtn.textContent = currentLang === 'ja' ? 'EN' : (currentLang === 'en' ? '日本語' : '日本語');
-
-  // NEW: visible language button group state
-  updateLangButtonsUI();
-
-  // NEW: Update URL hash to reflect language (AFTER URL)
-  if (updateURL) {
-    const base = location.pathname + location.search;
-    const newURL = `${base}#${currentLang}`;
-    // Avoid scroll jump: replaceState does not move viewport
-    history.replaceState(null, '', newURL);
-  }
-
-  // NEW: persist lang across navigation
-  rewriteLocalLinksForLang();
-
-  // If change came from hashchange, do nothing else
-  if (fromHashChange) return;
-}
-
-/* Sync language with URL hash changes (manual edits) */
-function initLangRouter() {                              // NEW
-  // On first load, mirror tolerated trailing segment to hash to avoid confusion
-  const trailing = (location.pathname || '').match(/\/(ja|jp|en|ko)\/?$/i);
-  if (trailing && trailing[1]) {
-    const normalized = normalizeLang(trailing[1]);
-    if (SUPPORTED_LANGS.includes(normalized)) {
-      const base = location.pathname.replace(/\/(ja|jp|en|ko)\/?$/i, '');
-      history.replaceState(null, '', `${base}${location.search}#${normalized}`);
-    }
-  } else {
-    // If hash missing, set it based on currentLang
-    if (!location.hash) {
-      history.replaceState(null, '', `${location.pathname}${location.search}#${currentLang}`);
-    }
-  }
-
-  on(window, 'hashchange', () => {
-    const lang = normalizeLang((location.hash || '').replace('#',''));
-    if (SUPPORTED_LANGS.includes(lang) && lang !== currentLang) {
-      setLang(lang, { updateURL: false, fromHashChange: true });
-    }
-  });
-}
-
 /* ----------------------------------------------------------
-   9) Header actions: language + drawer + smooth anchors (ENHANCED)
+   9) Header actions: language + drawer + smooth anchors
 -----------------------------------------------------------*/
 function initHeader() {
-  // NEW: Visible language button group (JA/EN/KO)
-  const group = $('.lang-group');
-  if (group) {
-    $$('.lang-group .lang-btn').forEach((btn) => {
-      const code = normalizeLang(btn.getAttribute('data-lang'));
-      on(btn, 'click', (e) => {
-        e.preventDefault();
-        if (SUPPORTED_LANGS.includes(code)) {
-          setLang(code);
-        }
-      });
+  // Language buttons (show all; JP default)
+  $$('.lang-btn').forEach((btn) => {
+    on(btn, 'click', (e) => {
+      e.preventDefault();
+      const lang = btn.getAttribute('data-lang');
+      if (!lang) return;
+      setLang(lang);
     });
-    updateLangButtonsUI();
-  }
-
-  // Legacy single toggle remains (no removal)
-  const langBtn = $('#langBtn');
-  if (langBtn && !group) {
-    langBtn.textContent = currentLang === 'ja' ? 'EN' : (currentLang === 'en' ? '日本語' : '日本語');
-    on(langBtn, 'click', () => {
-      const next = currentLang === 'ja' ? 'en' : (currentLang === 'en' ? 'ja' : 'ja'); // KO button exists in group; legacy toggles JA/EN
-      setLang(next);
-    });
-  }
+  });
 
   // Drawer (mobile)
   const menuOpen  = $('#menuBtn');
@@ -724,23 +691,13 @@ function initHeader() {
       smoothScrollTo(el, 76);
     });
   });
-
-  // Brand logo should go home (HTML handles the href). We also ensure lang persists:
-  const brandA = $('.brand');
-  if (brandA) {
-    const href = brandA.getAttribute('href') || 'index.html';
-    const url = new URL(href, location.href);
-    url.hash = `#${currentLang}`;
-    brandA.setAttribute('href', url.pathname + url.search + url.hash);
-  }
 }
 
 /* ----------------------------------------------------------
-   10) Sticky mobile apply bar + back-to-top
+   10) Sticky mobile apply bar (kept) — back-to-top was removed in HTML
 -----------------------------------------------------------*/
 function initStickyBars() {
   const applyBar = $('.apply-bar');
-  const toTop = $('#toTop');
 
   function onScroll() {
     const y = window.scrollY;
@@ -748,21 +705,9 @@ function initStickyBars() {
       // show after hero area
       applyBar.style.transform = y > 360 ? 'translateY(0)' : 'translateY(100%)';
     }
-    if (toTop) {
-      if (y > 560) toTop.classList.add('show');
-      else toTop.classList.remove('show');
-    }
   }
-
   on(window, 'scroll', onScroll, { passive: true });
   onScroll();
-
-  if (toTop) {
-    on(toTop, 'click', (e) => {
-      e.preventDefault();
-      smoothScrollTo('body', 0);
-    });
-  }
 }
 
 /* ----------------------------------------------------------
@@ -774,8 +719,8 @@ function initContactForm() {
   on(form, 'submit', (e) => {
     e.preventDefault();
     const name = $('#name')?.value?.trim() || '';
-    const fn = I18N[currentLang]?.contactThanks || I18N.ja.contactThanks || (() => 'ありがとうございました。');
-    const msg = typeof fn === 'function' ? fn(name || (currentLang === 'ja' ? '応募者' : currentLang === 'ko' ? '지원자' : 'Candidate')) : fn;
+    const fn = I18N[currentLang].contactThanks || I18N.ja.contactThanks || (() => 'ありがとうございました。');
+    const msg = typeof fn === 'function' ? fn(name || (currentLang === 'ja' ? '応募者' : 'Candidate')) : fn;
     alert(msg);
     form.reset();
   });
@@ -796,10 +741,10 @@ function initChatGPTSection() {
       try {
         await navigator.clipboard.writeText(ta.value);
         const original = btnCopy.textContent;
-        let copiedText = 'Copied!';
-        if (currentLang === 'ja') copiedText = 'コピーしました！';
-        else if (currentLang === 'ko') copiedText = '복사했습니다!';
-        btnCopy.textContent = copiedText;
+        // show localized feedback
+        if (currentLang === 'ja') btnCopy.textContent = 'コピーしました！';
+        else if (currentLang === 'ko') btnCopy.textContent = '복사했습니다!';
+        else btnCopy.textContent = 'Copied!';
         setTimeout(() => (btnCopy.textContent = original), 1400);
       } catch (e) {
         ta.select();
@@ -843,7 +788,7 @@ function initCultureStripAnimations() {
 }
 
 function normalizeIconSizes() {
-  // Make sure icons (SVGs) above photos are tidy
+  // Make sure icons (SVGs/emojis) above photos are tidy
   $$('.icon-card .icon svg, .icon-card .icon img').forEach((node) => {
     node.setAttribute('width', '48');
     node.setAttribute('height', '48');
@@ -853,13 +798,14 @@ function normalizeIconSizes() {
 }
 
 /* ----------------------------------------------------------
-   14) Boot sequence (ENHANCED)
+   14) Boot sequence
 -----------------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', () => {
-  // 0) Router for #lang and tolerant trailing segments -> hash
-  initLangRouter();                 // NEW
+  // 0) Respect URL if it already has a lang; otherwise default to JP and pretty-print suffix
+  currentLang = normalizeLang(getInitialLang());
+  ensurePrettyLangURL(currentLang);
 
-  // 1) Apply language + static strings
+  // 1) Apply language + static strings + mark active lang buttons
   applyLangToHtmlRoot();
   applyI18nStaticText();
 
@@ -868,7 +814,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3) Hero typewriter
   const heroNode  = $('#heroType');
-  const heroTexts = I18N[currentLang]?.heroTexts || [];
+  const heroTexts = I18N[currentLang].heroTexts || [];
   typewriter(heroNode, heroTexts);
 
   // 4) Carousels
@@ -887,7 +833,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroMediaFallbacks();
   initCultureStripAnimations();
   normalizeIconSizes();
-
-  // 8) Ensure all local nav links carry the current #lang after load
-  rewriteLocalLinksForLang();       // NEW (final sweep)
 });
