@@ -1,13 +1,141 @@
 /* ============================================================================
-   TP Candidate Microsite — translations.js (Updated)
-   Provides:
-     - window.I18N   (static UI strings & language-aware helpers)
-     - window.CONTENT (page data rendered by app.js)
-     - window.getChatGPTPrompt(lang) (Ask ChatGPT prompt per language)
-   Updated: 2025-08-18 - Added Korean language support
+   TP Candidate Microsite — translations.js  (FULL / RESTORED / EXPANDED)
+   ----------------------------------------------------------------------------
+   What this file provides to the site (global namespace):
+     • window.I18N                     → localized UI strings (ja / en / ko)
+     • window.CONTENT                  → page content (why, cities, benefits, etc.)
+     • window.getChatGPTPrompt(lang)   → returns the Ask ChatGPT prompt in that lang
+     • window.normalizeLang(code)      → normalizes "jp" → "ja", "ja-JP" → "ja", etc.
+     • window.getPreferredLang()       → best-guess of which language to use now
+     • window.getLangFromPath()        → parses /en /jp /ja /ko from current URL path
+     • window.LANGS                    → ordered list of supported langs: ['ja','en','ko']
+     • window.LANG_ALIASES             → alias map used by normalizeLang()
+     • DOM init: fills #chatgptPrompt and wires #copyPromptBtn/#openChatGPTBtn if present
+
+   Guarantees:
+     • Japanese is the default language.
+     • '/jp' after the URL is treated as 'ja' (and '/ja' works too).
+     • Nothing here requires app.js to change (helpers are additive).
+     • Clipboard copy has a fallback; code runs only if nodes exist.
+
+   Important links:
+     • Apply job ad (confirmed): 
+       https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE
+
+   Updated: 2025-08-22
 ============================================================================ */
 
 (function () {
+  'use strict';
+
+  /* ----------------------------------------------------------
+     0) Constants & Helpers (language plumbing)
+     ----------------------------------------------------------
+     - normalizeLang(code): maps alias → canonical ('jp' → 'ja')
+     - getLangFromPath():   reads '/en' '/jp' '/ja' '/ko' from URL path (any segment)
+     - getPreferredLang():  chooses language from (path → html[data-lang]/lang → browser)
+  -----------------------------------------------------------*/
+
+  // Supported languages (display order)
+  const LANGS = ['ja', 'en', 'ko'];
+
+  // Expose supported language list
+  window.LANGS = LANGS.slice();
+
+  // Aliases for user-land / URL inputs; kept broad and generous.
+  const LANG_ALIASES = {
+    jp: 'ja',
+    ja: 'ja',
+    'ja-jp': 'ja',
+    en: 'en',
+    'en-us': 'en',
+    'en-gb': 'en',
+    'en-au': 'en',
+    ko: 'ko',
+    'ko-kr': 'ko'
+  };
+
+  // Export aliases (read-only usage expected by outside scripts)
+  window.LANG_ALIASES = Object.assign({}, LANG_ALIASES);
+
+  /**
+   * normalizeLang(code)
+   * - Makes incoming codes safe and canonical (ja/en/ko).
+   * - Unknown inputs → 'ja' (Japanese default).
+   */
+  function normalizeLang(code) {
+    if (!code || typeof code !== 'string') return 'ja';
+    const key = code.trim().toLowerCase().replace('_', '-');
+    // Direct alias map
+    if (LANG_ALIASES[key]) return LANG_ALIASES[key];
+    // Prefix matches for 'ja-*', 'en-*', 'ko-*'
+    if (key.startsWith('ja')) return 'ja';
+    if (key.startsWith('en')) return 'en';
+    if (key.startsWith('ko')) return 'ko';
+    return 'ja';
+  }
+
+  // Expose
+  window.normalizeLang = normalizeLang;
+
+  /**
+   * getLangFromPath()
+   * - Returns a canonical language code inferred from the URL path,
+   *   accepting '/en', '/jp', '/ja', '/ko' anywhere *after* the domain.
+   * - If no match: returns '' (caller decides fallback).
+   */
+  function getLangFromPath() {
+    try {
+      const path = (location.pathname || '').toLowerCase();
+      const segs = path.split('/').map(s => s.trim()).filter(Boolean);
+      // Scan for any supported display segment
+      for (const seg of segs) {
+        if (seg === 'en' || seg === 'ja' || seg === 'jp' || seg === 'ko') {
+          return normalizeLang(seg);
+        }
+      }
+      return '';
+    } catch (_e) {
+      return '';
+    }
+  }
+
+  // Expose
+  window.getLangFromPath = getLangFromPath;
+
+  /**
+   * getPreferredLang()
+   * Priority:
+   *   1) URL path segment (/en /jp /ja /ko)
+   *   2) <html data-lang> or <html lang>
+   *   3) browser language (navigator.language)
+   * Defaults to 'ja'.
+   */
+  function getPreferredLang() {
+    const pathLang = getLangFromPath();
+    if (pathLang) return pathLang;
+
+    const root = document.documentElement;
+    const attrDataLang = root.getAttribute('data-lang');
+    const attrLang = root.getAttribute('lang');
+    if (attrDataLang) return normalizeLang(attrDataLang);
+    if (attrLang) return normalizeLang(attrLang);
+
+    const navLang = (navigator && (navigator.language || navigator.userLanguage)) || 'ja';
+    return normalizeLang(navLang);
+  }
+
+  // Expose
+  window.getPreferredLang = getPreferredLang;
+
+  /* ----------------------------------------------------------
+     1) I18N: UI strings
+     ----------------------------------------------------------
+     Notes:
+       - All keys preserved from your original mapping.
+       - Functions like contactThanks(name) kept as-is.
+       - No keys removed; some comments added for clarity.
+  -----------------------------------------------------------*/
   const I18N = {
     ja: {
       // Brand & Nav
@@ -258,7 +386,7 @@
       'stat.jp_roles': '일본어 포지션',
       'stat.jp_roles_n': '다수',
 
-      // Priority headings
+      // Priority
       'priority.title': '우선 메뉴',
       'priority.sub': '자주 보는 항목을 바로 열 수 있습니다',
       'priority.gallery.title': '우선 메뉴 (보기 쉬운 갤러리)',
@@ -322,8 +450,18 @@
     }
   };
 
+  // Expose I18N
+  window.I18N = I18N;
+
   /* ----------------------------------------------------------
-     Content Data (rendered by app.js)
+     2) Content data (rendered by app.js)
+     ----------------------------------------------------------
+     Structure:
+       CONTENT.links
+       CONTENT.ja / CONTENT.en / CONTENT.ko:
+         - why1, why2, cities, benefits, processSteps, offices, team,
+           voices, faq, galleryImgs
+     All preserved; harmless extra images are allowed (renderer loops).
   -----------------------------------------------------------*/
   const CONTENT = {
     links: {
@@ -331,7 +469,7 @@
       casual: 'https://forms.office.com/e/2UvpbweQww'
     },
 
-    // Japanese content
+    // ---------------------- Japanese content ----------------------
     ja: {
       why1: [
         { t: '🌍 グローバルな環境でレベルアップ', d: '英語・異文化理解が日常で鍛えられる国際チーム。' },
@@ -453,7 +591,7 @@
       ]
     },
 
-    // English content
+    // ---------------------- English content ----------------------
     en: {
       why1: [
         { t: '🌍 Level up in a global team', d: 'Daily practice in English & cross-culture collaboration.' },
@@ -527,13 +665,13 @@
           name: 'Maho',
           role: 'TA | Japan Market',
           img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop',
-          bio: 'We'll support you end-to-end in JP.'
+          bio: 'We\'ll support you end-to-end in JP.'
         },
         {
           name: 'Kenta',
           role: 'Recruiter',
           img: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=800&auto=format&fit=crop',
-          bio: 'Let's find your best-fit project.'
+          bio: 'Let\'s find your best-fit project.'
         },
         {
           name: 'Aya',
@@ -575,7 +713,7 @@
       ]
     },
 
-    // Korean content
+    // ---------------------- Korean content ----------------------
     ko: {
       why1: [
         { t: '🌍 글로벌 환경에서 레벨업', d: '영어・이문화 이해가 일상에서 단련되는 국제 팀.' },
@@ -698,8 +836,11 @@
     }
   };
 
+  // Expose CONTENT
+  window.CONTENT = CONTENT;
+
   /* ----------------------------------------------------------
-     ChatGPT Prompts
+     3) ChatGPT Prompts (unchanged content, multi-language)
   -----------------------------------------------------------*/
   const CHATGPT_PROMPTS = {
     ja: `あなたは就職アドバイザーです。テレパフォーマンス（Teleperformance）マレーシア／タイ（TP Malaysia / TP Thailand）について、候補者が安心して応募を検討できるよう、以下の条件でポジティブに紹介してください。
@@ -759,46 +900,67 @@ Start with a concise summary → bullet points → a friendly CTA.`,
 시작은 간결한 개요→불릿 포인트→마무리 CTA 순서로.`
   };
 
-  /* ----------------------------------------------------------
-     Exports
-  -----------------------------------------------------------*/
-  window.I18N = I18N;
-  window.CONTENT = CONTENT;
-
-  // Helper: get prompt by language code ('ja' default)
+  // Export: getChatGPTPrompt(lang)
   window.getChatGPTPrompt = function getChatGPTPrompt(lang) {
-    return CHATGPT_PROMPTS[lang] || CHATGPT_PROMPTS['ja'];
+    const code = normalizeLang(lang);
+    return CHATGPT_PROMPTS[code] || CHATGPT_PROMPTS.ja;
   };
 
   /* ----------------------------------------------------------
-     Initialize Ask ChatGPT textarea on load
+     4) DOM initialization for "Ask ChatGPT" UI
+        - Initializes textarea with prompt for the resolved language
+        - Wires copy & open buttons if present
+        - Defensive: runs only when nodes exist
   -----------------------------------------------------------*/
   document.addEventListener('DOMContentLoaded', () => {
-    const root = document.documentElement;
-    const langAttr = root.getAttribute('data-lang') || root.getAttribute('lang') || 'ja';
-    const current = ['ja', 'en', 'ko'].includes(langAttr) ? langAttr : 'ja';
+    // Choose language using our best-guess function
+    const resolved = getPreferredLang();
+
+    // 4.1) Initialize Ask ChatGPT textarea
     const ta = document.getElementById('chatgptPrompt');
     if (ta) {
-      ta.value = window.getChatGPTPrompt(current);
+      ta.value = window.getChatGPTPrompt(resolved);
     }
 
-    // Copy button UX
+    // 4.2) Copy button UX (+fallback)
     const copyBtn = document.getElementById('copyPromptBtn');
     if (copyBtn && ta) {
       copyBtn.addEventListener('click', async () => {
         try {
           await navigator.clipboard.writeText(ta.value);
           const original = copyBtn.textContent;
-          const copiedText = current === 'ja' ? 'コピーしました！' : 
-                            current === 'ko' ? '복사했습니다!' : 'Copied!';
+          const copiedText =
+            resolved === 'ja' ? 'コピーしました！' :
+            resolved === 'ko' ? '복사했습니다!' : 'Copied!';
           copyBtn.textContent = copiedText;
           setTimeout(() => (copyBtn.textContent = original), 1400);
-        } catch (e) {
-          // Fallback
-          ta.select();
-          document.execCommand('copy');
+        } catch (_err) {
+          // Fallback for http / older browsers
+          try {
+            ta.select();
+            document.execCommand('copy');
+          } catch (_ignored) {
+            // No-op as absolute fallback
+          }
         }
       });
     }
+
+    // 4.3) Open ChatGPT button (optional)
+    const openBtn = document.getElementById('openChatGPTBtn');
+    if (openBtn) {
+      openBtn.addEventListener('click', () => {
+        // Keep simple & robust (avoid window features that some browsers block)
+        window.open('https://chat.openai.com/', '_blank', 'noopener,noreferrer');
+      });
+    }
+
+    // 4.4) Ensure <html> carries the normalized language (non-destructive)
+    try {
+      const root = document.documentElement;
+      root.setAttribute('data-lang', resolved);
+      root.setAttribute('lang', resolved);
+    } catch (_ignored) {}
   });
+
 })();
