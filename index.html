@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>TP Japan — 暮らすように、海外で働く。</title>
-  <meta name="description" content="TPマレーシア／タイの日本語スピーカー採用サイト。暮らすように海外で働く。福利厚生、移住・ビザ、面接プロセス、勤務地都市、応募方法を分かりやすくご案内。" />
+  <meta name="description" content="TPマレーシア／タイの日本語スピーカー採用サイト。福利厚生、移住・ビザ、面接プロセス、勤務地都市、応募方法を分かりやすくご案内。" />
   <meta name="theme-color" content="#ffffff" />
   <link rel="icon" href="TPLogo11.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,7 +43,7 @@
       </nav>
 
       <div class="header-actions">
-        <!-- Visible language buttons (JP default). app.js can also read data-lang -->
+        <!-- Visible language buttons (JP default). app.js binds these, no removal of your logic -->
         <div class="lang-switch" role="group" aria-label="言語切替">
           <button class="btn lang-btn is-active" data-lang="ja" aria-current="true">日本語</button>
           <button class="btn lang-btn" data-lang="en">EN</button>
@@ -51,7 +51,7 @@
         </div>
 
         <a class="btn primary" target="_blank"
-           href="https://careerseng-TP.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE"
+           href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE"
            data-i18n="cta.apply">ご応募はこちら</a>
 
         <!-- Mobile hamburger -->
@@ -84,7 +84,7 @@
         <button class="btn lang-btn" data-lang="ko">한국어</button>
       </div>
       <a class="btn primary" target="_blank"
-         href="https://careerseng-TP.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">
+         href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">
         ご応募はこちら
       </a>
     </div>
@@ -93,7 +93,6 @@
   <main id="main">
     <!-- =========================================================
          HERO
-         Text from execution file: “暮らすように、海外で働く。” 他
     ========================================================== -->
     <section class="hero">
       <div class="container hero-inner">
@@ -168,7 +167,7 @@
         </div>
 
         <div class="grid cols-3 cols-2-md cols-1-sm" id="whyList1">
-          <!-- Rendered by app.js (CONTENT.ja.why1) but include server fallback for no-JS -->
+          <!-- JS will re-render; keep server fallback for no-JS -->
           <div class="item card">
             <h4>グローバルな環境で自分をレベルアップ</h4>
             <p class="subtle">毎日が“プチ留学”。英語力や異文化理解が自然とアップ。</p>
@@ -248,7 +247,7 @@
             <p class="h2-sub">“安心・成長・楽しさ”を全方位でサポート</p>
           </div>
 
-          <!-- Controls are now ABOVE the row, left=prev, right=next -->
+          <!-- Controls ABOVE; left=prev right=next -->
           <nav class="carousel-controls" aria-label="福利厚生ナビ">
             <button id="bPrev" class="ctrl" aria-label="前へ" title="前へ">←</button>
             <button id="bNext" class="ctrl" aria-label="次へ" title="次へ">→</button>
@@ -257,6 +256,7 @@
 
         <div class="carousel-wrap">
           <div id="benefitSlides" class="slides">
+            <!-- JS will re-render from CONTENT.[lang].benefits; keep no-JS fallback below -->
             <div class="slide card reveal">
               <h4 class="u-mt0">医療・歯科・眼科の補助</h4>
               <p class="subtle">本人（一部扶養対象）まで安心サポート。</p>
@@ -386,7 +386,7 @@
             </ol>
             <div class="u-mt12" style="display:flex;gap:10px;flex-wrap:wrap">
               <a class="btn primary" target="_blank"
-                 href="https://careerseng-TP.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">
+                 href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">
                 ご応募はこちら
               </a>
               <a class="btn ghost" target="_blank" href="https://forms.office.com/e/2UvpbweQww">カジュアル面談</a>
@@ -398,7 +398,7 @@
     </section>
 
     <!-- =========================================================
-         オフィス紹介（G Tower / Penang / Bangkok）
+         働く環境（オフィス）
     ========================================================== -->
     <section id="offices">
       <div class="container">
@@ -446,6 +446,52 @@
     </section>
 
     <!-- =========================================================
+         Team（※translations.js から動的にレンダリング）
+         - JSが有効: app.js の renderTeam() が #teamGrid を上書き
+         - JSが無効: 直下のフォールバックを表示
+    ========================================================== -->
+    <section id="team">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2">採用チーム</h2>
+          <p class="h2-sub">日本語で気軽にご相談ください</p>
+        </div>
+
+        <div class="grid cols-4 cols-2-md cols-1-sm" id="teamGrid">
+          <!-- JS fallback (will be replaced by CONTENT.[lang].team at runtime) -->
+          <div class="member card reveal">
+            <img src="assets/team/maho.jpg" alt="Maho" />
+            <h4 class="u-mt8">Maho</h4>
+            <div class="subtle">TA | Japan Market</div>
+            <p class="subtle u-mt8">初めての海外就職も、日本語で伴走します。</p>
+          </div>
+          <div class="member card reveal">
+            <img src="assets/team/kenta.jpg" alt="Kenta" />
+            <h4 class="u-mt8">Kenta</h4>
+            <div class="subtle">Recruiter</div>
+            <p class="subtle u-mt8">キャリア相談、お気軽にどうぞ。</p>
+          </div>
+          <div class="member card reveal">
+            <img src="assets/team/aya.jpg" alt="Aya" />
+            <h4 class="u-mt8">Aya</h4>
+            <div class="subtle">Coordinator</div>
+            <p class="subtle u-mt8">渡航手続きや現地生活もフォローします。</p>
+          </div>
+          <div class="member card reveal">
+            <img src="assets/team/leo.jpg" alt="Leo" />
+            <h4 class="u-mt8">Leo</h4>
+            <div class="subtle">Sourcer</div>
+            <p class="subtle u-mt8">ご希望のプロジェクトを一緒に探します。</p>
+          </div>
+        </div>
+
+        <div class="u-center u-mt12">
+          <a class="btn ghost" href="about-tp.html#team">採用チームを見る</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
          週末・アクティビティ（生活の楽しさ）
     ========================================================== -->
     <section id="lifestyle">
@@ -465,7 +511,7 @@
     </section>
 
     <!-- =========================================================
-         フッター（TP背景ありの旧デザイン相当）
+         Footer（TP背景入りの旧デザイン相当）
     ========================================================== -->
     <footer class="site-footer site-footer--brand">
       <div class="footer-brand-bg" aria-hidden="true">TP</div>
@@ -481,7 +527,7 @@
             <li><a href="interview-process.html">面接プロセス</a></li>
             <li><a href="jobs-and-benefits.html">求人・福利厚生</a></li>
             <li><a href="why-malaysia-thailand.html">勤務先都市</a></li>
-            <li><a target="_blank" href="https://careerseng-TP.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">ご応募はこちら</a></li>
+            <li><a target="_blank" href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">ご応募はこちら</a></li>
           </ul>
         </div>
       </div>
@@ -492,7 +538,7 @@
     <div class="noscript">JavaScript を有効にすると表示や言語切替がより快適になります。</div>
   </noscript>
 
-  <!-- JS (your existing files) -->
+  <!-- JS (existing files; no removals) -->
   <script src="translations.js" defer></script>
   <script src="app.js" defer></script>
 </body>
