@@ -43,7 +43,7 @@
       </nav>
 
       <div class="header-actions">
-        <!-- Visible language buttons (JP default). Handled by app.js URL-lang binding -->
+        <!-- Show all languages; JP default -->
         <div class="lang-switch" role="group" aria-label="言語切替">
           <button class="btn lang-btn is-active" data-lang="ja" aria-current="true">日本語</button>
           <button class="btn lang-btn" data-lang="en">EN</button>
@@ -122,7 +122,7 @@
     </section>
 
     <!-- =========================================================
-         9× Priority (写真タイル化)
+         9× Priority（写真タイル）
     ========================================================== -->
     <section class="icon-grid priority">
       <div class="container">
@@ -299,7 +299,6 @@
         </div>
 
         <div class="grid cols-3 cols-1-sm" id="visaWhy">
-          <!-- fallback static; also app.js fills why2 already -->
           <div class="item card reveal">
             <h4 class="u-mt0">就労ビザ（EP）申請サポート</h4>
             <p class="subtle">書類案内も日本語で丁寧に。</p>
@@ -414,7 +413,7 @@
     </section>
 
     <!-- =========================================================
-         採用チーム（動的）— ※Maho以外の修正は translations.js 側でOK
+         採用チーム（動的：translations.js の team をそのまま表示）
     ========================================================== -->
     <section id="team">
       <div class="container">
@@ -424,8 +423,9 @@
         </div>
 
         <div class="grid cols-4 cols-2-md cols-1-sm" id="teamGrid">
-          <!-- render by app.js from CONTENT[currentLang].team -->
-          <!-- ここにはハードコードしません（誤記防止のため） -->
+          <!-- DO NOT hardcode members here.
+               app.js → renderTeam() pulls window.CONTENT[currentLang].team.
+               Update names, roles, and images only in translations.js. -->
         </div>
       </div>
     </section>
@@ -471,7 +471,7 @@
     </section>
 
     <!-- =========================================================
-         お問い合わせ（強化）
+         お問い合わせ（既存ID維持）
     ========================================================== -->
     <section id="contact">
       <div class="container">
@@ -518,7 +518,7 @@
     </section>
 
     <!-- =========================================================
-         フッター（旧デザイン：TP 背景）
+         フッター（旧：TP 背景）
     ========================================================== -->
     <footer class="site-footer site-footer--brand">
       <div class="footer-brand-bg" aria-hidden="true">TP</div>
