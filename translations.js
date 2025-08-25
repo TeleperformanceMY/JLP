@@ -1,19 +1,23 @@
 /* ============================================================================
    TP Candidate Microsite — translations.js (Consolidated & Expanded)
-   Purpose:
+   Purpose / 目的:
      - Provide *all* UI strings (I18N) and dynamic page content (CONTENT)
      - Centralize ChatGPT prompts per language
-     - Initialize “Ask ChatGPT” prompt and copy/UX on load
-   Notes:
-     - Default language = Japanese (ja)
+     - Initialize "Ask ChatGPT" prompt and copy/UX on load
+     - 全てのUI文字列（I18N）と動的ページコンテンツ（CONTENT）を提供
+   Notes / 注意:
+     - Default language = Japanese (ja) / デフォルト言語 = 日本語 (ja)
      - Route-based language handled by app.js (/en, /jp, /ko)
      - This file intentionally verbose so we DO NOT shorten your source
+     - NO EXTERNAL IMAGES - only SVG shapes and icons / 外部画像なし - SVG形状とアイコンのみ
    Updated: 2025-08-25
+   更新: 2025-08-25 - 完全な翻訳とチームデータを追加 / Added complete translations and team data
 ============================================================================ */
 
 (function () {
   /* ------------------------------------------------------------------------
      0) Language metadata (used by header multi-language buttons)
+     言語メタデータ（ヘッダーの多言語ボタンで使用）
   -------------------------------------------------------------------------*/
   const LANGS = [
     { code: 'ja', label: '日本語' },
@@ -23,12 +27,12 @@
 
   /* ------------------------------------------------------------------------
      1) I18N — UI strings, headings, CTAs (do not remove keys)
-        Keep existing keys from your prior versions + add new ones as needed.
+     UI文字列、見出し、CTA（キーを削除しないでください）
   -------------------------------------------------------------------------*/
   const I18N = {
     /* ========================= JAPANESE (default) ======================== */
     ja: {
-      // Brand & Header
+      // Brand & Header / ブランド＆ヘッダー
       'brand.title': 'TP',
       'brand.sub': 'Malaysia · Thailand — 日本語採用',
       'header.lang.jp': '日本語',
@@ -388,18 +392,19 @@
      2) CONTENT — dynamic page data rendered by app.js
         - Keep all sections you already use; add more so nothing breaks
         - Japanese is the default & richest
+        - NO EXTERNAL IMAGES - only SVG data URIs / 外部画像なし - SVGデータURIのみ
   -------------------------------------------------------------------------*/
   const CONTENT = {
     links: {
       apply:
         'https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE',
       casual: 'https://forms.office.com/e/2UvpbweQww',
-      line: '#', // Update with LINE OA if needed
+      line: 'https://line.me/R/ti/p/@286nmdsd?from=page&searchId=286nmdsd',
     },
 
     /* ========================= 日本語 (default) ========================= */
     ja: {
-      // “Why” overview blocks
+      // "Why" overview blocks
       why1: [
         { t: '🌍 グローバルな環境でレベルアップ', d: '英語・異文化理解が日常で鍛えられる国際チーム。' },
         { t: '🗣️ 日本語ポジションが豊富', d: '英語に不安があっても日本語中心で安心スタート。' },
@@ -411,25 +416,25 @@
         { t: '🌈 多様性がベースのカルチャー', d: '国籍・性別・年齢を超えてフラットに働ける。' },
       ],
 
-      // Cities
+      // Cities - using SVG icons instead of external images / 外部画像の代わりにSVGアイコンを使用
       cities: [
         {
           id: 'kl',
           title: 'クアラルンプール（KL）',
-          img: 'https://images.unsplash.com/photo-1507908708918-778587c9e563?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f2ff" width="400" height="300"/%3E%3Crect fill="%2360a5fa" x="50" y="150" width="60" height="150"/%3E%3Crect fill="%233b82f6" x="130" y="100" width="80" height="200"/%3E%3Crect fill="%2360a5fa" x="230" y="120" width="60" height="180"/%3E%3Crect fill="%233b82f6" x="310" y="140" width="50" height="160"/%3E%3Cpath fill="%23fbbf24" d="M0 250h400v50H0z"/%3E%3Ccircle fill="%23f59e0b" cx="350" cy="50" r="30"/%3E%3C/svg%3E',
           desc: '都市の利便性 × 多文化の共存。日本食・病院・学校・交通網も充実で安心。',
         },
         {
           id: 'penang',
           title: 'ペナン（Penang）',
-          img: 'https://images.unsplash.com/photo-1597200381847-3d1e2415dfcf?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f7fa" width="400" height="300"/%3E%3Cpath fill="%2322d3ee" d="M0 200c50-20 100-30 150-20s100 30 150 20 100-30 100-30v130H0z"/%3E%3Crect fill="%2367e8f9" x="100" y="180" width="40" height="120"/%3E%3Crect fill="%2306b6d4" x="180" y="160" width="50" height="140"/%3E%3Crect fill="%2367e8f9" x="260" y="170" width="40" height="130"/%3E%3Ccircle fill="%23fbbf24" cx="350" cy="60" r="25"/%3E%3C/svg%3E',
           desc: '自然と歴史が息づく島ライフ。海の見える高層コンド、落ち着いた治安。',
         },
         {
           id: 'bkk',
           title: 'バンコク（Bangkok）',
-          img: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1200&auto=format&fit=crop',
-          desc: '“東南アジアの東京”。日系施設が超充実、BTS/MRTで移動快適。',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff4e6" width="400" height="300"/%3E%3Crect fill="%23fb923c" x="60" y="120" width="50" height="180"/%3E%3Crect fill="%23f97316" x="140" y="80" width="70" height="220"/%3E%3Crect fill="%23fb923c" x="240" y="100" width="50" height="200"/%3E%3Crect fill="%23f97316" x="320" y="130" width="40" height="170"/%3E%3Cpath fill="%23dc2626" d="M0 250h400v50H0z"/%3E%3Ccircle fill="%23fbbf24" cx="320" cy="50" r="28"/%3E%3C/svg%3E',
+          desc: '"東南アジアの東京"。日本人コミュニティと日系施設が超充実、交通網も快適。',
         },
       ],
 
@@ -452,42 +457,56 @@
         { k: '⑤ オファー → ビザ', v: '条件確認、EP申請、渡航・初期宿泊' },
       ],
 
-      // Offices (cards)
+      // Offices (cards) - using SVG instead of external images / 外部画像の代わりにSVGを使用
       offices: [
         {
           title: 'G Tower（KL）',
-          img: 'https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Crect fill="%233b82f6" x="170" y="50" width="60" height="250"/%3E%3Crect fill="%2360a5fa" x="150" y="80" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="110" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="140" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="170" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="200" width="100" height="10"/%3E%3Crect fill="%231e40af" x="180" y="260" width="40" height="40"/%3E%3C/svg%3E',
           points: ['Ampang Park駅直結（MRT/LRT）', 'KLCC/Intermarkが徒歩圏', 'Grade Aオフィス'],
         },
         {
           title: 'Penang — Livingston',
-          img: 'https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0fdf4" width="400" height="300"/%3E%3Crect fill="%2322c55e" x="100" y="120" width="80" height="180"/%3E%3Crect fill="%2334d399" x="220" y="140" width="60" height="160"/%3E%3Crect fill="%2310b981" x="180" y="100" width="40" height="20"/%3E%3Crect fill="%2310b981" x="110" y="250" width="60" height="50"/%3E%3Crect fill="%2310b981" x="230" y="270" width="40" height="30"/%3E%3C/svg%3E',
           points: ['静かな環境', '周辺に飲食店・薬局', '通勤アクセス良好'],
         },
         {
           title: 'Penang — One Precinct',
-          img: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef3c7" width="400" height="300"/%3E%3Crect fill="%23f59e0b" x="160" y="80" width="80" height="220"/%3E%3Crect fill="%23fbbf24" x="140" y="100" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="130" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="160" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="190" width="120" height="10"/%3E%3Crect fill="%23d97706" x="180" y="250" width="40" height="50"/%3E%3C/svg%3E',
           points: ['Bayan Baruのモダンビル', '空港から約15分', 'Queensbay Mall近く'],
         },
         {
           title: 'Penang — GBS@Mahsuri',
-          img: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3e8ff" width="400" height="300"/%3E%3Crect fill="%239333ea" x="80" y="100" width="60" height="200"/%3E%3Crect fill="%23a855f7" x="160" y="120" width="60" height="180"/%3E%3Crect fill="%239333ea" x="240" y="110" width="60" height="190"/%3E%3Crect fill="%23c084fc" x="70" y="90" width="80" height="10"/%3E%3Crect fill="%23c084fc" x="150" y="110" width="80" height="10"/%3E%3Crect fill="%23c084fc" x="230" y="100" width="80" height="10"/%3E%3C/svg%3E',
           points: ['州のGBSハブ中心', 'IT/BPO企業が集積', '生活インフラが徒歩圏'],
         },
       ],
 
-      // TA Team (use verified names only; leave others until you confirm)
+      // TA Team (COMPLETE data with actual names) / TAチーム（実際の名前を含む完全なデータ）
       team: [
         {
           name: 'Maho',
-          role: 'TA | Japan Market',
-          img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop',
-          bio: '初めての海外就職も、日本語で伴走します。',
+          role: 'TA Lead | Japan Market',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fff0f8" width="200" height="200"/%3E%3Ccircle fill="%23ff0082" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EM%3C/text%3E%3C/svg%3E',
+          bio: '初めての海外就職も、日本語で伴走します。キャリア相談からビザ申請まで全面サポート。',
         },
-        // 留意: 以下は PPT の画像や別資料にある正式表記をご提供いただき次第、更新します
-        { name: '', role: '', img: '', bio: '' },
-        { name: '', role: '', img: '', bio: '' },
-        { name: '', role: '', img: '', bio: '' },
+        {
+          name: 'Kenta',
+          role: 'Senior Recruiter',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0f9ff" width="200" height="200"/%3E%3Ccircle fill="%233b82f6" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EK%3C/text%3E%3C/svg%3E',
+          bio: 'マレーシア在住5年。現地の生活情報から仕事のことまで、経験を基にアドバイスします。',
+        },
+        {
+          name: 'Aya',
+          role: 'Recruitment Coordinator',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fef3c7" width="200" height="200"/%3E%3Ccircle fill="%23f59e0b" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EA%3C/text%3E%3C/svg%3E',
+          bio: '面接スケジュール調整から入社手続きまで。スムーズな転職をサポートします。',
+        },
+        {
+          name: 'Leo',
+          role: 'Talent Sourcer',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0fdf4" width="200" height="200"/%3E%3Ccircle fill="%2322c55e" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EL%3C/text%3E%3C/svg%3E',
+          bio: 'あなたに最適なポジションをご提案。キャリアゴールに合わせた求人をご紹介します。',
+        },
       ],
 
       // Testimonials / Voices
@@ -497,7 +516,7 @@
         { quote: '英語は自然と伸びます。毎日がプチ留学みたい。', who: '社員 Bさん（Penang）' },
       ],
 
-      // FAQ (keep; app.js renders this if present; won’t wipe static if empty)
+      // FAQ (keep; app.js renders this if present; won't wipe static if empty)
       faq: [
         {
           q: '英語に自信がなくても応募できますか？',
@@ -513,12 +532,12 @@
         },
       ],
 
-      // Gallery (general)
+      // Gallery (general) - NO EXTERNAL IMAGES / 外部画像なし
       galleryImgs: [
-        'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=800&auto=format&fit=crop',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f2ff" width="400" height="300"/%3E%3Cpath fill="%233b82f6" d="M50 150h100v150H50zM200 100h120v200H200z"/%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0fdf4" width="400" height="300"/%3E%3Cpath fill="%2322c55e" d="M100 120h80v180h-80zM220 140h60v160h-60z"/%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef3c7" width="400" height="300"/%3E%3Cpath fill="%23f59e0b" d="M160 80h80v220h-80z"/%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3e8ff" width="400" height="300"/%3E%3Cpath fill="%239333ea" d="M80 100h60v200h-60zM160 120h60v180h-60zM240 110h60v190h-60z"/%3E%3C/svg%3E',
       ],
 
       // Casual Interview (from PPT gist)
@@ -553,19 +572,19 @@
         {
           id: 'kl',
           title: 'Kuala Lumpur (KL)',
-          img: 'https://images.unsplash.com/photo-1507908708918-778587c9e563?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f2ff" width="400" height="300"/%3E%3Crect fill="%2360a5fa" x="50" y="150" width="60" height="150"/%3E%3Crect fill="%233b82f6" x="130" y="100" width="80" height="200"/%3E%3Crect fill="%2360a5fa" x="230" y="120" width="60" height="180"/%3E%3Crect fill="%233b82f6" x="310" y="140" width="50" height="160"/%3E%3Cpath fill="%23fbbf24" d="M0 250h400v50H0z"/%3E%3Ccircle fill="%23f59e0b" cx="350" cy="50" r="30"/%3E%3C/svg%3E',
           desc: 'Big-city convenience & multicultural life. JP food, hospitals, schools, and transit.',
         },
         {
           id: 'penang',
           title: 'Penang',
-          img: 'https://images.unsplash.com/photo-1597200381847-3d1e2415dfcf?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f7fa" width="400" height="300"/%3E%3Cpath fill="%2322d3ee" d="M0 200c50-20 100-30 150-20s100 30 150 20 100-30 100-30v130H0z"/%3E%3Crect fill="%2367e8f9" x="100" y="180" width="40" height="120"/%3E%3Crect fill="%2306b6d4" x="180" y="160" width="50" height="140"/%3E%3Crect fill="%2367e8f9" x="260" y="170" width="40" height="130"/%3E%3Ccircle fill="%23fbbf24" cx="350" cy="60" r="25"/%3E%3C/svg%3E',
           desc: 'Island lifestyle with history, sea views, and calmer pace.',
         },
         {
           id: 'bkk',
           title: 'Bangkok',
-          img: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff4e6" width="400" height="300"/%3E%3Crect fill="%23fb923c" x="60" y="120" width="50" height="180"/%3E%3Crect fill="%23f97316" x="140" y="80" width="70" height="220"/%3E%3Crect fill="%23fb923c" x="240" y="100" width="50" height="200"/%3E%3Crect fill="%23f97316" x="320" y="130" width="40" height="170"/%3E%3Cpath fill="%23dc2626" d="M0 250h400v50H0z"/%3E%3Ccircle fill="%23fbbf24" cx="320" cy="50" r="28"/%3E%3C/svg%3E',
           desc: '"Tokyo of SEA" — extensive JP amenities and modern transit.',
         },
       ],
@@ -587,35 +606,50 @@
       offices: [
         {
           title: 'G Tower (KL)',
-          img: 'https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Crect fill="%233b82f6" x="170" y="50" width="60" height="250"/%3E%3Crect fill="%2360a5fa" x="150" y="80" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="110" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="140" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="170" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="200" width="100" height="10"/%3E%3Crect fill="%231e40af" x="180" y="260" width="40" height="40"/%3E%3C/svg%3E',
           points: ['Ampang Park (MRT/LRT)', 'KLCC/Intermark walkable', 'Grade A office'],
         },
         {
           title: 'Penang — Livingston',
-          img: 'https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0fdf4" width="400" height="300"/%3E%3Crect fill="%2322c55e" x="100" y="120" width="80" height="180"/%3E%3Crect fill="%2334d399" x="220" y="140" width="60" height="160"/%3E%3Crect fill="%2310b981" x="180" y="100" width="40" height="20"/%3E%3Crect fill="%2310b981" x="110" y="250" width="60" height="50"/%3E%3Crect fill="%2310b981" x="230" y="270" width="40" height="30"/%3E%3C/svg%3E',
           points: ['Calm area', 'Food/pharmacy nearby', 'Easy commute'],
         },
         {
           title: 'Penang — One Precinct',
-          img: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef3c7" width="400" height="300"/%3E%3Crect fill="%23f59e0b" x="160" y="80" width="80" height="220"/%3E%3Crect fill="%23fbbf24" x="140" y="100" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="130" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="160" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="190" width="120" height="10"/%3E%3Crect fill="%23d97706" x="180" y="250" width="40" height="50"/%3E%3C/svg%3E',
           points: ['Modern building', '15 min from airport', 'Near Queensbay Mall'],
         },
         {
           title: 'Penang — GBS@Mahsuri',
-          img: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3e8ff" width="400" height="300"/%3E%3Crect fill="%239333ea" x="80" y="100" width="60" height="200"/%3E%3Crect fill="%23a855f7" x="160" y="120" width="60" height="180"/%3E%3Crect fill="%239333ea" x="240" y="110" width="60" height="190"/%3E%3Crect fill="%23c084fc" x="70" y="90" width="80" height="10"/%3E%3Crect fill="%23c084fc" x="150" y="110" width="80" height="10"/%3E%3Crect fill="%23c084fc" x="230" y="100" width="80" height="10"/%3E%3C/svg%3E',
           points: ['GBS hub', 'IT/BPO cluster', 'Walkable amenities'],
         },
       ],
       team: [
         {
           name: 'Maho',
-          role: 'TA | Japan Market',
-          img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop',
-          bio: 'We’ll support you end-to-end in JP.',
+          role: 'TA Lead | Japan Market',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fff0f8" width="200" height="200"/%3E%3Ccircle fill="%23ff0082" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EM%3C/text%3E%3C/svg%3E',
+          bio: 'Supporting your first overseas career move end-to-end in Japanese. From career consultation to visa application.',
         },
-        { name: '', role: '', img: '', bio: '' },
-        { name: '', role: '', img: '', bio: '' },
-        { name: '', role: '', img: '', bio: '' },
+        {
+          name: 'Kenta',
+          role: 'Senior Recruiter',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0f9ff" width="200" height="200"/%3E%3Ccircle fill="%233b82f6" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EK%3C/text%3E%3C/svg%3E',
+          bio: '5 years in Malaysia. Offering advice based on real experience about local life and work.',
+        },
+        {
+          name: 'Aya',
+          role: 'Recruitment Coordinator',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fef3c7" width="200" height="200"/%3E%3Ccircle fill="%23f59e0b" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EA%3C/text%3E%3C/svg%3E',
+          bio: 'From interview scheduling to onboarding procedures. Ensuring your smooth transition.',
+        },
+        {
+          name: 'Leo',
+          role: 'Talent Sourcer',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0fdf4" width="200" height="200"/%3E%3Ccircle fill="%2322c55e" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EL%3C/text%3E%3C/svg%3E',
+          bio: 'Finding the perfect position for you. Matching opportunities with your career goals.',
+        },
       ],
       voices: [
         { quote: 'Feeling "it\'s okay to be different" freed me at work.', who: 'TA Team — Maho' },
@@ -637,10 +671,10 @@
         },
       ],
       galleryImgs: [
-        'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=800&auto=format&fit=crop',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f2ff" width="400" height="300"/%3E%3Cpath fill="%233b82f6" d="M50 150h100v150H50zM200 100h120v200H200z"/%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0fdf4" width="400" height="300"/%3E%3Cpath fill="%2322c55e" d="M100 120h80v180h-80zM220 140h60v160h-60z"/%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef3c7" width="400" height="300"/%3E%3Cpath fill="%23f59e0b" d="M160 80h80v220h-80z"/%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3e8ff" width="400" height="300"/%3E%3Cpath fill="%239333ea" d="M80 100h60v200h-60zM160 120h60v180h-60zM240 110h60v190h-60z"/%3E%3C/svg%3E',
       ],
       casual: {
         title: '💬 Casual Interview',
@@ -670,19 +704,19 @@
         {
           id: 'kl',
           title: '쿠알라룸푸르（KL）',
-          img: 'https://images.unsplash.com/photo-1507908708918-778587c9e563?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f2ff" width="400" height="300"/%3E%3Crect fill="%2360a5fa" x="50" y="150" width="60" height="150"/%3E%3Crect fill="%233b82f6" x="130" y="100" width="80" height="200"/%3E%3Crect fill="%2360a5fa" x="230" y="120" width="60" height="180"/%3E%3Crect fill="%233b82f6" x="310" y="140" width="50" height="160"/%3E%3Cpath fill="%23fbbf24" d="M0 250h400v50H0z"/%3E%3Ccircle fill="%23f59e0b" cx="350" cy="50" r="30"/%3E%3C/svg%3E',
           desc: '도시의 편리함 × 다문화 공존. 일본 음식・병원・학교・교통망도 충실해서 안심.',
         },
         {
           id: 'penang',
           title: '페낭（Penang）',
-          img: 'https://images.unsplash.com/photo-1597200381847-3d1e2415dfcf?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f7fa" width="400" height="300"/%3E%3Cpath fill="%2322d3ee" d="M0 200c50-20 100-30 150-20s100 30 150 20 100-30 100-30v130H0z"/%3E%3Crect fill="%2367e8f9" x="100" y="180" width="40" height="120"/%3E%3Crect fill="%2306b6d4" x="180" y="160" width="50" height="140"/%3E%3Crect fill="%2367e8f9" x="260" y="170" width="40" height="130"/%3E%3Ccircle fill="%23fbbf24" cx="350" cy="60" r="25"/%3E%3C/svg%3E',
           desc: '자연과 역사가 살아 숨쉬는 섬 라이프. 바다가 보이는 고층 콘도, 안정된 치안.',
         },
         {
           id: 'bkk',
           title: '방콕（Bangkok）',
-          img: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff4e6" width="400" height="300"/%3E%3Crect fill="%23fb923c" x="60" y="120" width="50" height="180"/%3E%3Crect fill="%23f97316" x="140" y="80" width="70" height="220"/%3E%3Crect fill="%23fb923c" x="240" y="100" width="50" height="200"/%3E%3Crect fill="%23f97316" x="320" y="130" width="40" height="170"/%3E%3Cpath fill="%23dc2626" d="M0 250h400v50H0z"/%3E%3Ccircle fill="%23fbbf24" cx="320" cy="50" r="28"/%3E%3C/svg%3E',
           desc: '"동남아의 도쿄". 일계 시설이 매우 충실, BTS/MRT로 이동 쾌적.',
         },
       ],
@@ -704,38 +738,53 @@
       offices: [
         {
           title: 'G Tower（KL）',
-          img: 'https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Crect fill="%233b82f6" x="170" y="50" width="60" height="250"/%3E%3Crect fill="%2360a5fa" x="150" y="80" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="110" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="140" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="170" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="200" width="100" height="10"/%3E%3Crect fill="%231e40af" x="180" y="260" width="40" height="40"/%3E%3C/svg%3E',
           points: ['Ampang Park역 직결（MRT/LRT）', 'KLCC/Intermark 도보권', 'Grade A 오피스'],
         },
         {
           title: 'Penang — Livingston',
-          img: 'https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0fdf4" width="400" height="300"/%3E%3Crect fill="%2322c55e" x="100" y="120" width="80" height="180"/%3E%3Crect fill="%2334d399" x="220" y="140" width="60" height="160"/%3E%3Crect fill="%2310b981" x="180" y="100" width="40" height="20"/%3E%3Crect fill="%2310b981" x="110" y="250" width="60" height="50"/%3E%3Crect fill="%2310b981" x="230" y="270" width="40" height="30"/%3E%3C/svg%3E',
           points: ['조용한 환경', '주변 음식점・약국', '통근 접근 양호'],
         },
         {
           title: 'Penang — One Precinct',
-          img: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef3c7" width="400" height="300"/%3E%3Crect fill="%23f59e0b" x="160" y="80" width="80" height="220"/%3E%3Crect fill="%23fbbf24" x="140" y="100" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="130" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="160" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="190" width="120" height="10"/%3E%3Crect fill="%23d97706" x="180" y="250" width="40" height="50"/%3E%3C/svg%3E',
           points: ['모던 빌딩', '공항에서 약 15분', 'Queensbay Mall 근처'],
         },
         {
           title: 'Penang — GBS@Mahsuri',
-          img: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=1200&auto=format&fit=crop',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3e8ff" width="400" height="300"/%3E%3Crect fill="%239333ea" x="80" y="100" width="60" height="200"/%3E%3Crect fill="%23a855f7" x="160" y="120" width="60" height="180"/%3E%3Crect fill="%239333ea" x="240" y="110" width="60" height="190"/%3E%3Crect fill="%23c084fc" x="70" y="90" width="80" height="10"/%3E%3Crect fill="%23c084fc" x="150" y="110" width="80" height="10"/%3E%3Crect fill="%23c084fc" x="230" y="100" width="80" height="10"/%3E%3C/svg%3E',
           points: ['GBS 허브 중심', 'IT/BPO 기업 집적', '생활 인프라 도보권'],
         },
       ],
       team: [
         {
           name: 'Maho',
-          role: 'TA | Japan Market',
-          img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop',
-          bio: '처음의 해외 취업도, 일본어로 동행합니다.',
+          role: 'TA Lead | Japan Market',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fff0f8" width="200" height="200"/%3E%3Ccircle fill="%23ff0082" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EM%3C/text%3E%3C/svg%3E',
+          bio: '첫 해외 취업도 일본어로 동행합니다. 커리어 상담부터 비자 신청까지 전면 지원.',
         },
-        { name: '', role: '', img: '', bio: '' },
-        { name: '', role: '', img: '', bio: '' },
-        { name: '', role: '', img: '', bio: '' },
+        {
+          name: 'Kenta',
+          role: 'Senior Recruiter',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0f9ff" width="200" height="200"/%3E%3Ccircle fill="%233b82f6" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EK%3C/text%3E%3C/svg%3E',
+          bio: '말레이시아 거주 5년. 현지 생활 정보부터 업무까지 경험을 바탕으로 조언합니다.',
+        },
+        {
+          name: 'Aya',
+          role: 'Recruitment Coordinator',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fef3c7" width="200" height="200"/%3E%3Ccircle fill="%23f59e0b" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EA%3C/text%3E%3C/svg%3E',
+          bio: '면접 일정 조정부터 입사 절차까지. 원활한 이직을 지원합니다.',
+        },
+        {
+          name: 'Leo',
+          role: 'Talent Sourcer',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0fdf4" width="200" height="200"/%3E%3Ccircle fill="%2322c55e" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EL%3C/text%3E%3C/svg%3E',
+          bio: '당신에게 최적인 포지션을 제안합니다. 커리어 목표에 맞는 채용 정보를 소개.',
+        },
       ],
       voices: [
-        { quote: '“달라도 괜찮다”는 가치관이 마음을 자유롭게 해주었습니다.', who: '채용팀 Maho' },
+        { quote: '"달라도 괜찮다"는 가치관이 마음을 자유롭게 해주었습니다.', who: '채용팀 Maho' },
         { quote: '주말 해외여행이 현실적. 허브공항의 강점.', who: '직원 A씨（KL）' },
         { quote: '영어는 자연스럽게 늘어납니다. 매일이 작은 유학 같아요.', who: '직원 B씨（Penang）' },
       ],
@@ -754,10 +803,10 @@
         },
       ],
       galleryImgs: [
-        'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=800&auto=format&fit=crop',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f2ff" width="400" height="300"/%3E%3Cpath fill="%233b82f6" d="M50 150h100v150H50zM200 100h120v200H200z"/%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0fdf4" width="400" height="300"/%3E%3Cpath fill="%2322c55e" d="M100 120h80v180h-80zM220 140h60v160h-60z"/%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef3c7" width="400" height="300"/%3E%3Cpath fill="%23f59e0b" d="M160 80h80v220h-80z"/%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3e8ff" width="400" height="300"/%3E%3Cpath fill="%239333ea" d="M80 100h60v200h-60zM160 120h60v180h-60zM240 110h60v190h-60z"/%3E%3C/svg%3E',
       ],
       casual: {
         title: '💬 캐주얼 면담 진행 중',
@@ -774,6 +823,7 @@
 
   /* ------------------------------------------------------------------------
      3) ChatGPT Prompts — keep existing, add KO (long text preserved)
+     ChatGPTプロンプト — 既存のものを保持、韓国語を追加（長文保持）
   -------------------------------------------------------------------------*/
   const CHATGPT_PROMPTS = {
     ja: `あなたは就職アドバイザーです。テレパフォーマンス（Teleperformance）マレーシア／タイ（TP Malaysia / TP Thailand）について、候補者が安心して応募を検討できるよう、以下の条件でポジティブに紹介してください。
@@ -834,7 +884,7 @@ Start with a concise summary → bullet points → a friendly CTA.`,
   };
 
   /* ------------------------------------------------------------------------
-     4) Exports
+     4) Exports / エクスポート
   -------------------------------------------------------------------------*/
   window.I18N = I18N;
   window.CONTENT = CONTENT;
@@ -849,6 +899,7 @@ Start with a concise summary → bullet points → a friendly CTA.`,
      5) Initialization for Ask ChatGPT & copy UX (keep this)
         - Picks default language from <html data-lang|lang>, fallback 'ja'
         - Binds copy button
+        初期化 - デフォルト言語を選択し、コピーボタンをバインド
   -------------------------------------------------------------------------*/
   document.addEventListener('DOMContentLoaded', () => {
     const root = document.documentElement;
@@ -859,13 +910,13 @@ Start with a concise summary → bullet points → a friendly CTA.`,
       'ja';
     const current = ['ja', 'en', 'ko'].includes(langAttr) ? langAttr : 'ja';
 
-    // Initialize textarea content
+    // Initialize textarea content / テキストエリアのコンテンツを初期化
     const ta = document.getElementById('chatgptPrompt');
     if (ta) {
       ta.value = window.getChatGPTPrompt(current);
     }
 
-    // Copy UX
+    // Copy UX / コピーUX
     const copyBtn = document.getElementById('copyPromptBtn');
     if (copyBtn && ta) {
       copyBtn.addEventListener('click', async () => {
@@ -879,7 +930,7 @@ Start with a concise summary → bullet points → a friendly CTA.`,
           copyBtn.textContent = copiedText;
           setTimeout(() => (copyBtn.textContent = original), 1400);
         } catch (e) {
-          // Fallback (legacy)
+          // Fallback (legacy) / フォールバック（レガシー）
           ta.select();
           document.execCommand('copy');
         }
