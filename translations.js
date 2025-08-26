@@ -483,30 +483,11 @@
 
       // TA Team (COMPLETE data with actual names) / TAチーム（実際の名前を含む完全なデータ）
       team: [
-        {
-          name: 'Maho',
-          role: 'TA Lead | Japan Market',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fff0f8" width="200" height="200"/%3E%3Ccircle fill="%23ff0082" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EM%3C/text%3E%3C/svg%3E',
-          bio: '初めての海外就職も、日本語で伴走します。キャリア相談からビザ申請まで全面サポート。',
-        },
-        {
-          name: 'Kenta',
-          role: 'Senior Recruiter',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0f9ff" width="200" height="200"/%3E%3Ccircle fill="%233b82f6" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EK%3C/text%3E%3C/svg%3E',
-          bio: 'マレーシア在住5年。現地の生活情報から仕事のことまで、経験を基にアドバイスします。',
-        },
-        {
-          name: 'Aya',
-          role: 'Recruitment Coordinator',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fef3c7" width="200" height="200"/%3E%3Ccircle fill="%23f59e0b" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EA%3C/text%3E%3C/svg%3E',
-          bio: '面接スケジュール調整から入社手続きまで。スムーズな転職をサポートします。',
-        },
-        {
-          name: 'Leo',
-          role: 'Talent Sourcer',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0fdf4" width="200" height="200"/%3E%3Ccircle fill="%2322c55e" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EL%3C/text%3E%3C/svg%3E',
-          bio: 'あなたに最適なポジションをご提案。キャリアゴールに合わせた求人をご紹介します。',
-        },
+         { name: 'Joseph', role: 'Senior Manager (TA)', img: , bio: '多国籍採用の責任者。日本語スピーカー採用を含む全体統括。' },
+         { name: 'Maya', role: 'TA', img: , bio: '約5000人の日本語話者の面接経験。次はあなたの番！' },
+         { name: 'Akito', role: 'Recruiter', img: , bio: '期待を超える対応を目指し、丁寧にご案内します。' },
+         { name: 'Maho', role: 'Talent Attraction', img: , bio: '海外就職の不安に日本語で伴走。旅行・スポーツ好き。' },
+         { name: 'Koyori', role: 'TA', img: , bio: 'はじめまして、採用担当のKoyoriです。' },
       ],
 
       // Testimonials / Voices
