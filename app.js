@@ -1,11 +1,12 @@
 /* ============================================================================
-   TP Candidate Microsite — app.js
+   TP Candidate Microsite — app.js (FIXED FOR GITHUB PAGES)
    Requires: translations.js (window.I18N, window.CONTENT, window.getChatGPTPrompt)
    Purpose / 目的: 
      - Bind UI, render dynamic content, and keep things snappy on mobile
      - UI のバインド、動的コンテンツのレンダリング、モバイルでのスムーズな動作
-   Updated: 2025-08-25 
-     - URL-based lang suffix; JP default; language buttons
+   Updated: 2025-08-26 
+     - FIXED: Changed from path-based to hash-based routing for GitHub Pages
+     - Hash-based lang (#ja, #en, #ko) to avoid 404 errors
      - Better image fallback handling for SVG icons
      - Bilingual comments / バイリンガルコメント
 ============================================================================ */
@@ -50,14 +51,9 @@ function imageFallback(img, fallbackAlt = 'image') {
 }
 
 /* ----------------------------------------------------------
-   1) Language & i18n plumbing (URL suffix style + graceful fallback)
-   言語とi18n配管（URLサフィックススタイル+優雅なフォールバック）
-      - Supported styles we can parse / サポートされる解析可能なスタイル:
-        * Suffix:  /page.html/ja, /page.html/en, /page.html/ko  (preferred)
-        * Query :  ?lang=ja|en|ko
-        * Hash  :  #ja|#en|#ko
-        * Prefix:  /ja/page.html, /en/page.html  (parsed but we rewrite to suffix)
-        * LocalStorage fallback (tp_lang)
+   1) Language & i18n plumbing (Hash-based for GitHub Pages)
+   言語とi18n配管（GitHub Pages用ハッシュベース）
+      - Supported: #ja, #en, #ko
       - Default language: Japanese ('ja') / デフォルト言語：日本語（'ja'）
 -----------------------------------------------------------*/
 const I18N    = window.I18N    || { ja: {}, en: {}, ko: {} };
@@ -77,84 +73,37 @@ function normalizeLang(x) {
   return 'ja';
 }
 
-/** Detect language from the current URL (suffix/query/hash/prefix). 
- * 現在のURLから言語を検出（サフィックス/クエリ/ハッシュ/プレフィックス） */
+/** Detect language from the current URL (hash/query). 
+ * 現在のURLから言語を検出（ハッシュ/クエリ） */
 function parseLangFromLocation() {
-  const { pathname, search, hash } = window.location;
+  const { search, hash } = window.location;
 
-  // 1) Query ?lang=xx
+  // 1) Hash #ja, #en, #ko
+  const h = (hash || '').replace(/^#/, '');
+  if (LANGS.includes(h)) return h;
+
+  // 2) Query ?lang=xx
   const qs = new URLSearchParams(search);
   const q = qs.get('lang');
-  if (q && LANGS.includes(q)) return { lang: q, style: 'query' };
+  if (q && LANGS.includes(q)) return q;
 
-  // 2) Hash #xx
-  const h = (hash || '').replace(/^#/, '');
-  if (LANGS.includes(h)) return { lang: h, style: 'hash' };
-
-  // 3) Suffix /xx at the end (…/page.html/ja)
-  const parts = pathname.split('/').filter(Boolean);
-  const last = parts[parts.length - 1];
-  if (LANGS.includes(last)) return { lang: last, style: 'suffix' };
-
-  // 4) Prefix /xx/ at the beginning (…/en/page.html)
-  const first = parts[0];
-  if (LANGS.includes(first)) return { lang: first, style: 'prefix' };
-
-  // 5) None in URL
-  return { lang: null, style: 'none' };
+  // 3) None in URL
+  return null;
 }
 
-/** Remove any visible lang tokens from URL path/search/hash (no navigation). 
- * URLパス/検索/ハッシュから可視言語トークンを削除（ナビゲーションなし） */
-function stripLangFromURL() {
-  const { pathname, search, hash } = window.location;
-  let p = pathname;
-  let s = new URLSearchParams(search);
-  let h = hash;
-
-  // Remove suffix / サフィックスを削除
-  const parts = p.split('/').filter(Boolean);
-  if (parts.length && LANGS.includes(parts[parts.length - 1])) {
-    parts.pop();
-    p = '/' + parts.join('/') + (p.endsWith('/') ? '/' : '');
-  }
-
-  // Remove prefix / プレフィックスを削除
-  const parts2 = p.split('/').filter(Boolean);
-  if (parts2.length && LANGS.includes(parts2[0])) {
-    parts2.shift();
-    p = '/' + parts2.join('/') + (p.endsWith('/') ? '/' : '');
-  }
-
-  // Remove ?lang
-  if (s.has('lang')) s.delete('lang');
-
-  // Remove #ja|#en|#ko
-  if (LANGS.includes((h || '').replace(/^#/, ''))) h = '';
-
-  return { pathname: p || '/', search: s.toString(), hash: h || '' };
-}
-
-/** Pretty-print current URL to suffix style …/page.html/<lang> without reloading. 
- * 現在のURLをサフィックススタイルに整形…/page.html/<lang> リロードなし */
-function ensurePrettyLangURL(lang) {
-  const { pathname, search, hash } = stripLangFromURL();
-  const base = pathname.replace(/\/+$/, ''); // trim trailing slash
-  const suf = '/' + lang;
-  const qs  = search ? ('?' + search) : '';
-  const hh  = hash ? (hash.startsWith('#') ? hash : '#' + hash) : '';
-  const pretty = (base || '/') + suf + qs + hh;
-  if (window.location.pathname + window.location.search + window.location.hash !== pretty) {
-    window.history.replaceState({}, '', pretty);
-  }
+/** Update URL to show current language as hash 
+ * URLを更新して現在の言語をハッシュとして表示 */
+function updateLangURL(lang) {
+  // Use hash for GitHub Pages compatibility
+  window.history.replaceState({}, '', '#' + lang);
 }
 
 /** Initial language picker: URL → localStorage → browser → default 'ja'. 
  * 初期言語ピッカー：URL → localStorage → ブラウザ → デフォルト 'ja' */
 function getInitialLang() {
   // a) from URL
-  const { lang } = parseLangFromLocation();
-  if (lang) return normalizeLang(lang);
+  const urlLang = parseLangFromLocation();
+  if (urlLang) return normalizeLang(urlLang);
 
   // b) from localStorage
   const saved = localStorage.getItem(LANG_STORAGE_KEY);
@@ -190,6 +139,15 @@ function applyLangToHtmlRoot() {
       btn.setAttribute('aria-pressed', 'false');
     }
   });
+  
+  // Update legacy #langBtn if it exists
+  const legacyBtn = $('#langBtn');
+  if (legacyBtn) {
+    const labels = { ja: 'EN', en: '한국어', ko: '日本語' };
+    const nextLang = { ja: 'en', en: 'ko', ko: 'ja' };
+    legacyBtn.textContent = labels[currentLang] || 'EN';
+    legacyBtn.setAttribute('data-next-lang', nextLang[currentLang]);
+  }
 }
 
 /** i18n getter / i18n ゲッター */
@@ -215,8 +173,8 @@ function applyI18nStaticText() {
   });
 }
 
-/** Update both state and pretty URL, then re-render UI. 
- * 状態とプリティURLの両方を更新し、UIを再レンダリング */
+/** Update both state and URL, then re-render UI. 
+ * 状態とURLの両方を更新し、UIを再レンダリング */
 function setLang(lang) {
   currentLang = normalizeLang(lang);
   localStorage.setItem(LANG_STORAGE_KEY, currentLang);
@@ -237,8 +195,8 @@ function setLang(lang) {
     ta.value = window.getChatGPTPrompt(currentLang);
   }
 
-  // Keep URL in the user's requested style: suffix / ユーザーのリクエストされたスタイルでURLを保持：サフィックス
-  ensurePrettyLangURL(currentLang);
+  // Update URL with hash for GitHub Pages / GitHub Pages用にハッシュでURLを更新
+  updateLangURL(currentLang);
 }
 
 /* ----------------------------------------------------------
@@ -305,8 +263,6 @@ function observeReveal(node) {
 /* ----------------------------------------------------------
    4) Simple horizontal carousel (Benefits)
    シンプルな水平カルーセル（特典）
-   - Fixed: prev ← moves left (index-1), next → moves right (index+1)
-   - Controls placed in section head (top row)
 -----------------------------------------------------------*/
 function makeCarousel(containerSel, prevBtnSel, nextBtnSel) {
   const track = $(containerSel);
@@ -355,11 +311,7 @@ function makeCarousel(containerSel, prevBtnSel, nextBtnSel) {
 
 /* ----------------------------------------------------------
    5) Dynamic renders (Why / Cities / Benefits / Process / Offices / Team / Voices / FAQ / Gallery)
-   動的レンダリング（なぜ/都市/特典/プロセス/オフィス/チーム/声/FAQ/ギャラリー）
-   - All data pulled from translations.js → window.CONTENT[currentLang]
-   - Do not hardcode names inside HTML (team/voices).
-   - すべてのデータはtranslations.js → window.CONTENT[currentLang]から取得
-   - HTML内に名前をハードコードしない（チーム/声）
+   動的レンダリング
 -----------------------------------------------------------*/
 function renderWhyLists() {
   const lists = [
@@ -510,11 +462,10 @@ function renderGallery() {
 }
 
 /* ----------------------------------------------------------
-   6) Priority / Secondary galleries (3×3 tiles with background connector)
-   優先/セカンダリギャラリー（3×3タイルと背景コネクタ）
+   6-8) Priority galleries, connectors, etc. (keeping same)
 -----------------------------------------------------------*/
+// ... [Keeping all the priority gallery, secondary gallery, and connector functions exactly as they were]
 const PHOTO_SOURCES = {
-  // SVG placeholders instead of external images / 外部画像の代わりにSVGプレースホルダー
   about: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Ccircle fill="%233b82f6" cx="200" cy="150" r="60"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="24" font-weight="bold"%3EAbout%3C/text%3E%3C/svg%3E',
   jobs: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff0f8" width="400" height="300"/%3E%3Crect fill="%23ff0082" x="150" y="100" width="100" height="100"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="24" font-weight="bold"%3EJobs%3C/text%3E%3C/svg%3E',
   relocation: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f7fa" width="400" height="300"/%3E%3Cpath fill="%2322d3ee" d="M150 150l50-50 50 50-50 50z"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="20" font-weight="bold"%3EVisa%3C/text%3E%3C/svg%3E',
@@ -534,8 +485,6 @@ const PHOTO_SOURCES = {
 };
 
 function decorateIconCard(a, key) {
-  // Expect structure: <a.icon-card><span.icon>…</span><span.meta>…</span></a>
-  // We'll inject a <div class="photo"> before meta, and keep SVG/emoji for accessibility.
   const title = $('.title', a)?.textContent?.trim() || a.getAttribute('aria-label') || '';
   const photoURL = PHOTO_SOURCES[key] || PHOTO_SOURCES.about;
   let photo = $('.photo', a);
@@ -576,10 +525,6 @@ function renderSecondaryGallery() {
   items.forEach((el) => observeReveal(el));
 }
 
-/* ----------------------------------------------------------
-   7) Background connector SVG (subtle, modern)
-   背景コネクタSVG（微妙、モダン）
------------------------------------------------------------*/
 function injectConnectorBackground(sectionEl, opts = {}) {
   if (!sectionEl) return;
   const { density = 12, variant = 'grid' } = opts;
@@ -622,7 +567,6 @@ function injectConnectorBackground(sectionEl, opts = {}) {
   svg.innerHTML = svgInner;
   sectionEl.prepend(svg);
 
-  // Update on resize / リサイズ時に更新
   let raf;
   on(window, 'resize', () => {
     cancelAnimationFrame(raf);
@@ -639,8 +583,6 @@ function injectConnectorBackground(sectionEl, opts = {}) {
    言語切り替え+動的セクションの完全リフレッシュ
 -----------------------------------------------------------*/
 function renderAllDynamic() {
-  // These only exist on the long single-page template.
-  // これらは長い単一ページテンプレートにのみ存在します。
   renderWhyLists();
   renderCities();
   renderBenefits();
@@ -650,13 +592,9 @@ function renderAllDynamic() {
   renderVoices();
   renderFaq();
   renderGallery();
-
-  // Icon galleries (3×3 + secondary)
-  // アイコンギャラリー（3×3 +セカンダリ）
   renderPriorityGallery();
   renderSecondaryGallery();
 
-  // Year in footer / フッターの年
   const y = String(new Date().getFullYear());
   const yNode = document.getElementById('year');
   if (yNode) yNode.textContent = y;
@@ -669,7 +607,7 @@ function renderAllDynamic() {
    ヘッダーアクション：言語+ドロワー+スムーズアンカー
 -----------------------------------------------------------*/
 function initHeader() {
-  // Language buttons (show all; JP default) / 言語ボタン（すべて表示; JPデフォルト）
+  // Language buttons / 言語ボタン
   $$('.lang-btn').forEach((btn) => {
     on(btn, 'click', (e) => {
       e.preventDefault();
@@ -678,6 +616,16 @@ function initHeader() {
       setLang(lang);
     });
   });
+
+  // Legacy single language toggle button (if exists)
+  const legacyBtn = $('#langBtn');
+  if (legacyBtn) {
+    on(legacyBtn, 'click', (e) => {
+      e.preventDefault();
+      const nextLang = legacyBtn.getAttribute('data-next-lang') || 'en';
+      setLang(nextLang);
+    });
+  }
 
   // Drawer (mobile) / ドロワー（モバイル）
   const menuOpen  = $('#menuBtn');
@@ -714,8 +662,7 @@ function initHeader() {
     })
   );
 
-  // Smooth scroll for any in-page anchors in header/footer
-  // ヘッダー/フッターのページ内アンカーのスムーススクロール
+  // Smooth scroll for any in-page anchors
   $$('a[href^="#"]').forEach((a) => {
     on(a, 'click', (e) => {
       const id = a.getAttribute('href');
@@ -729,8 +676,7 @@ function initHeader() {
 }
 
 /* ----------------------------------------------------------
-   10) Sticky mobile apply bar (kept) — back-to-top was removed in HTML
-   スティッキーモバイル応募バー（保持）— back-to-topはHTMLで削除されました
+   10-13) Rest of initialization functions (kept same)
 -----------------------------------------------------------*/
 function initStickyBars() {
   const applyBar = $('.apply-bar');
@@ -739,11 +685,9 @@ function initStickyBars() {
   function onScroll() {
     const y = window.scrollY;
     if (applyBar) {
-      // show after hero area / ヒーローエリアの後に表示
       applyBar.style.transform = y > 360 ? 'translateY(0)' : 'translateY(100%)';
     }
     if (floatBar) {
-      // show after scrolling a bit / 少しスクロールした後に表示
       floatBar.setAttribute('aria-hidden', y < 200 ? 'true' : 'false');
       floatBar.style.opacity = y < 200 ? '0' : '1';
       floatBar.style.pointerEvents = y < 200 ? 'none' : 'auto';
@@ -752,7 +696,6 @@ function initStickyBars() {
   on(window, 'scroll', onScroll, { passive: true });
   onScroll();
 
-  // Back to top button / トップへ戻るボタン
   const toTopBtn = $('#toTopBtn');
   if (toTopBtn) {
     on(toTopBtn, 'click', (e) => {
@@ -762,10 +705,6 @@ function initStickyBars() {
   }
 }
 
-/* ----------------------------------------------------------
-   11) Contact form (demo-safe)
-   連絡フォーム（デモセーフ）
------------------------------------------------------------*/
 function initContactForm() {
   const form = $('#contactForm');
   if (!form) return;
@@ -779,10 +718,6 @@ function initContactForm() {
   });
 }
 
-/* ----------------------------------------------------------
-   12) Ask ChatGPT section: copy & open actions
-   Ask ChatGPTセクション：コピー＆オープンアクション
------------------------------------------------------------*/
 function initChatGPTSection() {
   const ta = $('#chatgptPrompt');
   const btnCopy = $('#copyPromptBtn');
@@ -795,7 +730,6 @@ function initChatGPTSection() {
       try {
         await navigator.clipboard.writeText(ta.value);
         const original = btnCopy.textContent;
-        // show localized feedback / ローカライズされたフィードバックを表示
         if (currentLang === 'ja') btnCopy.textContent = 'コピーしました！';
         else if (currentLang === 'ko') btnCopy.textContent = '복사했습니다!';
         else btnCopy.textContent = 'Copied!';
@@ -813,10 +747,6 @@ function initChatGPTSection() {
   }
 }
 
-/* ----------------------------------------------------------
-   13) Misc boot helpers
-   その他のブートヘルパー
------------------------------------------------------------*/
 function initHeroMediaFallbacks() {
   imageFallback($('#heroCover'), 'Hero');
   imageFallback($('#logoImg'), 'TP');
@@ -824,8 +754,6 @@ function initHeroMediaFallbacks() {
 }
 
 function initCultureStripAnimations() {
-  // lightweight parallax on large screens (no library)
-  // 大画面での軽量パララックス（ライブラリなし）
   const strip = $('.culture-strip');
   if (!strip || prefersReducedMotion()) return;
 
@@ -835,7 +763,7 @@ function initCultureStripAnimations() {
     if (rect.top > window.innerHeight || rect.bottom < 0) return;
     const progress = 1 - Math.abs(rect.top) / (window.innerHeight + rect.height);
     motifs.forEach((m, i) => {
-      const factor = (i + 1) * 4; // increasing subtle offset / 微妙なオフセットを増やす
+      const factor = (i + 1) * 4;
       m.style.transform = `translateY(${(1 - progress) * factor}px)`;
     });
   }
@@ -844,8 +772,6 @@ function initCultureStripAnimations() {
 }
 
 function normalizeIconSizes() {
-  // Make sure icons (SVGs/emojis) above photos are tidy
-  // 写真の上のアイコン（SVG/絵文字）を整頓する
   $$('.icon-card .icon svg, .icon-card .icon img').forEach((node) => {
     node.setAttribute('width', '48');
     node.setAttribute('height', '48');
@@ -858,39 +784,35 @@ function normalizeIconSizes() {
    14) Boot sequence / ブートシーケンス
 -----------------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', () => {
-  // 0) Respect URL if it already has a lang; otherwise default to JP and pretty-print suffix
-  // 0) URLに既に言語がある場合はそれを尊重; それ以外の場合はJPをデフォルトにしてサフィックスを整形
+  // 0) Initialize language from hash or default to JP
   currentLang = normalizeLang(getInitialLang());
-  ensurePrettyLangURL(currentLang);
+  updateLangURL(currentLang);
 
-  // 1) Apply language + static strings + mark active lang buttons
-  // 1) 言語+静的文字列を適用+アクティブな言語ボタンをマーク
+  // 1) Apply language + static strings
   applyLangToHtmlRoot();
   applyI18nStaticText();
 
-  // 2) Render dynamic blocks / 動的ブロックをレンダリング
+  // 2) Render dynamic blocks
   renderAllDynamic();
 
-  // 3) Hero typewriter / ヒーロータイプライター
+  // 3) Hero typewriter
   const heroNode  = $('#heroType');
   const heroTexts = I18N[currentLang].heroTexts || [];
   typewriter(heroNode, heroTexts);
 
-  // 4) Carousels / カルーセル
+  // 4) Carousels
   makeCarousel('#benefitSlides', '#bPrev', '#bNext');
 
-  // 5) Observe all revealables that exist initially
-  // 5) 最初に存在するすべての表示可能要素を観察
+  // 5) Observe all revealables
   $$('.reveal').forEach(observeReveal);
 
   // 6) Header, sticky, contact, chatgpt
-  // 6) ヘッダー、スティッキー、連絡先、chatgpt
   initHeader();
   initStickyBars();
   initContactForm();
   initChatGPTSection();
 
-  // 7) Fallbacks & visuals / フォールバック＆ビジュアル
+  // 7) Fallbacks & visuals
   initHeroMediaFallbacks();
   initCultureStripAnimations();
   normalizeIconSizes();
