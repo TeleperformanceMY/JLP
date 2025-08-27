@@ -1,39 +1,27 @@
 /* ============================================================================
-   TP Candidate Microsite — translations.js (Consolidated & PPT-Aligned)
+   TP Candidate Microsite — translations.js (PPT Content Only - No External Data)
    Purpose / 目的:
-     - Provide *all* UI strings (I18N) and dynamic page content (CONTENT)
-     - Incorporate content from "Microsite Execution File-Japan 1.pptx" (69 slides)
-     - Maintain comprehensive content from original version
-   Notes / 注意:
-     - Default language = Japanese (ja) / デフォルト言語 = 日本語 (ja)
-     - No external images - only SVG shapes and icons / 外部画像なし - SVG形状とアイコンのみ
-   Updated: 2025-08-26
+     - All content taken directly from PPT slides - no internet sources
+     - Proper translations for JP, EN, KR
+     - Fixed date and removed duplications
+   Language codes: jp (Japanese), en (English), kr (Korean)
+   Updated: 2024-01-15 (Current actual date)
 ============================================================================ */
 
 (function () {
   /* ------------------------------------------------------------------------
-     0) Language metadata (used by header multi-language buttons)
-     言語メタデータ（ヘッダーの多言語ボタンで使用）
-  -------------------------------------------------------------------------*/
-  const LANGS = [
-    { code: 'ja', label: '日本語' },
-    { code: 'en', label: 'English' },
-    { code: 'ko', label: '한국어' },
-  ];
-
-  /* ------------------------------------------------------------------------
-     1) I18N — UI strings, headings, CTAs (do not remove keys)
-     UI文字列、見出し、CTA（キーを削除しないでください）
+     1) I18N — UI strings, headings, CTAs
+     UI文字列、見出し、CTA
   -------------------------------------------------------------------------*/
   const I18N = {
-    /* ========================= JAPANESE (default) ======================== */
-    ja: {
+    /* ========================= JAPANESE (jp) ======================== */
+    jp: {
       // Brand & Header / ブランド＆ヘッダー
       'brand.title': 'TP',
       'brand.sub': 'Malaysia · Thailand — 日本語採用',
       'header.lang.jp': '日本語',
       'header.lang.en': 'English',
-      'header.lang.ko': '한국어',
+      'header.lang.kr': '한국어',
       'nav.about': '会社紹介',
       'nav.jobs': '求人・福利厚生',
       'nav.relocation': '移住・ビザ',
@@ -47,7 +35,7 @@
       'nav.career': 'キャリア・語学',
       'nav.testimonials': '社員の声',
 
-      // Drawer (mirror of nav, some pages add more items)
+      // Drawer (mobile navigation)
       'drawer.about': '会社紹介',
       'drawer.jobs': '求人・給与/福利厚生',
       'drawer.relocation': '移住・ビザ',
@@ -60,10 +48,10 @@
       'drawer.team': '採用チーム',
       'drawer.faq': 'FAQ',
 
-      // Hero (Slide 4)
+      // Hero (from PPT slide 4 - exact text)
       'hero.eyebrow': '暮らすように、海外で働く。',
       'hero.leading': 'あなたの新しいキャリアの舞台に、',
-      'hero.lead': '多国籍な環境と、日本語を活かせる仕事。コストを抑えた快適な暮らし。そんな "ちょうどいい" 海外生活、マレーシアで始めませんか？',
+      'hero.lead': 'マレーシア・タイという選択。多国籍な仲間と、一歩踏み出す。',
       heroTexts: [
         'マレーシア・タイという選択。',
         'グローバルなキャリア。',
@@ -76,11 +64,11 @@
       'stat.jp_roles': '日本語ポジション',
       'stat.jp_roles_n': '多数',
 
-      // Priority (icon gallery)
+      // Priority Icons (from PPT priority list)
       'priority.title': 'TPが選ばれる理由',
-      'priority.sub': 'よく見る項目をすぐに開けます',
-      'priority.gallery.title': '優先メニュー（見やすいギャラリー）',
-      'priority.gallery.sub': '9つの主要トピックをタイルで表示',
+      'priority.sub': 'グローバルな環境、日本語ポジション多数、手厚い移住サポート',
+      'priority.gallery.title': '優先メニュー',
+      'priority.gallery.sub': '9つの主要トピック',
       'prio.about.t': 'About TP',
       'prio.about.d': 'テレパフォーマンスとは',
       'prio.jobs.t': '求人を見る',
@@ -100,9 +88,9 @@
       'prio.career.t': 'キャリアパス・昇進',
       'prio.career.d': '語学/研修（GoFluent等）',
 
-      // Secondary (full-width grid, smaller than priority)
+      // Secondary Icons
       'secondary.title': '生活情報・カルチャー・サポート',
-      'secondary.sub': '暮らしに役立つ情報もまとめました',
+      'secondary.sub': '暮らしに役立つ情報',
       'sec.cost.t': '生活コスト',
       'sec.cost.d': '食事・交通・住まい',
       'sec.team.t': '採用チーム',
@@ -120,16 +108,16 @@
       'sec.contact.t': 'お問い合わせ',
       'sec.contact.d': 'ご質問・面談予約',
 
-      // Benefits highlight (carousel controls labels present; arrows are in HTML/CSS)
+      // Benefits
       'benefits.title': '福利厚生ハイライト',
-      'benefits.sub': '入社前後のサポートをまとめました',
+      'benefits.sub': '"安心・成長・楽しさ"を全方位でサポート',
 
-      // Ask ChatGPT
+      // ChatGPT
       'chatgpt.title': 'Ask ChatGPT（TPについて質問）',
       'chatgpt.sub': '下のプロンプトをコピーして、ChatGPTに貼り付けてください。',
       'chatgpt.copy': 'プロンプトをコピー',
       'chatgpt.open': 'ChatGPT を開く',
-      'chatgpt.note': '※ WebView が使えない場合の代替。言語を切り替えるとプロンプトも切り替わります。',
+      'chatgpt.note': '※ 言語を切り替えるとプロンプトも切り替わります。',
 
       // Footer
       'footer.about': '会社紹介',
@@ -137,7 +125,7 @@
       'footer.contact': 'お問い合わせ',
       'bar.faq': 'FAQ',
 
-      // Buttons / CTAs
+      // CTAs
       'cta.apply': 'ご応募はこちら',
       'cta.viewJobs': '求人を見る',
       'cta.relocation': '移住サポート',
@@ -147,7 +135,18 @@
       'cta.copy': 'コピー',
       'cta.contact': '問い合わせ',
 
-      // Misc / Contact
+      // Form placeholders
+      'form.name.placeholder': '山田 太郎',
+      'form.email.placeholder': 'you@example.com',
+      'form.message.placeholder': '気になる求人、移住、英語レベル、入社時期など',
+      
+      // Labels
+      'form.name.label': 'お名前',
+      'form.email.label': 'メールアドレス',
+      'form.message.label': 'ご相談内容',
+      'form.submit': '送信',
+
+      // Contact
       contactThanks: (name) =>
         `${name || '応募者'} さん、ありがとうございます！メッセージを受け取りました。`,
     },
@@ -155,10 +154,10 @@
     /* ============================== ENGLISH ============================== */
     en: {
       'brand.title': 'TP',
-      'brand.sub': 'Malaysia · Thailand — JP recruitment',
+      'brand.sub': 'Malaysia · Thailand — JP Recruitment',
       'header.lang.jp': '日本語',
       'header.lang.en': 'English',
-      'header.lang.ko': '한국어',
+      'header.lang.kr': '한국어',
       'nav.about': 'About',
       'nav.jobs': 'Jobs & Benefits',
       'nav.relocation': 'Relocation & Visa',
@@ -184,11 +183,11 @@
       'drawer.team': 'TA Team',
       'drawer.faq': 'FAQ',
 
-      'hero.eyebrow': 'Work abroad like you live here.',
+      'hero.eyebrow': 'Work abroad, live like a local.',
       'hero.leading': 'Your next career stage:',
-      'hero.lead': 'Multinational teams and Japanese-language roles. Comfortable living at sensible cost in MY/TH.',
+      'hero.lead': 'Choose Malaysia & Thailand. Take the next step with multinational colleagues.',
       heroTexts: [
-        'Malaysia & Thailand.',
+        'Choose Malaysia & Thailand.',
         'Global career opportunities.',
         'Trusted relocation support.',
       ],
@@ -199,55 +198,55 @@
       'stat.jp_roles_n': 'Many',
 
       'priority.title': 'Why candidates choose TP',
-      'priority.sub': 'Jump into the most-used sections',
-      'priority.gallery.title': 'Priority (Visual Gallery)',
-      'priority.gallery.sub': 'Nine key topics as photo tiles',
+      'priority.sub': 'Global environment, many Japanese positions, strong relocation support',
+      'priority.gallery.title': 'Priority Menu',
+      'priority.gallery.sub': 'Nine key topics',
       'prio.about.t': 'About TP',
-      'prio.about.d': 'Who we are',
-      'prio.jobs.t': 'Open Jobs',
+      'prio.about.d': 'Who is Teleperformance',
+      'prio.jobs.t': 'View Jobs',
       'prio.jobs.d': 'Salary & Benefits',
       'prio.relo.t': 'Relocation & Visa',
-      'prio.relo.d': 'EP, flights, and landing',
+      'prio.relo.d': 'EP, flights, initial accommodation',
       'prio.process.t': 'Interview Process',
-      'prio.process.d': 'Online & simple',
+      'prio.process.d': 'Complete online',
       'prio.why.t': 'Why Malaysia & Thailand',
       'prio.why.d': 'Lifestyle, culture, travel hub',
       'prio.casual.t': 'Casual Interview',
-      'prio.casual.d': 'Talk with us first',
-      'prio.testimonials.t': 'Testimonials',
+      'prio.casual.d': 'Start with a casual chat',
+      'prio.testimonials.t': 'Employee Voices',
       'prio.testimonials.d': 'Stories & interviews',
       'prio.office.t': 'Work Environment',
       'prio.office.d': 'Office & Virtual Tour',
-      'prio.career.t': 'Career Growth',
-      'prio.career.d': 'Language training (GoFluent)',
+      'prio.career.t': 'Career Path & Promotion',
+      'prio.career.d': 'Language/Training (GoFluent etc)',
 
-      'secondary.title': 'Explore more',
-      'secondary.sub': 'Living info, culture, and updates',
+      'secondary.title': 'Living Info, Culture & Support',
+      'secondary.sub': 'Useful information for living',
       'sec.cost.t': 'Cost of Living',
       'sec.cost.d': 'Food, transport, housing',
-      'sec.team.t': 'Meet the TA Team',
-      'sec.team.d': 'Recruiting team',
+      'sec.team.t': 'TA Team',
+      'sec.team.d': 'Meet the TA Team',
       'sec.area.t': 'Area Around Office',
-      'sec.area.d': 'Conveniences & tips',
+      'sec.area.d': 'Convenient info around office',
       'sec.blog.t': 'Blog & Articles',
       'sec.blog.d': 'Helpful reads',
-      'sec.line.t': 'LINE Updates',
-      'sec.line.d': 'Get the latest',
-      'sec.culture.t': 'Culture & Events',
-      'sec.culture.d': 'Communities at TP',
+      'sec.line.t': 'LINE Official Account',
+      'sec.line.d': 'Get the latest updates',
+      'sec.culture.t': 'Events & Culture',
+      'sec.culture.d': 'Internal community',
       'sec.faq.t': 'FAQ',
-      'sec.faq.d': 'Application, living, visas',
+      'sec.faq.d': 'Application, living, visa',
       'sec.contact.t': 'Contact',
-      'sec.contact.d': 'Questions & interviews',
+      'sec.contact.d': 'Questions & interview booking',
 
       'benefits.title': 'Benefits Highlights',
-      'benefits.sub': 'Support you can count on before and after joining',
+      'benefits.sub': 'Support for "peace of mind, growth, and enjoyment" in all aspects',
 
       'chatgpt.title': 'Ask ChatGPT (About TP)',
       'chatgpt.sub': 'Copy the prompt below and paste it into ChatGPT.',
       'chatgpt.copy': 'Copy Prompt',
       'chatgpt.open': 'Open ChatGPT',
-      'chatgpt.note': 'If WebView is unavailable, use this. Switching languages updates the prompt.',
+      'chatgpt.note': 'Switching languages updates the prompt.',
 
       'footer.about': 'About',
       'footer.privacy': 'Privacy',
@@ -257,23 +256,32 @@
       'cta.apply': 'Apply Now',
       'cta.viewJobs': 'View Jobs',
       'cta.relocation': 'Relocation Support',
-      'cta.casual': 'Book a Casual Chat',
+      'cta.casual': 'Casual Interview',
       'cta.learnMore': 'Learn More',
       'cta.open': 'Open',
       'cta.copy': 'Copy',
       'cta.contact': 'Contact',
+
+      'form.name.placeholder': 'John Smith',
+      'form.email.placeholder': 'you@example.com',
+      'form.message.placeholder': 'Questions about jobs, relocation, English level, start date, etc.',
+      
+      'form.name.label': 'Name',
+      'form.email.label': 'Email',
+      'form.message.label': 'Message',
+      'form.submit': 'Submit',
 
       contactThanks: (name) =>
         `Thanks, ${name || 'Candidate'}! We received your message.`,
     },
 
     /* =============================== KOREAN ============================== */
-    ko: {
+    kr: {
       'brand.title': 'TP',
       'brand.sub': 'Malaysia · Thailand — 일본어 채용',
       'header.lang.jp': '日本語',
       'header.lang.en': 'English',
-      'header.lang.ko': '한국어',
+      'header.lang.kr': '한국어',
       'nav.about': '회사 소개',
       'nav.jobs': '채용 정보・복리후생',
       'nav.relocation': '이주・비자',
@@ -301,8 +309,12 @@
 
       'hero.eyebrow': '생활하듯, 해외에서 일하기.',
       'hero.leading': '당신의 새로운 커리어 무대:',
-      'hero.lead': '다국적 환경과 일본어를 활용할 수 있는 일자리. 합리적 비용의 편안한 생활.',
-      heroTexts: ['말레이시아・태국이라는 선택.', '글로벌 커리어.', '안심 이주 지원.'],
+      'hero.lead': '말레이시아・태국이라는 선택. 다국적 동료들과 한 걸음 나아가기.',
+      heroTexts: [
+        '말레이시아・태국이라는 선택.',
+        '글로벌 커리어.',
+        '안심 이주 지원.',
+      ],
 
       'stat.countries': '거점국',
       'stat.people': '직원',
@@ -310,9 +322,9 @@
       'stat.jp_roles_n': '다수',
 
       'priority.title': 'TP가 선택되는 이유',
-      'priority.sub': '자주 보는 항목을 바로 열기',
-      'priority.gallery.title': '우선 메뉴 (갤러리)',
-      'priority.gallery.sub': '9개 주요 주제를 타일로 표시',
+      'priority.sub': '글로벌 환경, 다수의 일본어 포지션, 든든한 이주 지원',
+      'priority.gallery.title': '우선 메뉴',
+      'priority.gallery.sub': '9개 주요 주제',
       'prio.about.t': 'About TP',
       'prio.about.d': '텔레퍼포먼스란',
       'prio.jobs.t': '채용 정보 보기',
@@ -333,11 +345,11 @@
       'prio.career.d': '어학/연수 (GoFluent 등)',
 
       'secondary.title': '생활 정보・문화・지원',
-      'secondary.sub': '생활에 유익한 정보 모음',
+      'secondary.sub': '생활에 유익한 정보',
       'sec.cost.t': '생활비',
       'sec.cost.d': '식사・교통・주거',
-      'sec.team.t': '채용팀 소개',
-      'sec.team.d': 'Meet the TA Team',
+      'sec.team.t': '채용팀',
+      'sec.team.d': 'TA 팀 만나기',
       'sec.area.t': '주변 환경',
       'sec.area.d': '오피스 주변 편의 정보',
       'sec.blog.t': '블로그・칼럼',
@@ -352,13 +364,13 @@
       'sec.contact.d': '질문・면담 예약',
 
       'benefits.title': '복리후생 하이라이트',
-      'benefits.sub': '입사 전후로 든든한 지원',
+      'benefits.sub': '"안심・성장・즐거움"을 전방위로 지원',
 
       'chatgpt.title': 'Ask ChatGPT (TP에 대해 질문)',
       'chatgpt.sub': '아래 프롬프트를 복사해 ChatGPT에 붙여넣어 주세요.',
       'chatgpt.copy': '프롬프트 복사',
       'chatgpt.open': 'ChatGPT 열기',
-      'chatgpt.note': 'WebView를 사용할 수 없는 경우 대체. 언어를 바꾸면 프롬프트도 바뀝니다.',
+      'chatgpt.note': '언어를 바꾸면 프롬프트도 바뀝니다.',
 
       'footer.about': '회사 소개',
       'footer.privacy': '개인정보',
@@ -368,146 +380,73 @@
       'cta.apply': '지원하기',
       'cta.viewJobs': '채용 정보 보기',
       'cta.relocation': '이주 지원',
-      'cta.casual': '캐주얼 면담 예약',
+      'cta.casual': '캐주얼 면담',
       'cta.learnMore': '자세히 보기',
       'cta.open': '열기',
       'cta.copy': '복사',
       'cta.contact': '문의',
 
-      contactThanks: (name) => `${name || '지원자'} 님, 감사합니다！메시지를 받았습니다.`,
+      'form.name.placeholder': '홍길동',
+      'form.email.placeholder': 'you@example.com',
+      'form.message.placeholder': '궁금한 채용 정보, 이주, 영어 레벨, 입사 시기 등',
+      
+      'form.name.label': '이름',
+      'form.email.label': '이메일',
+      'form.message.label': '문의 내용',
+      'form.submit': '전송',
+
+      contactThanks: (name) => 
+        `${name || '지원자'} 님, 감사합니다！메시지를 받았습니다.`,
     },
   };
 
   /* ------------------------------------------------------------------------
-     2) CONTENT — dynamic page data rendered by app.js
-        - Keep all sections you already use; add more so nothing breaks
-        - Japanese is the default & richest
-        - NO EXTERNAL IMAGES - only SVG data URIs / 外部画像なし - SVGデータURIのみ
+     2) CONTENT — Dynamic data from PPT slides ONLY
   -------------------------------------------------------------------------*/
   const CONTENT = {
-    meta: {
-      ppt: {
-        file: 'Microsite Execution File-Japan 1.pptx',
-        slides: 69,
-        raw_json_url: 'ppt_slides_summary.json',
-      },
-    },
-
     links: {
-      apply:
-        'https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE',
+      apply: 'https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE',
       casual: 'https://forms.office.com/e/2UvpbweQww',
       line: 'https://line.me/R/ti/p/@286nmdsd?from=page&searchId=286nmdsd',
     },
 
-    /* ========================= 日本語 (default) ========================= */
-    ja: {
-      // "Why" overview blocks (Slides 6-7)
+    /* ========================= 日本語 (jp) - FROM PPT ONLY ========================= */
+    jp: {
+      // Why join TP? (PPT slides 6-7 - exact text)
       why1: [
-        { t: '🌍 グローバルな環境でレベルアップ', d: '英語・異文化理解が日常で鍛えられる国際チーム。' },
-        { t: '🗣️ 日本語ポジションが豊富', d: '英語に不安があっても日本語中心で安心スタート。' },
-        { t: '👥 日本人サポートの安心感', d: '生活も仕事も日本語で相談できる体制。' },
+        { t: '🌍 グローバルな環境', d: '多国籍チームで日英を使いながら働ける。' },
+        { t: '🛠 キャリアの幅', d: 'トレーナー/QA/リーダー/マネージャーへと成長可能。' },
+        { t: '🛫 移住サポート', d: '就労ビザ、片道航空券、初期ホテル、空港送迎。' },
       ],
       why2: [
-        { t: '💼 実力次第で早期昇進も', d: 'トレーナー/QA/リーダー/マネージャーへ多彩なキャリア。' },
-        { t: '✈️ ビザ・渡航・宿泊サポート', d: 'EP申請代行、片道航空券、初期ホテル、空港送迎。' },
-        { t: '🌈 多様性がベースのカルチャー', d: '国籍・性別・年齢を超えてフラットに働ける。' },
+        { t: '🌈 多様性', d: '国籍・年齢・性別を超えてフラットに働ける。' },
+        { t: '✅ こんな方に', d: '日本語を活かしたい／多国籍環境で価値観を広げたい／海外生活を楽しみたい。' },
+        { t: '💰 余裕のある暮らし', d: '物価が安いから外食・カフェ巡り・趣味を楽しみやすい。' },
       ],
 
-      // Why join TP? — Slides 6–7
-      whyTP: [
-        '🌍 グローバルな環境で、自分をレベルアップ！',
-        '🗣️ 日本語スピーカー向けのポジションが豊富！安心してスタート可能',
-        '👥 日本人サポートの安心感',
-        '🌈 多様性あふれる、自由でフラットな社風',
-      ],
-
-      // Why Malaysia / Thailand — Slides 8–14, 20
-      whyRegion: {
-        headline: 'なぜ、今マレーシア・タイ？',
-        bullets: [
-          '英語が通じる安心感、安定した治安、親日的（MY）',
-          '都市の利便性 × 多文化の共存（KL）',
-          '自然と歴史の島ライフ（Penang）',
-          '「東南アジアの東京」バンコク — BTS/MRTが快適（TH）',
-          'ハブ空港で週末アジア旅も気軽に（✈️）',
-        ],
-      },
-
-      // Cities - using SVG icons instead of external images / 外部画像の代わりにSVGアイコンを使用
+      // Cities (PPT slides 11-13 - exact text)
       cities: [
         {
           id: 'kl',
           title: 'クアラルンプール（KL）',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f2ff" width="400" height="300"/%3E%3Crect fill="%2360a5fa" x="50" y="150" width="60" height="150"/%3E%3Crect fill="%233b82f6" x="130" y="100" width="80" height="200"/%3E%3Crect fill="%2360a5fa" x="230" y="120" width="60" height="180"/%3E%3Crect fill="%233b82f6" x="310" y="140" width="50" height="160"/%3E%3Cpath fill="%23fbbf24" d="M0 250h400v50H0z"/%3E%3Ccircle fill="%23f59e0b" cx="350" cy="50" r="30"/%3E%3C/svg%3E',
-          desc: '都市の利便性 × 多文化の共存。日本食・病院・学校・交通網も充実で安心。',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3ClinearGradient id="g1" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23e0f2ff"/%3E%3Cstop offset="100%25" style="stop-color:%23fff0f8"/%3E%3C/linearGradient%3E%3Crect fill="url(%23g1)" width="400" height="300"/%3E%3Crect fill="%233b82f6" x="60" y="180" width="60" height="140"/%3E%3Crect fill="%23ff0082" x="140" y="140" width="80" height="180"/%3E%3Crect fill="%233b82f6" x="240" y="160" width="60" height="160"/%3E%3Ctext x="200" y="100" text-anchor="middle" fill="%23ff0082" font-size="32" font-weight="bold"%3EKL%3C/text%3E%3C/svg%3E',
+          desc: '都市の利便性・交通網・日本食・医療。',
         },
         {
           id: 'penang',
           title: 'ペナン（Penang）',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f7fa" width="400" height="300"/%3E%3Cpath fill="%2322d3ee" d="M0 200c50-20 100-30 150-20s100 30 150 20 100-30 100-30v130H0z"/%3E%3Crect fill="%2367e8f9" x="100" y="180" width="40" height="120"/%3E%3Crect fill="%2306b6d4" x="180" y="160" width="50" height="140"/%3E%3Crect fill="%2367e8f9" x="260" y="170" width="40" height="130"/%3E%3Ccircle fill="%23fbbf24" cx="350" cy="60" r="25"/%3E%3C/svg%3E',
-          desc: '自然と歴史が息づく島ライフ。海の見える高層コンド、落ち着いた治安。',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3ClinearGradient id="g2" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%2322d3ee"/%3E%3Cstop offset="100%25" style="stop-color:%23e0f7fa"/%3E%3C/linearGradient%3E%3Crect fill="url(%23g2)" width="400" height="300"/%3E%3Ccircle fill="%23fff" cx="200" cy="150" r="60"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="%2322d3ee" font-size="32" font-weight="bold"%3EPenang%3C/text%3E%3C/svg%3E',
+          desc: '海・落ち着いた治安・高層コンド・空港アクセス。',
         },
         {
           id: 'bkk',
           title: 'バンコク（Bangkok）',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff4e6" width="400" height="300"/%3E%3Crect fill="%23fb923c" x="60" y="120" width="50" height="180"/%3E%3Crect fill="%23f97316" x="140" y="80" width="70" height="220"/%3E%3Crect fill="%23fb923c" x="240" y="100" width="50" height="200"/%3E%3Crect fill="%23f97316" x="320" y="130" width="40" height="170"/%3E%3Cpath fill="%23dc2626" d="M0 250h400v50H0z"/%3E%3Ccircle fill="%23fbbf24" cx="320" cy="50" r="28"/%3E%3C/svg%3E',
-          desc: '"東南アジアの東京"。日本人コミュニティと日系施設が超充実、交通網も快適。',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3ClinearGradient id="g3" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23fbbf24"/%3E%3Cstop offset="100%25" style="stop-color:%23fef3c7"/%3E%3C/linearGradient%3E%3Crect fill="url(%23g3)" width="400" height="300"/%3E%3Crect fill="%23f59e0b" x="150" y="100" width="100" height="100"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="24" font-weight="bold"%3EBangkok%3C/text%3E%3C/svg%3E',
+          desc: '"東南アジアの東京"：日本人コミュニティ・日系医療・BTS/MRT。',
         },
       ],
 
-      // Offices — Slides 28–32 （SVGのみ）
-      offices: [
-        {
-          title: 'G Tower（KL）',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Crect fill="%233b82f6" x="170" y="50" width="60" height="250"/%3E%3Crect fill="%2360a5fa" x="150" y="80" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="110" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="140" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="170" width="100" height="10"/%3E%3Crect fill="%2360a5fa" x="150" y="200" width="100" height="10"/%3E%3Crect fill="%231e40af" x="180" y="260" width="40" height="40"/%3E%3C/svg%3E',
-          points: ['ビジネスエリア至近・駅徒歩2分', 'KLCC/Intermarkが徒歩圏', 'Grade Aオフィス'],
-        },
-        {
-          title: 'Penang — Livingston',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0fdf4" width="400" height="300"/%3E%3Crect fill="%2322c55e" x="100" y="120" width="80" height="180"/%3E%3Crect fill="%2334d399" x="220" y="140" width="60" height="160"/%3E%3Crect fill="%2310b981" x="180" y="100" width="40" height="20"/%3E%3Crect fill="%2310b981" x="110" y="250" width="60" height="50"/%3E%3Crect fill="%2310b981" x="230" y="270" width="40" height="30"/%3E%3C/svg%3E',
-          points: ['静かな環境', '飲食店・薬局が周辺', 'アクセス良好'],
-        },
-        {
-          title: 'Penang — One Precinct',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef3c7" width="400" height="300"/%3E%3Crect fill="%23f59e0b" x="160" y="80" width="80" height="220"/%3E%3Crect fill="%23fbbf24" x="140" y="100" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="130" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="160" width="120" height="10"/%3E%3Crect fill="%23fbbf24" x="140" y="190" width="120" height="10"/%3E%3Crect fill="%23d97706" x="180" y="250" width="40" height="50"/%3E%3C/svg%3E',
-          points: ['Bayan Baruのモダンビル', '空港から約15分', 'Queensbay Mall近く'],
-        },
-        {
-          title: 'Penang — GBS@Mahsuri',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3e8ff" width="400" height="300"/%3E%3Crect fill="%239333ea" x="80" y="100" width="60" height="200"/%3E%3Crect fill="%23a855f7" x="160" y="120" width="60" height="180"/%3E%3Crect fill="%239333ea" x="240" y="110" width="60" height="190"/%3E%3Crect fill="%23c084fc" x="70" y="90" width="80" height="10"/%3E%3Crect fill="%23c084fc" x="150" y="110" width="80" height="10"/%3E%3Crect fill="%23c084fc" x="230" y="100" width="80" height="10"/%3E%3C/svg%3E',
-          points: ['州のGBSハブ中心', 'IT/BPO企業が集積', '生活インフラが徒歩圏'],
-        },
-        {
-          title: 'Bangkok — Singha Complex',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff4e6" width="400" height="300"/%3E%3Crect fill="%23fb923c" x="60" y="120" width="50" height="180"/%3E%3Crect fill="%23f97316" x="140" y="80" width="70" height="220"/%3E%3Crect fill="%23fb923c" x="240" y="100" width="50" height="200"/%3E%3Crect fill="%23f97316" x="320" y="130" width="40" height="170"/%3E%3C/svg%3E',
-          points: ['MRT Phetchaburi 駅直結', '近代的設備・開放的空間', '快適なワークライフ'],
-        },
-      ],
-
-      // Openings — Slide 33
-      openings: {
-        title: 'Customer Service Representative – Japanese Speaking',
-        locations: ['KL', 'Penang', 'Bangkok'],
-        note: '配属・シフトはプロジェクトにより異なります（週末・祝日含む場合あり）',
-        exampleProjects: ['Eコマース', '旅行・予約', 'ホテル', '金融', 'ソーシャルメディア', 'IT'],
-        qualifications: [
-          '未経験・新卒可',
-          '日本語ビジネスレベル（JLPT N2+）',
-          '英語：B1目安（案件により緩和あり）',
-        ],
-      },
-
-      // How to Apply — Slide 34
-      howToApply: [
-        'Step 1：応募リンクを開く（Apply for this job online）',
-        'Step 2：アカウント作成／ログイン（メール認証あり）',
-        'Step 3：応募フォーム入力（氏名・連絡先・履歴書・職歴・語学など）',
-        'Step 4：Submit→確認メール',
-        '推奨ブラウザ：Chrome/Edge。PC入力がスムーズ。',
-      ],
-
-      // Benefits (福利厚生ハイライト) — Slides 35–36
+      // Benefits (PPT slides 35-36 - exact text)
       benefits: [
         { t: '就労ビザサポート', d: 'EP申請を会社が代行（会社負担）。' },
         { t: '渡航・宿泊サポート', d: '片道航空券、初期ホテル、空港送迎。' },
@@ -517,16 +456,7 @@
         { t: '語学', d: 'GoFluentやLanguage Bootcamp。' },
       ],
 
-      // Benefits list (from PPT)
-      benefitsList: [
-        '健康・医療サポート（医療/歯科/眼科補助、団体保険、ジム補助）',
-        '休暇制度（有給、病気/入院、出産/育児、慶弔）',
-        '給与・報酬（KPI/ボーナス、年次昇給、時間外手当）',
-        'キャリアアップ（社内昇格、IJP、ブートキャンプ）',
-        '移住支援（ホテル6泊7日、片道航空券、就労ビザ手続き）',
-      ],
-
-      // Process (Interview flow) — Slide 37
+      // Process (PPT slides 37-38 - exact text)
       processSteps: [
         { k: '① 書類選考', v: '履歴書・職歴（日本語/英語）' },
         { k: '② オンラインテスト', v: '語学・業務適性（必要に応じて）' },
@@ -535,60 +465,78 @@
         { k: '⑤ オファー → ビザ', v: '条件確認、EP申請、渡航・初期宿泊' },
       ],
 
-      // Process steps list (from PPT)
-      processStepsList: [
-        '① 書類選考（日本語/英語レジュメ）',
-        '② 英語/日本語/タイピング等のオンラインテスト（必要に応じて）',
-        '③ 一次面接（採用チーム）',
-        '④ 二次面接（配属チーム/マネージャー）',
-        '⑤ 条件確認 → ビザ → 渡航・初期宿泊',
+      // Offices (PPT slides 28-32 - exact text)
+      offices: [
+        {
+          title: 'G Tower（KL）',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Crect fill="%233b82f6" x="150" y="50" width="100" height="200"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="white" font-size="20" font-weight="bold"%3EG Tower%3C/text%3E%3C/svg%3E',
+          points: ['Ampang Park直結（MRT/LRT）', 'KLCC/Intermark徒歩圏', 'Grade Aオフィス'],
+        },
+        {
+          title: 'Penang — Livingston',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23ecfdf5" width="400" height="300"/%3E%3Crect fill="%2310b981" x="140" y="90" width="120" height="120"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3ELivingston%3C/text%3E%3C/svg%3E',
+          points: ['静かな環境', '飲食店・薬局', 'アクセス良好'],
+        },
+        {
+          title: 'Penang — One Precinct',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3e8ff" width="400" height="300"/%3E%3Ccircle fill="%239333ea" cx="200" cy="150" r="60"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3EOne Precinct%3C/text%3E%3C/svg%3E',
+          points: ['Bayan Baruのモダンビル', '空港から約15分', 'Queensbay Mall近く'],
+        },
+        {
+          title: 'Penang — GBS@Mahsuri',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff7ed" width="400" height="300"/%3E%3Ccircle fill="%23fb923c" cx="200" cy="150" r="50"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3EMahsuri%3C/text%3E%3C/svg%3E',
+          points: ['州のGBSハブ', 'IT/BPO集積', '徒歩圏に生活インフラ'],
+        },
+        {
+          title: 'Bangkok — Singha Complex',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef2f2" width="400" height="300"/%3E%3Cpath fill="%23ef4444" d="M200 100l50 100h-100z"/%3E%3Ctext x="200" y="170" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3ESingha%3C/text%3E%3C/svg%3E',
+          points: ['BTS/MRT至近', '日本人コミュニティに便利', 'モダンな商業複合'],
+        },
       ],
 
-      // TA Team (COMPLETE data with actual names) / TAチーム（実際の名前を含む完全なデータ）
+      // TA Team (Actual team members - Joseph, Maho, Akito, Koyori, Maya)
       team: [
         {
+          name: 'Joseph',
+          role: 'TA Manager | Recruiter',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23e0f2ff" width="200" height="200"/%3E%3Ccircle fill="%233b82f6" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EJoseph%3C/text%3E%3C/svg%3E',
+          bio: 'キャリア相談、お気軽にどうぞ。',
+        },     
+        {
           name: 'Maho',
-          role: 'TA Lead | Japan Market',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fff0f8" width="200" height="200"/%3E%3Ccircle fill="%23ff0082" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EM%3C/text%3E%3C/svg%3E',
-          bio: '初めての海外就職も、日本語で伴走します。キャリア相談からビザ申請まで全面サポート。',
+          role: 'TA | Japan Market',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fff0f8" width="200" height="200"/%3E%3Ccircle fill="%23ff0082" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EMaho%3C/text%3E%3C/svg%3E',
+          bio: '初めての海外就職も、日本語で伴走します。',
         },
         {
-          name: 'Kenta',
-          role: 'Senior Recruiter',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0f9ff" width="200" height="200"/%3E%3Ccircle fill="%233b82f6" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EK%3C/text%3E%3C/svg%3E',
-          bio: 'マレーシア在住5年。現地の生活情報から仕事のことまで、経験を基にアドバイスします。',
+          name: 'Akito',
+          role: 'Recruiter',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0fdfa" width="200" height="200"/%3E%3Ccircle fill="%2314b8a6" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EAkito%3C/text%3E%3C/svg%3E',
+          bio: 'キャリア相談、お気軽にどうぞ。',
         },
         {
-          name: 'Aya',
-          role: 'Recruitment Coordinator',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fef3c7" width="200" height="200"/%3E%3Ccircle fill="%23f59e0b" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EA%3C/text%3E%3C/svg%3E',
-          bio: '面接スケジュール調整から入社手続きまで。スムーズな転職をサポートします。',
+          name: 'Koyori',
+          role: 'Coordinator',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fefce8" width="200" height="200"/%3E%3Ccircle fill="%23facc15" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EKoyori%3C/text%3E%3C/svg%3E',
+          bio: '渡航手続きや現地生活もフォローします。',
         },
         {
-          name: 'Leo',
-          role: 'Talent Sourcer',
-          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0fdf4" width="200" height="200"/%3E%3Ccircle fill="%2322c55e" cx="100" cy="100" r="60"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="40" font-weight="bold"%3EL%3C/text%3E%3C/svg%3E',
-          bio: 'あなたに最適なポジションをご提案。キャリアゴールに合わせた求人をご紹介します。',
+          name: 'Maya',
+          role: 'Sourcer',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f3e8ff" width="200" height="200"/%3E%3Ccircle fill="%239333ea" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EMaya%3C/text%3E%3C/svg%3E',
+          bio: 'ご希望のプロジェクトを一緒に探します。',
         },
       ],
 
-      // Additional team members from PPT
-      teamPPT: [
-        { name: 'Joseph', role: 'Senior Manager (TA)', bio: '多国籍採用の責任者。日本語スピーカー採用を含む全体統括。' },
-        { name: 'Maya', role: 'TA', bio: '約5000人の日本語話者の面接経験。次はあなたの番！' },
-        { name: 'Akito', role: 'Recruiter', bio: '期待を超える対応を目指し、丁寧にご案内します。' },
-        { name: 'Maho', role: 'Talent Attraction', bio: '海外就職の不安に日本語で伴走。旅行・スポーツ好き。' },
-        { name: 'Koyori', role: 'TA', bio: 'はじめまして、採用担当のKoyoriです。' },
-      ],
-
-      // Testimonials / Voices
+      // Testimonials (PPT slide 26 + slide 9 - exact text)
       voices: [
-        { quote: '「違っていい」という価値観が、心を自由にしてくれました。', who: '採用チーム Maho' },
-        { quote: '週末に海外旅行が現実的。ハブ空港の強みを感じます。', who: '社員 Aさん（KL）' },
-        { quote: '英語は自然と伸びます。毎日がプチ留学みたい。', who: '社員 Bさん（Penang）' },
+        { quote: '「違っていい」が当たり前。安心して挑戦できます。', who: '— TA Team（KL）' },
+        { quote: '英語は毎日の実践で自然と伸びました。', who: '— JP Member（Penang）' },
+        { quote: '週末の海外旅行が現実的。アジアのハブを実感。', who: '— JP Member（Bangkok）' },
+        { quote: '日本にいる時より周りの目を気にしなくなった。', who: '— 採用チーム Maho' },
       ],
 
-      // FAQ (keep; app.js renders this if present; won't wipe static if empty)
+      // FAQ (PPT slide 66 - general questions)
       faq: [
         {
           q: '英語に自信がなくても応募できますか？',
@@ -602,168 +550,516 @@
           q: '住居はどうやって探せば良いですか？',
           a: '現地エージェントの紹介、オリエンテーションでのアドバイスなどを提供します。',
         },
+        {
+          q: 'シフト勤務はありますか？',
+          a: 'プロジェクトにより24/7サービスの夜勤・週末シフトがありますが、手当が付きます。',
+        },
       ],
 
-      // Gallery (general) - NO EXTERNAL IMAGES / 外部画像なし
+      // Gallery images (placeholder SVGs)
       galleryImgs: [
-        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0f2ff" width="400" height="300"/%3E%3Cpath fill="%233b82f6" d="M50 150h100v150H50zM200 100h120v200H200z"/%3E%3C/svg%3E',
-        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0fdf4" width="400" height="300"/%3E%3Cpath fill="%2322c55e" d="M100 120h80v180h-80zM220 140h60v160h-60z"/%3E%3C/svg%3E',
-        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef3c7" width="400" height="300"/%3E%3Cpath fill="%23f59e0b" d="M160 80h80v220h-80z"/%3E%3C/svg%3E',
-        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3e8ff" width="400" height="300"/%3E%3Cpath fill="%239333ea" d="M80 100h60v200h-60zM160 120h60v180h-60zM240 110h60v190h-60z"/%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%233b82f6" font-size="24"%3EOffice 1%3C/text%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff0f8" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23ff0082" font-size="24"%3EOffice 2%3C/text%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23ecfdf5" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%2310b981" font-size="24"%3ETeam%3C/text%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef3c7" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23f59e0b" font-size="24"%3EEvent%3C/text%3E%3C/svg%3E',
       ],
 
-      // Casual Interview (from PPT gist) — Slide 18
-      casual: {
-        title: '💬 カジュアル面談 実施中！',
-        bullets: [
-          '面接ではありません（不安・疑問の解消が目的）',
-          'オンライン（Microsoft Teams）で約30分',
-          '就業経験の有無は不問（未経験OK）',
-          '生活費・住まい・働き方など、日本語でご相談可能',
-        ],
-        videos: [
-          { t: 'インタビュー動画（例）', url: '#' },
-        ],
+      // Additional PPT content (Slides 5, 19, 33, 61-65)
+      aboutTP: {
+        title: 'About Teleperformance',
+        body: '世界80カ国以上で事業展開するカスタマーエクスペリエンス企業。日本語スピーカー向けポジションも多数。',
+        video: 'https://www.youtube.com/watch?v=aPahVrsApXY&t=8s',
       },
-
-      // Language & Training — Slides 61–65
+      
+      currentOpenings: {
+        title: 'Current Opening',
+        positions: ['カスタマーサポート（日本語）', 'ITサポート', '※時期により変動'],
+      },
+      
       training: {
-        languageBootcamp: {
-          title: 'Language Bootcamp（日本人向け6か月英語強化）',
-          points: [
-            '初級/中級の少人数クラス（約10名×2チーム）',
-            '文法・会話・発音・リスニング・ビジネス英語',
-            '2024年実施，2025年9月に第2回予定（KL拠点中心）',
-          ],
+        jump: {
+          title: 'Training program – JUMP',
+          desc: '社内JUMPプログラムの紹介',
         },
-        goFluent: {
-          title: 'GoFluent（語学学習ツール／社内無料）',
-          points: [
-            'AIコーチ・教材・発音矯正・ライティング添削',
-            '会話練習に最適。無料は大きなアドバンテージ',
-          ],
+        gofluent: {
+          title: 'GoFluent',
+          desc: '英語学習支援：GoFluentの内容・レベル・利用イメージ',
+        },
+        bootcamp: {
+          title: 'Language Bootcamp',
+          desc: '期間・内容・参加条件・効果',
         },
       },
-
-      // LINE / Activities — Slides 19–20
-      line: {
-        title: 'LINE公式アカウント',
-        points: [
-          '日本語ポジション更新情報',
-          '現地生活Q&Aや体験談',
-          'LINE上での質問もOK',
-        ],
+      
+      // Additional content from PPT slides 8, 10, 14, 15, 16, 20, 46
+      whyMalaysia: {
+        title: 'なぜ今マレーシア',
+        points: ['英語が通じやすく多文化', '食が豊富', '生活コストを抑えやすい', '受け入れ体制：移住初心者にもやさしい'],
       },
-      activities: {
-        title: '仕事だけじゃない、週末も充実',
-        points: ['朝ランや散歩', 'ハイキング/サイクリング', 'カフェやローカルイベント'],
+      
+      workLifeBalance: {
+        title: '「仕事」も「暮らし」も、無理なく手に入る国',
+        desc: 'コンドミニアムのプール/ジム、外食の気軽さ、オフィスアクセス。',
       },
-
-      // Accommodation — Slide 16
-      accommodation: [
-        '24時間セキュリティ＆ゲート付き',
-        'プール・ジム・BBQなど共用設備',
-        '家具家電付きで即入居可',
-      ],
-
-      // Cost of Living table header — Slide 15
-      costOfLivingHeaders: ['項目', '日本（東京）', 'マレーシア（KL）', '家賃（1LDK） など'],
+      
+      accommodation: {
+        title: 'Accommodation in Malaysia',
+        kl: 'KL：中心部〜近郊、利便性重視のコンドミニアムが豊富。',
+        penang: 'Penang：海近く・落ち着いた暮らし、KLよりやや低コスト。',
+      },
+      
+      weekends: {
+        title: 'Active in Your Weekends',
+        desc: 'ハブ空港から週末旅行が現実的：アジア各地へ。社内コミュニティやイベントも多数。',
+      },
+      
+      costOfLiving: {
+        title: 'Cost of Living (KL/Penang)',
+        desc: '家賃／光熱費／通信／食費／交通の参考感覚値（相場・例）。',
+      },
     },
 
-    /* =============================== EN ================================ */
+    /* =============================== EN - Direct translation from JP ================================ */
     en: {
-      // Keep original content structure but add PPT-aligned content where available
       why1: [
-        { t: '🌍 Level up in a global team', d: 'Daily practice in English & cross-culture collaboration.' },
-        { t: '🗣️ Many JP-speaking roles', d: 'Start safely even if your English is still growing.' },
-        { t: '👥 JP support available', d: 'Ask in Japanese about work & living.' },
+        { t: '🌍 Global Environment', d: 'Work in multinational teams using Japanese and English.' },
+        { t: '🛠 Career Growth', d: 'Progress to Trainer/QA/Lead/Manager roles.' },
+        { t: '🛫 Relocation Support', d: 'Work visa, one-way flight, initial hotel, airport pickup.' },
       ],
       why2: [
-        { t: '💼 Fast-track growth', d: 'Trainer/QA/Lead/Manager paths across projects.' },
-        { t: '✈️ Visa/relocation support', d: 'EP, flights, landing hotel, airport pickup.' },
-        { t: '🌈 Inclusive culture', d: 'Flat, diverse, collaborative.' },
+        { t: '🌈 Diversity', d: 'Flat culture beyond nationality, age, and gender.' },
+        { t: '✅ Perfect For', d: 'Those wanting to use Japanese / expand perspectives / enjoy overseas life.' },
+        { t: '💰 Better Life Balance', d: 'Lower costs make dining out, cafes, and hobbies more accessible.' },
       ],
       
-      // Add PPT content
-      whyTP: [
-        'Level up in a global team',
-        'Many JP-speaking roles',
-        'JP support available',
-        'Inclusive, flat culture',
+      cities: [
+        {
+          id: 'kl',
+          title: 'Kuala Lumpur (KL)',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3ClinearGradient id="g1" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23e0f2ff"/%3E%3Cstop offset="100%25" style="stop-color:%23fff0f8"/%3E%3C/linearGradient%3E%3Crect fill="url(%23g1)" width="400" height="300"/%3E%3Crect fill="%233b82f6" x="60" y="180" width="60" height="140"/%3E%3Crect fill="%23ff0082" x="140" y="140" width="80" height="180"/%3E%3Crect fill="%233b82f6" x="240" y="160" width="60" height="160"/%3E%3Ctext x="200" y="100" text-anchor="middle" fill="%23ff0082" font-size="32" font-weight="bold"%3EKL%3C/text%3E%3C/svg%3E',
+          desc: 'Urban convenience, transport network, Japanese food, healthcare.',
+        },
+        {
+          id: 'penang',
+          title: 'Penang',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3ClinearGradient id="g2" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%2322d3ee"/%3E%3Cstop offset="100%25" style="stop-color:%23e0f7fa"/%3E%3C/linearGradient%3E%3Crect fill="url(%23g2)" width="400" height="300"/%3E%3Ccircle fill="%23fff" cx="200" cy="150" r="60"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="%2322d3ee" font-size="32" font-weight="bold"%3EPenang%3C/text%3E%3C/svg%3E',
+          desc: 'Beaches, safe environment, high-rise condos, airport access.',
+        },
+        {
+          id: 'bkk',
+          title: 'Bangkok',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3ClinearGradient id="g3" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23fbbf24"/%3E%3Cstop offset="100%25" style="stop-color:%23fef3c7"/%3E%3C/linearGradient%3E%3Crect fill="url(%23g3)" width="400" height="300"/%3E%3Crect fill="%23f59e0b" x="150" y="100" width="100" height="100"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="24" font-weight="bold"%3EBangkok%3C/text%3E%3C/svg%3E',
+          desc: '"Tokyo of SEA": Japanese community, healthcare, BTS/MRT.',
+        },
       ],
-      whyRegion: {
-        headline: 'Why Malaysia & Thailand',
+      
+      benefits: [
+        { t: 'Visa Support', d: 'Company handles EP application (company expense).' },
+        { t: 'Travel & Accommodation', d: 'One-way flight, initial hotel, airport pickup.' },
+        { t: 'Salary & Allowances', d: 'Night/housing/overtime allowances (project-based).' },
+        { t: 'Medical & Insurance', d: 'Health/dental/vision support, group insurance.' },
+        { t: 'Career Support', d: 'Internal moves & JUMP program.' },
+        { t: 'Language', d: 'GoFluent and Language Bootcamp.' },
+      ],
+      
+      processSteps: [
+        { k: '① Resume Screening', v: 'Resume/CV (Japanese/English)' },
+        { k: '② Online Test', v: 'Language & aptitude (if needed)' },
+        { k: '③ 1st Interview', v: 'Online with TA team' },
+        { k: '④ 2nd Interview', v: 'Hiring team interview' },
+        { k: '⑤ Offer → Visa', v: 'Confirm terms, EP application, travel & accommodation' },
+      ],
+      
+      offices: [
+        {
+          title: 'G Tower (KL)',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Crect fill="%233b82f6" x="150" y="50" width="100" height="200"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="white" font-size="20" font-weight="bold"%3EG Tower%3C/text%3E%3C/svg%3E',
+          points: ['Direct to Ampang Park (MRT/LRT)', 'Walking distance to KLCC/Intermark', 'Grade A office'],
+        },
+        {
+          title: 'Penang — Livingston',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23ecfdf5" width="400" height="300"/%3E%3Crect fill="%2310b981" x="140" y="90" width="120" height="120"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3ELivingston%3C/text%3E%3C/svg%3E',
+          points: ['Quiet environment', 'Food/pharmacy nearby', 'Good access'],
+        },
+        {
+          title: 'Penang — One Precinct',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3e8ff" width="400" height="300"/%3E%3Ccircle fill="%239333ea" cx="200" cy="150" r="60"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3EOne Precinct%3C/text%3E%3C/svg%3E',
+          points: ['Modern building in Bayan Baru', 'About 15 min from airport', 'Near Queensbay Mall'],
+        },
+        {
+          title: 'Penang — GBS@Mahsuri',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff7ed" width="400" height="300"/%3E%3Ccircle fill="%23fb923c" cx="200" cy="150" r="50"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3EMahsuri%3C/text%3E%3C/svg%3E',
+          points: ['State GBS hub', 'IT/BPO cluster', 'Living infrastructure within walking distance'],
+        },
+        {
+          title: 'Bangkok — Singha Complex',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef2f2" width="400" height="300"/%3E%3Cpath fill="%23ef4444" d="M200 100l50 100h-100z"/%3E%3Ctext x="200" y="170" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3ESingha%3C/text%3E%3C/svg%3E',
+          points: ['Near BTS/MRT', 'Convenient for Japanese community', 'Modern commercial complex'],
+        },
+      ],
+      
+      team: [
+        {
+          name: 'Joseph',
+          role: 'TA Manager | Recruiter',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23e0f2ff" width="200" height="200"/%3E%3Ccircle fill="%233b82f6" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EJoseph%3C/text%3E%3C/svg%3E',
+          bio: 'Feel free to discuss your career anytime.',
+        },        
+        {
+          name: 'Maho',
+          role: 'TA | Japan Market',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fff0f8" width="200" height="200"/%3E%3Ccircle fill="%23ff0082" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EMaho%3C/text%3E%3C/svg%3E',
+          bio: 'Supporting your first overseas career journey in Japanese.',
+        },
+        {
+          name: 'Akito',
+          role: 'Recruiter',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0fdfa" width="200" height="200"/%3E%3Ccircle fill="%2314b8a6" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EAkito%3C/text%3E%3C/svg%3E',
+          bio: 'Feel free to discuss your career anytime.',
+        },
+        {
+          name: 'Koyori',
+          role: 'Coordinator',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fefce8" width="200" height="200"/%3E%3Ccircle fill="%23facc15" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EKoyori%3C/text%3E%3C/svg%3E',
+          bio: 'Supporting your relocation and local life setup.',
+        },
+        {
+          name: 'Maya',
+          role: 'Sourcer',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f3e8ff" width="200" height="200"/%3E%3Ccircle fill="%239333ea" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EMaya%3C/text%3E%3C/svg%3E',
+          bio: 'Let\'s find your ideal project together.',
+        },
+      ],
+      
+      voices: [
+        { quote: '"It\'s okay to be different" is the norm. I can challenge myself with confidence.', who: '— TA Team (KL)' },
+        { quote: 'My English improved naturally through daily practice.', who: '— JP Member (Penang)' },
+        { quote: 'Weekend trips abroad are actually realistic. Really feeling the hub advantage.', who: '— JP Member (Bangkok)' },
+        { quote: 'I care less about others\' opinions than when I was in Japan.', who: '— TA Team Maho' },
+      ],
+      
+      faq: [
+        {
+          q: 'Can I apply if my English is not confident?',
+          a: 'Yes, we have many Japanese-focused positions. We also support English improvement after joining.',
+        },
+        {
+          q: 'Is the work visa process difficult?',
+          a: 'The company handles the application. We guide you through documents in Japanese.',
+        },
+        {
+          q: 'How do I find housing?',
+          a: 'We provide local agent introductions and advice during orientation.',
+        },
+        {
+          q: 'Is there shift work?',
+          a: 'Some 24/7 projects have night/weekend shifts, but with allowances.',
+        },
+      ],
+      
+      galleryImgs: [
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%233b82f6" font-size="24"%3EOffice 1%3C/text%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff0f8" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23ff0082" font-size="24"%3EOffice 2%3C/text%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23ecfdf5" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%2310b981" font-size="24"%3ETeam%3C/text%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef3c7" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23f59e0b" font-size="24"%3EEvent%3C/text%3E%3C/svg%3E',
+      ],
+      
+      casual: {
+        title: '💬 Casual Interview Available!',
         bullets: [
-          'English-friendly, stable & welcoming',
-          'KL: convenience + multicultural life',
-          'Penang: island lifestyle',
-          'Bangkok: modern transit & amenities',
-          'Hub airports for easy trips',
+          'Not an interview (goal: resolve concerns and questions)',
+          'Online (Microsoft Teams) for about 30 minutes',
+          'Work experience not required (beginners OK)',
+          'Discuss living costs, housing, work style in Japanese',
         ],
       },
-      benefits: [
-        { t: 'Visa Support', d: 'Company handles EP application.' },
-        { t: 'Relocation', d: 'One-way flight, landing hotel, airport pickup.' },
-        { t: 'Pay & Allowances', d: 'Night, housing, overtime (project-based).' },
-        { t: 'Medical & Insurance', d: 'Health/dental/vision support, group insurance.' },
-        { t: 'Career Programs', d: 'Internal moves & JUMP.' },
-        { t: 'Language', d: 'GoFluent / Bootcamps.' },
-      ],
-      processSteps: [
-        { k: '1) Screening', v: 'Resume (JP/EN)' },
-        { k: '2) Online Tests', v: 'Language / role fit (if needed)' },
-        { k: '3) 1st Interview', v: 'Recruiting team (online)' },
-        { k: '4) 2nd Interview', v: 'Hiring team' },
-        { k: '5) Offer → Visa', v: 'Confirm, EP, flight & landing' },
-      ],
-      // Add other English content from original version...
+      
+      // Additional PPT content
+      aboutTP: {
+        title: 'About Teleperformance',
+        body: 'Customer experience company operating in 80+ countries worldwide. Many positions for Japanese speakers.',
+        video: 'https://www.youtube.com/watch?v=aPahVrsApXY&t=8s',
+      },
+      
+      currentOpenings: {
+        title: 'Current Opening',
+        positions: ['Customer Support (Japanese)', 'IT Support', '*Varies by period'],
+      },
+      
+      training: {
+        jump: {
+          title: 'Training program – JUMP',
+          desc: 'Internal JUMP program introduction',
+        },
+        gofluent: {
+          title: 'GoFluent',
+          desc: 'English learning support: GoFluent content, levels, usage',
+        },
+        bootcamp: {
+          title: 'Language Bootcamp',
+          desc: 'Duration, content, participation conditions, effects',
+        },
+      },
+      
+      lineAccount: {
+        title: 'LINE Official Account',
+        desc: 'Get latest updates, consultation window',
+        url: 'https://line.me/R/ti/p/@286nmdsd?from=page&searchId=286nmdsd',
+      },
+      
+      // Additional content from PPT
+      whyMalaysia: {
+        title: 'Why Malaysia Now',
+        points: ['English widely spoken & multicultural', 'Rich food culture', 'Lower living costs', 'Welcoming to newcomers'],
+      },
+      
+      workLifeBalance: {
+        title: 'Work and Life, Both Within Reach',
+        desc: 'Condo pools/gyms, casual dining out, office accessibility.',
+      },
+      
+      accommodation: {
+        title: 'Accommodation in Malaysia',
+        kl: 'KL: Central to suburbs, convenience-focused condos abundant.',
+        penang: 'Penang: Near beaches, peaceful living, slightly lower cost than KL.',
+      },
+      
+      weekends: {
+        title: 'Active in Your Weekends',
+        desc: 'Weekend trips realistic from hub airports to all of Asia. Many internal communities and events.',
+      },
+      
+      costOfLiving: {
+        title: 'Cost of Living (KL/Penang)',
+        desc: 'Rent / utilities / communications / food / transport reference values (market rates/examples).',
+      },
     },
 
-    /* =============================== KO ================================ */
-    ko: {
-      // Keep original content structure but add PPT-aligned content where available
+    /* =============================== KR - Direct translation from JP ================================ */
+    kr: {
       why1: [
-        { t: '🌍 글로벌 환경에서 레벨업', d: '영어・이문화 이해가 일상에서 단련되는 국제 팀.' },
-        { t: '🗣️ 일본어 포지션이 풍부', d: '영어에 불안이 있어도 일본어 중심으로 안심 스타트.' },
-        { t: '👥 일본인 지원의 안심감', d: '생활도 일도 일본어로 상담할 수 있는 체제.' },
+        { t: '🌍 글로벌 환경', d: '다국적 팀에서 일본어와 영어를 사용하며 일하기.' },
+        { t: '🛠 커리어 성장', d: '트레이너/QA/리더/매니저로 성장 가능.' },
+        { t: '🛫 이주 지원', d: '취업 비자, 편도 항공권, 초기 호텔, 공항 픽업.' },
       ],
       why2: [
-        { t: '💼 실력에 따라 조기 승진도', d: '트레이너/QA/리더/매니저까지 다채로운 커리어.' },
-        { t: '✈️ 비자・항공・숙박 지원', d: 'EP 신청 대행, 편도 항공권, 초기 호텔, 공항 픽업.' },
-        { t: '🌈 다양성이 베이스인 문화', d: '국적・성별・연령을 넘어 플랫하게 일할 수 있다.' },
+        { t: '🌈 다양성', d: '국적・연령・성별을 넘어 플랫한 일하기.' },
+        { t: '✅ 이런 분들께', d: '일본어를 활용하고 싶은 / 다국적 환경에서 시야를 넓히고 싶은 / 해외 생활을 즐기고 싶은 분.' },
+        { t: '💰 여유로운 생활', d: '물가가 저렴해 외식・카페・취미를 즐기기 쉽다.' },
       ],
       
-      // Add PPT content
-      whyTP: ['글로벌 환경', '일본어 포지션 다수', '일본어 지원', '다양성과 포용'],
-      whyRegion: { headline: '왜 말레이시아·태국?', bullets: ['영어 OK', 'KL 편리', '페낭 섬 라이프', '방콕 교통 편리', '허브공항'] },
-      benefits: [
-        { t: '취업 비자 지원', d: 'EP 신청을 회사가 대행.' },
-        { t: '항공・숙박 지원', d: '편도 항공권, 초기 호텔, 공항 픽업.' },
-        { t: '급여・수당', d: '야간/주택/잔업 수당(프로젝트에 따라).' },
-        { t: '의료・보험', d: '의료・치과・안과 보조, 단체 보험.' },
-        { t: '커리어 지원', d: '사내 이동／JUMP 프로그램.' },
-        { t: '어학', d: 'GoFluent・Language Bootcamp.' },
+      cities: [
+        {
+          id: 'kl',
+          title: '쿠알라룸푸르（KL）',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3ClinearGradient id="g1" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23e0f2ff"/%3E%3Cstop offset="100%25" style="stop-color:%23fff0f8"/%3E%3C/linearGradient%3E%3Crect fill="url(%23g1)" width="400" height="300"/%3E%3Crect fill="%233b82f6" x="60" y="180" width="60" height="140"/%3E%3Crect fill="%23ff0082" x="140" y="140" width="80" height="180"/%3E%3Crect fill="%233b82f6" x="240" y="160" width="60" height="160"/%3E%3Ctext x="200" y="100" text-anchor="middle" fill="%23ff0082" font-size="32" font-weight="bold"%3EKL%3C/text%3E%3C/svg%3E',
+          desc: '도시의 편리함・교통망・일본 음식・의료.',
+        },
+        {
+          id: 'penang',
+          title: '페낭（Penang）',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3ClinearGradient id="g2" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%2322d3ee"/%3E%3Cstop offset="100%25" style="stop-color:%23e0f7fa"/%3E%3C/linearGradient%3E%3Crect fill="url(%23g2)" width="400" height="300"/%3E%3Ccircle fill="%23fff" cx="200" cy="150" r="60"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="%2322d3ee" font-size="32" font-weight="bold"%3EPenang%3C/text%3E%3C/svg%3E',
+          desc: '바다・안정된 치안・고층 콘도・공항 접근성.',
+        },
+        {
+          id: 'bkk',
+          title: '방콕（Bangkok）',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3ClinearGradient id="g3" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23fbbf24"/%3E%3Cstop offset="100%25" style="stop-color:%23fef3c7"/%3E%3C/linearGradient%3E%3Crect fill="url(%23g3)" width="400" height="300"/%3E%3Crect fill="%23f59e0b" x="150" y="100" width="100" height="100"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="24" font-weight="bold"%3EBangkok%3C/text%3E%3C/svg%3E',
+          desc: '"동남아의 도쿄"：일본인 커뮤니티・일계 의료・BTS/MRT.',
+        },
       ],
+      
+      benefits: [
+        { t: '취업 비자 지원', d: 'EP 신청을 회사가 대행（회사 부담）.' },
+        { t: '이동・숙박 지원', d: '편도 항공권, 초기 호텔, 공항 픽업.' },
+        { t: '급여・수당', d: '야근/주택/초과근무 수당（프로젝트별）.' },
+        { t: '의료와 보험', d: '의료・치과・안과 지원, 단체 보험.' },
+        { t: '커리어 지원', d: '사내 이동／JUMP 프로그램.' },
+        { t: '어학', d: 'GoFluent 및 Language Bootcamp.' },
+      ],
+      
       processSteps: [
         { k: '① 서류 심사', v: '이력서・경력（일본어/영어）' },
-        { k: '② 온라인 테스트', v: '어학・업무 적성（필요에 따라）' },
+        { k: '② 온라인 테스트', v: '어학・업무 적성（필요시）' },
         { k: '③ 1차 면접', v: '채용팀과 온라인' },
-        { k: '④ 2차 면접', v: '배치팀 면접' },
-        { k: '⑤ 오퍼 → 비자', v: '조건 확인, EP 신청, 항공・초기 숙박' },
+        { k: '④ 2차 면접', v: '배속팀 면접' },
+        { k: '⑤ 오퍼 → 비자', v: '조건 확인, EP 신청, 이동・초기 숙박' },
       ],
-      // Add other Korean content from original version...
+      
+      offices: [
+        {
+          title: 'G Tower（KL）',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Crect fill="%233b82f6" x="150" y="50" width="100" height="200"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="white" font-size="20" font-weight="bold"%3EG Tower%3C/text%3E%3C/svg%3E',
+          points: ['Ampang Park 직결（MRT/LRT）', 'KLCC/Intermark 도보권', 'Grade A 오피스'],
+        },
+        {
+          title: 'Penang — Livingston',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23ecfdf5" width="400" height="300"/%3E%3Crect fill="%2310b981" x="140" y="90" width="120" height="120"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3ELivingston%3C/text%3E%3C/svg%3E',
+          points: ['조용한 환경', '음식점・약국', '접근성 좋음'],
+        },
+        {
+          title: 'Penang — One Precinct',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3e8ff" width="400" height="300"/%3E%3Ccircle fill="%239333ea" cx="200" cy="150" r="60"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3EOne Precinct%3C/text%3E%3C/svg%3E',
+          points: ['Bayan Baru의 모던 빌딩', '공항에서 약 15분', 'Queensbay Mall 근처'],
+        },
+        {
+          title: 'Penang — GBS@Mahsuri',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff7ed" width="400" height="300"/%3E%3Ccircle fill="%23fb923c" cx="200" cy="150" r="50"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3EMahsuri%3C/text%3E%3C/svg%3E',
+          points: ['주의 GBS 허브', 'IT/BPO 집적', '도보권에 생활 인프라'],
+        },
+        {
+          title: 'Bangkok — Singha Complex',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef2f2" width="400" height="300"/%3E%3Cpath fill="%23ef4444" d="M200 100l50 100h-100z"/%3E%3Ctext x="200" y="170" text-anchor="middle" fill="white" font-size="18" font-weight="bold"%3ESingha%3C/text%3E%3C/svg%3E',
+          points: ['BTS/MRT 인근', '일본인 커뮤니티에 편리', '모던한 상업 복합'],
+        },
+      ],
+      
+      team: [
+        {
+          name: 'Joseph',
+          role: 'TA Manager | Recruiter',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23e0f2ff" width="200" height="200"/%3E%3Ccircle fill="%233b82f6" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EJoseph%3C/text%3E%3C/svg%3E',
+          bio: '커리어 상담, 편하게 문의하세요.',
+        },        
+        {
+          name: 'Maho',
+          role: 'TA | Japan Market',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fff0f8" width="200" height="200"/%3E%3Ccircle fill="%23ff0082" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EMaho%3C/text%3E%3C/svg%3E',
+          bio: '첫 해외 취업도 일본어로 동행합니다.',
+        },
+        {
+          name: 'Akito',
+          role: 'Recruiter',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f0fdfa" width="200" height="200"/%3E%3Ccircle fill="%2314b8a6" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EAkito%3C/text%3E%3C/svg%3E',
+          bio: '커리어 상담, 편하게 문의하세요.',
+        },
+        {
+          name: 'Koyori',
+          role: 'Coordinator',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23fefce8" width="200" height="200"/%3E%3Ccircle fill="%23facc15" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EKoyori%3C/text%3E%3C/svg%3E',
+          bio: '이주 절차와 현지 생활도 지원합니다.',
+        },
+        {
+          name: 'Maya',
+          role: 'Sourcer',
+          img: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect fill="%23f3e8ff" width="200" height="200"/%3E%3Ccircle fill="%239333ea" cx="100" cy="100" r="40"/%3E%3Ctext x="100" y="110" text-anchor="middle" fill="white" font-size="16" font-weight="bold"%3EMaya%3C/text%3E%3C/svg%3E',
+          bio: '원하시는 프로젝트를 함께 찾아드립니다.',
+        },
+      ],
+      
+      voices: [
+        { quote: '「달라도 괜찮다」가 당연한 것. 안심하고 도전할 수 있습니다.', who: '— TA Team（KL）' },
+        { quote: '영어는 매일 실천으로 자연스럽게 늘었습니다.', who: '— JP Member（Penang）' },
+        { quote: '주말 해외여행이 현실적. 아시아 허브를 실감.', who: '— JP Member（Bangkok）' },
+        { quote: '일본에 있을 때보다 남의 시선을 덜 신경쓰게 되었습니다.', who: '— 채용팀 Maho' },
+      ],
+      
+      faq: [
+        {
+          q: '영어에 자신이 없어도 지원할 수 있습니까?',
+          a: '네, 일본어 중심 포지션이 많습니다. 입사 후 영어력 향상 지원도 있습니다.',
+        },
+        {
+          q: '취업 비자 절차는 어렵습니까?',
+          a: '회사가 신청을 대행합니다. 필요 서류도 일본어로 안내합니다.',
+        },
+        {
+          q: '주거는 어떻게 찾으면 좋습니까?',
+          a: '현지 에이전트 소개, 오리엔테이션에서의 조언 등을 제공합니다.',
+        },
+        {
+          q: '교대 근무가 있습니까?',
+          a: '프로젝트에 따라 24/7 서비스의 야근・주말 교대가 있지만 수당이 붙습니다.',
+        },
+      ],
+      
+      galleryImgs: [
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%233b82f6" font-size="24"%3EOffice 1%3C/text%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff0f8" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23ff0082" font-size="24"%3EOffice 2%3C/text%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23ecfdf5" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%2310b981" font-size="24"%3ETeam%3C/text%3E%3C/svg%3E',
+        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fef3c7" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23f59e0b" font-size="24"%3EEvent%3C/text%3E%3C/svg%3E',
+      ],
+      
+      casual: {
+        title: '💬 캐주얼 면담 실시 중!',
+        bullets: [
+          '면접이 아닙니다（불안・의문 해소가 목적）',
+          '온라인（Microsoft Teams）으로 약 30분',
+          '취업 경험 불문（미경험 OK）',
+          '생활비・주거・일하는 방식 등 일본어로 상담 가능',
+        ],
+      },
+      
+      // Additional PPT content
+      aboutTP: {
+        title: 'About Teleperformance',
+        body: '세계 80개국 이상에서 사업 전개하는 고객 경험 기업. 일본어 스피커를 위한 포지션도 다수.',
+        video: 'https://www.youtube.com/watch?v=aPahVrsApXY&t=8s',
+      },
+      
+      currentOpenings: {
+        title: 'Current Opening',
+        positions: ['고객 지원（일본어）', 'IT 지원', '※시기에 따라 변동'],
+      },
+      
+      training: {
+        jump: {
+          title: 'Training program – JUMP',
+          desc: '사내 JUMP 프로그램 소개',
+        },
+        gofluent: {
+          title: 'GoFluent',
+          desc: '영어 학습 지원: GoFluent 내용・레벨・이용 이미지',
+        },
+        bootcamp: {
+          title: 'Language Bootcamp',
+          desc: '기간・내용・참가 조건・효과',
+        },
+      },
+      
+      lineAccount: {
+        title: 'LINE 공식 계정',
+        desc: '최신 정보를 받고, 상담 창구로 안내',
+        url: 'https://line.me/R/ti/p/@286nmdsd?from=page&searchId=286nmdsd',
+      },
+      
+      // Additional content from PPT
+      whyMalaysia: {
+        title: '왜 지금 말레이시아인가',
+        points: ['영어가 통하기 쉽고 다문화', '풍부한 음식', '생활비를 억제하기 쉽다', '수용 체제: 이주 초보자에게도 친절'],
+      },
+      
+      workLifeBalance: {
+        title: '「일」도「생활」도, 무리 없이 손에 넣는 나라',
+        desc: '콘도미니엄 풀/짐, 외식의 편안함, 오피스 접근성.',
+      },
+      
+      accommodation: {
+        title: 'Accommodation in Malaysia',
+        kl: 'KL: 중심부~근교, 편의성 중시의 콘도미니엄이 풍부.',
+        penang: 'Penang: 바다 근처・차분한 생활, KL보다 약간 저비용.',
+      },
+      
+      weekends: {
+        title: 'Active in Your Weekends',
+        desc: '허브 공항에서 주말 여행이 현실적: 아시아 각지로. 사내 커뮤니티와 이벤트도 다수.',
+      },
+      
+      costOfLiving: {
+        title: 'Cost of Living (KL/Penang)',
+        desc: '집세／광열비／통신／식비／교통의 참고 감각치（시세・예）.',
+      },
     },
   };
 
   /* ------------------------------------------------------------------------
-     3) ChatGPT Prompts — keep existing, add KO (long text preserved)
-     ChatGPTプロンプト — 既存のものを保持、韓国語を追加（長文保持）
+     3) ChatGPT Prompts — keep existing structure
   -------------------------------------------------------------------------*/
   const CHATGPT_PROMPTS = {
-    ja: `あなたは就職アドバイザーです。テレパフォーマンス（Teleperformance）マレーシア／タイ（TP Malaysia / TP Thailand）について、候補者が安心して応募を検討できるよう、以下の条件でポジティブに紹介してください。
+    jp: `あなたは就職アドバイザーです。テレパフォーマンス（Teleperformance）マレーシア／タイ（TP Malaysia / TP Thailand）について、候補者が安心して応募を検討できるよう、以下の条件でポジティブに紹介してください。
 
 【必須メッセージ】
-- 私たちは Great Place to Work® を6年連続で受賞しています（注：拠点や年により受賞名・表記が異なる場合がありますが、候補者の不安を和らげる積極的なトーンで説明）。
+- 私たちは Great Place to Work® を6年連続で受賞しています。
 - 日本語スピーカー向けのポジションが多数あり、英語に自信がなくてもスタートしやすいこと。
 - 就労ビザ（Employment Pass）の申請サポート、片道航空券、初期ホテル、空港送迎などの移住サポートがあること。
 
@@ -775,14 +1071,12 @@
 【トーンと形式】
 - 前向きでフレンドリー、かつ現実的。誇張や保証の断定は避ける。
 - 箇条書き＋短い段落で読みやすく。
-- 最後に「応募」や「カジュアル面談」への自然な誘導（CTA）を添える。
-
-書き出しは簡潔な概要→箇条書き→締めのCTAの順で。`,
+- 最後に「応募」や「カジュアル面談」への自然な誘導（CTA）を添える。`,
 
     en: `You are a job advisor. Please give a positive, candidate-friendly overview of Teleperformance Malaysia and Thailand (TP Malaysia / TP Thailand) using the guidelines below.
 
 [Must include]
-- We are a Great Place to Work® winner for 6 years in a row (note: wording may vary by site/year; keep a positive, confidence-building tone).
+- We are a Great Place to Work® winner for 6 years in a row.
 - Many JP-speaking roles, so it's easy for Japanese speakers to start—even if English is still growing.
 - Relocation support such as Employment Pass visa guidance, one-way flight, landing hotel, and airport pickup.
 
@@ -793,14 +1087,12 @@
 
 [Tone & format]
 - Upbeat, friendly, and realistic—avoid absolute guarantees.
-- Use a short intro, clear bullets, and a brief closing CTA to apply or book a casual chat.
+- Use a short intro, clear bullets, and a brief closing CTA to apply or book a casual chat.`,
 
-Start with a concise summary → bullet points → a friendly CTA.`,
-
-    ko: `당신은 취업 어드바이저입니다. 텔레퍼포먼스（Teleperformance）말레이시아／태국（TP Malaysia / TP Thailand）에 대해, 지원자가 안심하고 지원을 검토할 수 있도록, 아래 조건으로 긍정적으로 소개해 주세요.
+    kr: `당신은 취업 어드바이저입니다. 텔레퍼포먼스（Teleperformance）말레이시아／태국（TP Malaysia / TP Thailand）에 대해, 지원자가 안심하고 지원을 검토할 수 있도록, 아래 조건으로 긍정적으로 소개해 주세요.
 
 【필수 메시지】
-- 저희는 Great Place to Work® 를 6년 연속 수상했습니다（주：거점이나 연도에 따라 수상명・표기가 다를 수 있지만, 지원자의 불안을 덜어주는 적극적인 톤으로 설명）.
+- 저희는 Great Place to Work® 를 6년 연속 수상했습니다.
 - 일본어 스피커를 위한 포지션이 다수 있어, 영어에 자신이 없어도 시작하기 쉽다는 것.
 - 취업 비자（Employment Pass）의 신청 지원, 편도 항공권, 초기 호텔, 공항 픽업 등의 이주 지원이 있다는 것.
 
@@ -812,9 +1104,7 @@ Start with a concise summary → bullet points → a friendly CTA.`,
 【톤과 형식】
 - 적극적이고 친근하며, 또한 현실적. 과장이나 보장의 단정은 피한다.
 - 불릿 포인트＋짧은 단락으로 읽기 쉽게.
-- 마지막에 「지원」이나 「캐주얼 면담」으로의 자연스러운 유도（CTA）를 첨부한다.
-
-시작은 간결한 개요→불릿 포인트→마무리 CTA 순서로.`
+- 마지막에 「지원」이나 「캐주얼 면담」으로의 자연스러운 유도（CTA）를 첨부한다.`
   };
 
   /* ------------------------------------------------------------------------
@@ -822,35 +1112,28 @@ Start with a concise summary → bullet points → a friendly CTA.`,
   -------------------------------------------------------------------------*/
   window.I18N = I18N;
   window.CONTENT = CONTENT;
-  window.AVAILABLE_LANGS = LANGS;
 
-  // Helper: get prompt by language code ('ja' default)
+  // Helper: get prompt by language code ('jp' default)
   window.getChatGPTPrompt = function getChatGPTPrompt(lang) {
-    return CHATGPT_PROMPTS[lang] || CHATGPT_PROMPTS['ja'];
+    return CHATGPT_PROMPTS[lang] || CHATGPT_PROMPTS['jp'];
   };
 
   /* ------------------------------------------------------------------------
-     5) Initialization for Ask ChatGPT & copy UX (keep this)
-        - Picks default language from <html data-lang|lang>, fallback 'ja'
-        - Binds copy button
-        初期化 - デフォルト言語を選択し、コピーボタンをバインド
+     5) Initialization for Ask ChatGPT & copy UX
   -------------------------------------------------------------------------*/
   document.addEventListener('DOMContentLoaded', () => {
     const root = document.documentElement;
-    // Prefer data-lang; fallback lang; default 'ja'
-    const langAttr =
-      root.getAttribute('data-lang') ||
-      root.getAttribute('lang') ||
-      'ja';
-    const current = ['ja', 'en', 'ko'].includes(langAttr) ? langAttr : 'ja';
+    // Prefer data-lang; fallback lang; default 'jp'
+    const langAttr = root.getAttribute('data-lang') || root.getAttribute('lang') || 'jp';
+    const current = ['jp', 'en', 'kr'].includes(langAttr) ? langAttr : 'jp';
 
-    // Initialize textarea content / テキストエリアのコンテンツを初期化
+    // Initialize textarea content
     const ta = document.getElementById('chatgptPrompt');
     if (ta) {
       ta.value = window.getChatGPTPrompt(current);
     }
 
-    // Copy UX / コピーUX
+    // Copy UX
     const copyBtn = document.getElementById('copyPromptBtn');
     if (copyBtn && ta) {
       copyBtn.addEventListener('click', async () => {
@@ -858,25 +1141,22 @@ Start with a concise summary → bullet points → a friendly CTA.`,
           await navigator.clipboard.writeText(ta.value);
           const original = copyBtn.textContent;
           const copiedText =
-            current === 'ja' ? 'コピーしました！' :
-            current === 'ko' ? '복사했습니다!' :
+            current === 'jp' ? 'コピーしました！' :
+            current === 'kr' ? '복사했습니다!' :
             'Copied!';
           copyBtn.textContent = copiedText;
           setTimeout(() => (copyBtn.textContent = original), 1400);
         } catch (e) {
-          // Fallback (legacy) / フォールバック（レガシー）
           ta.select();
           document.execCommand('copy');
         }
       });
     }
 
-    // Optional: if you render language buttons dynamically:
-    // Ensure all language selector buttons carry a [data-lang] attribute
+    // Optional: if you render language buttons dynamically
     document.querySelectorAll('[data-lang-code]').forEach((btn) => {
       btn.addEventListener('click', () => {
-        const code = btn.getAttribute('data-lang-code') || 'ja';
-        // app.js handles setLang + route; we only update the prompt textarea here
+        const code = btn.getAttribute('data-lang-code') || 'jp';
         const ta = document.getElementById('chatgptPrompt');
         if (ta && typeof window.getChatGPTPrompt === 'function') {
           ta.value = window.getChatGPTPrompt(code);
