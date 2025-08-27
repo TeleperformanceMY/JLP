@@ -499,7 +499,7 @@
         {
           name: 'Joseph',
           role: 'Recruiter',
-          img: 'assets/team/kenta.jpg',
+          img: 'assets/team/joseph.jpg',
           bio: 'キャリア相談、お気軽にどうぞ。',
         },     
          {
@@ -511,19 +511,19 @@
         {
           name: 'Akito',
           role: 'Recruiter',
-          img: 'assets/team/kenta.jpg',
+          img: 'assets/team/Akito.jpg',
           bio: 'キャリア相談、お気軽にどうぞ。',
         },
         {
           name: 'Koyori',
           role: 'Coordinator',
-          img: 'assets/team/aya.jpg',
+          img: 'assets/team/Koyori.jpg',
           bio: '渡航手続きや現地生活もフォローします。',
         },
         {
           name: 'Maya',
           role: 'Sourcer',
-          img: 'assets/team/leo.jpg',
+          img: 'assets/team/maya.jpg',
           bio: 'ご希望のプロジェクトを一緒に探します。',
         },
       ],
@@ -657,27 +657,33 @@
       
       team: [
         {
+          name: 'Joseph',
+          role: 'TA | Japan Market',
+          img: 'assets/team/joseph.jpg',
+          bio: 'Supporting your first overseas career journey in Japanese.',
+        },        
+         {
           name: 'Maho',
           role: 'TA | Japan Market',
           img: 'assets/team/maho.jpg',
           bio: 'Supporting your first overseas career journey in Japanese.',
         },
         {
-          name: 'Kenta',
+          name: 'Akito',
           role: 'Recruiter',
-          img: 'assets/team/kenta.jpg',
+          img: 'assets/team/Akito.jpg',
           bio: 'Feel free to discuss your career anytime.',
         },
         {
-          name: 'Aya',
+          name: 'Koyori',
           role: 'Coordinator',
-          img: 'assets/team/aya.jpg',
+          img: 'assets/team/Koyori.jpg',
           bio: 'Supporting your relocation and local life setup.',
         },
         {
-          name: 'Leo',
+          name: 'Maya',
           role: 'Sourcer',
-          img: 'assets/team/leo.jpg',
+          img: 'assets/team/Maya.jpg',
           bio: 'Let\'s find your ideal project together.',
         },
       ],
@@ -807,27 +813,33 @@
       
       team: [
         {
+          name: 'Joseph',
+          role: 'TA | Japan Market',
+          img: 'assets/team/joseph.jpg',
+          bio: '첫 해외 취업도 일본어로 동행합니다.',
+        },        
+         {
           name: 'Maho',
           role: 'TA | Japan Market',
           img: 'assets/team/maho.jpg',
           bio: '첫 해외 취업도 일본어로 동행합니다.',
         },
         {
-          name: 'Kenta',
+          name: 'Akito',
           role: 'Recruiter',
-          img: 'assets/team/kenta.jpg',
+          img: 'assets/team/Akito.jpg',
           bio: '커리어 상담, 편하게 문의하세요.',
         },
         {
-          name: 'Aya',
+          name: 'Koyori',
           role: 'Coordinator',
-          img: 'assets/team/aya.jpg',
+          img: 'assets/team/Koyori.jpg',
           bio: '이주 절차와 현지 생활도 지원합니다.',
         },
         {
-          name: 'Leo',
+          name: 'Maya',
           role: 'Sourcer',
-          img: 'assets/team/leo.jpg',
+          img: 'assets/team/maya.jpg',
           bio: '원하시는 프로젝트를 함께 찾아드립니다.',
         },
       ],
