@@ -1,12 +1,12 @@
 /* ============================================================================
-   TP Candidate Microsite — app.js (FIXED FOR GITHUB PAGES)
+   TP Candidate Microsite — app.js (FIXED WITH QUERY PARAMS)
    Requires: translations.js (window.I18N, window.CONTENT, window.getChatGPTPrompt)
    Purpose / 目的: 
      - Bind UI, render dynamic content, and keep things snappy on mobile
      - UI のバインド、動的コンテンツのレンダリング、モバイルでのスムーズな動作
-   Updated: 2025-08-26 
-     - FIXED: Changed from path-based to hash-based routing for GitHub Pages
-     - Hash-based lang (#ja, #en, #ko) to avoid 404 errors
+   Updated: 2025-12-19
+     - FIXED: Using query parameters ?lang=en/jp/kr for language switching
+     - Language codes: jp (Japanese), en (English), kr (Korean)
      - Better image fallback handling for SVG icons
      - Bilingual comments / バイリンガルコメント
 ============================================================================ */
@@ -51,63 +51,59 @@ function imageFallback(img, fallbackAlt = 'image') {
 }
 
 /* ----------------------------------------------------------
-   1) Language & i18n plumbing (Hash-based for GitHub Pages)
-   言語とi18n配管（GitHub Pages用ハッシュベース）
-      - Supported: #ja, #en, #ko
-      - Default language: Japanese ('ja') / デフォルト言語：日本語（'ja'）
+   1) Language & i18n plumbing (Query parameter based)
+   言語とi18n配管（クエリパラメータベース）
+      - Supported: ?lang=jp, ?lang=en, ?lang=kr
+      - Default language: Japanese ('jp') / デフォルト言語：日本語（'jp'）
 -----------------------------------------------------------*/
-const I18N    = window.I18N    || { ja: {}, en: {}, ko: {} };
-const CONTENT = window.CONTENT || { links:{}, ja:{}, en:{}, ko:{} };
+const I18N    = window.I18N    || { jp: {}, en: {}, kr: {} };
+const CONTENT = window.CONTENT || { links:{}, jp:{}, en:{}, kr:{} };
 
-const LANGS = ['ja', 'en', 'ko'];
+const LANGS = ['jp', 'en', 'kr'];
 const LANG_STORAGE_KEY = 'tp_lang';
 
-/** Normalize a language code to one of LANGS; default 'ja'. 
- * 言語コードをLANGSの1つに正規化; デフォルト 'ja' */
+/** Normalize a language code to one of LANGS; default 'jp'. 
+ * 言語コードをLANGSの1つに正規化; デフォルト 'jp' */
 function normalizeLang(x) {
-  if (!x) return 'ja';
+  if (!x) return 'jp';
   const lc = (x + '').toLowerCase();
   if (LANGS.includes(lc)) return lc;
+  // Handle common variations
+  if (lc === 'ja' || lc.startsWith('ja')) return 'jp';
+  if (lc === 'ko' || lc.startsWith('ko')) return 'kr';
   if (lc.startsWith('en')) return 'en';
-  if (lc.startsWith('ko')) return 'ko';
-  return 'ja';
+  return 'jp';
 }
 
-/** Detect language from the current URL (hash/query). 
- * 現在のURLから言語を検出（ハッシュ/クエリ） */
+/** Detect language from the current URL query parameters. 
+ * 現在のURLクエリパラメータから言語を検出 */
 function parseLangFromLocation() {
-  const { search, hash } = window.location;
-
-  // 1) Hash #ja, #en, #ko
-  const h = (hash || '').replace(/^#/, '');
-  if (LANGS.includes(h)) return h;
-
-  // 2) Query ?lang=xx
-  const qs = new URLSearchParams(search);
-  const q = qs.get('lang');
-  if (q && LANGS.includes(q)) return q;
-
-  // 3) None in URL
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get('lang');
+  if (lang && LANGS.includes(normalizeLang(lang))) {
+    return normalizeLang(lang);
+  }
   return null;
 }
 
-/** Update URL to show current language as hash 
- * URLを更新して現在の言語をハッシュとして表示 */
+/** Update URL to show current language as query parameter 
+ * URLを更新して現在の言語をクエリパラメータとして表示 */
 function updateLangURL(lang) {
-  // Use hash for GitHub Pages compatibility
-  window.history.replaceState({}, '', '#' + lang);
+  const url = new URL(window.location.href);
+  url.searchParams.set('lang', lang);
+  window.history.replaceState({}, '', url.toString());
 }
 
-/** Initial language picker: URL → localStorage → browser → default 'ja'. 
- * 初期言語ピッカー：URL → localStorage → ブラウザ → デフォルト 'ja' */
+/** Initial language picker: URL → localStorage → browser → default 'jp'. 
+ * 初期言語ピッカー：URL → localStorage → ブラウザ → デフォルト 'jp' */
 function getInitialLang() {
-  // a) from URL
+  // a) from URL query parameter
   const urlLang = parseLangFromLocation();
-  if (urlLang) return normalizeLang(urlLang);
+  if (urlLang) return urlLang;
 
   // b) from localStorage
   const saved = localStorage.getItem(LANG_STORAGE_KEY);
-  if (saved && LANGS.includes(saved)) return saved;
+  if (saved && LANGS.includes(normalizeLang(saved))) return normalizeLang(saved);
 
   // c) from browser
   if (navigator.language) {
@@ -115,7 +111,7 @@ function getInitialLang() {
     return guess;
   }
   // d) fallback
-  return 'ja';
+  return 'jp';
 }
 
 let currentLang = getInitialLang();
@@ -129,7 +125,7 @@ function applyLangToHtmlRoot() {
   // Update language buttons active state / 言語ボタンのアクティブ状態を更新
   $$('.lang-btn').forEach(btn => {
     const lang = btn.getAttribute('data-lang') || btn.getAttribute('data-lang-code');
-    if (lang === currentLang) {
+    if (normalizeLang(lang) === currentLang) {
       btn.classList.add('is-active');
       btn.setAttribute('aria-current', 'true');
       btn.setAttribute('aria-pressed', 'true');
@@ -143,8 +139,8 @@ function applyLangToHtmlRoot() {
   // Update legacy #langBtn if it exists
   const legacyBtn = $('#langBtn');
   if (legacyBtn) {
-    const labels = { ja: 'EN', en: '한국어', ko: '日本語' };
-    const nextLang = { ja: 'en', en: 'ko', ko: 'ja' };
+    const labels = { jp: 'EN', en: '한국어', kr: '日本語' };
+    const nextLang = { jp: 'en', en: 'kr', kr: 'jp' };
     legacyBtn.textContent = labels[currentLang] || 'EN';
     legacyBtn.setAttribute('data-next-lang', nextLang[currentLang]);
   }
@@ -154,8 +150,8 @@ function applyLangToHtmlRoot() {
 function t(key) {
   const dict = I18N[currentLang] || {};
   const val = dict[key];
-  if (typeof val === 'function') return val;
-  return val ?? I18N.ja[key] ?? I18N.en[key] ?? '';
+  if (typeof val === 'function') return val();
+  return val ?? I18N.jp[key] ?? I18N.en[key] ?? '';
 }
 
 /** Paint static text nodes with data-i18n or data-i18n-static. 
@@ -164,12 +160,34 @@ function applyI18nStaticText() {
   $$('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
     const val = t(key);
-    if (typeof val === 'string' || typeof val === 'number') el.innerHTML = val;
+    if (typeof val === 'string' || typeof val === 'number') {
+      el.innerHTML = val;
+    }
   });
   $$('[data-i18n-static]').forEach((el) => {
     const key = el.getAttribute('data-i18n-static');
     const val = t(key);
-    if (typeof val === 'string' || typeof val === 'number') el.textContent = val;
+    if (typeof val === 'string' || typeof val === 'number') {
+      el.textContent = val;
+    }
+  });
+  
+  // Update placeholder text
+  $$('[data-i18n-placeholder]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    const val = t(key);
+    if (val && el.placeholder !== undefined) {
+      el.placeholder = val;
+    }
+  });
+  
+  // Update aria-labels
+  $$('[data-i18n-aria-label]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-aria-label');
+    const val = t(key);
+    if (val) {
+      el.setAttribute('aria-label', val);
+    }
   });
 }
 
@@ -187,7 +205,9 @@ function setLang(lang) {
   // Update hero typewriter text / ヒーロータイプライターテキストを更新
   const heroNode = $('#heroType');
   const heroTexts = I18N[currentLang].heroTexts || [];
-  typewriter(heroNode, heroTexts);
+  if (heroNode && heroTexts.length > 0) {
+    typewriter(heroNode, heroTexts);
+  }
 
   // Update Ask ChatGPT prompt / Ask ChatGPTプロンプトを更新
   const ta = $('#chatgptPrompt');
@@ -195,25 +215,37 @@ function setLang(lang) {
     ta.value = window.getChatGPTPrompt(currentLang);
   }
 
-  // Update URL with hash for GitHub Pages / GitHub Pages用にハッシュでURLを更新
+  // Update URL with query parameter / クエリパラメータでURLを更新
   updateLangURL(currentLang);
 }
 
 /* ----------------------------------------------------------
    2) Typewriter (hero) / タイプライター（ヒーロー）
 -----------------------------------------------------------*/
+let typewriterCleanup = null;
+
 function typewriter(node, texts, speed = 58, pause = 1200) {
+  // Clean up previous typewriter if exists
+  if (typewriterCleanup) {
+    typewriterCleanup();
+    typewriterCleanup = null;
+  }
+
   if (!node || !texts || !texts.length) return () => {};
   if (prefersReducedMotion()) {
     node.textContent = texts[0] || '';
     return () => {};
   }
+  
   let idx = 0;
   let isDeleting = false;
   let char = 0;
   let timer;
+  let isRunning = true;
 
   function tick() {
+    if (!isRunning) return;
+    
     const full = texts[idx] || '';
     if (!isDeleting) {
       char++;
@@ -236,26 +268,36 @@ function typewriter(node, texts, speed = 58, pause = 1200) {
       timer = setTimeout(tick, Math.max(35, speed - 20));
     }
   }
+  
   tick();
-  return () => clearTimeout(timer);
+  
+  typewriterCleanup = () => {
+    isRunning = false;
+    clearTimeout(timer);
+  };
+  
+  return typewriterCleanup;
 }
 
 /* ----------------------------------------------------------
    3) Reveal-on-scroll (IO) / スクロール時表示（IO）
 -----------------------------------------------------------*/
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        revealObserver.unobserve(e.target);
-      }
-    }
-  },
-  { threshold: 0.14 }
-);
+const revealObserver = typeof IntersectionObserver !== 'undefined' 
+  ? new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            revealObserver.unobserve(e.target);
+          }
+        }
+      },
+      { threshold: 0.14 }
+    )
+  : null;
+
 function observeReveal(node) {
-  if (!node) return;
+  if (!node || !revealObserver) return;
   node.classList.add('reveal');
   revealObserver.observe(node);
 }
@@ -295,8 +337,10 @@ function makeCarousel(containerSel, prevBtnSel, nextBtnSel) {
     index = (index + 1) % Math.max(1, count);
     update();
   }, 5200);
+  
   on(track, 'mouseenter', () => clearInterval(timer));
   on(track, 'mouseleave', () => {
+    clearInterval(timer);
     timer = setInterval(() => {
       const count = track.children.length;
       index = (index + 1) % Math.max(1, count);
@@ -377,7 +421,7 @@ function renderOffices() {
   const root = $('#officeCards');
   if (!root) return;
   root.innerHTML = '';
-  (CONTENT[currentLang].offices || CONTENT.ja.offices || []).forEach((o) => {
+  (CONTENT[currentLang].offices || CONTENT.jp.offices || []).forEach((o) => {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
@@ -464,7 +508,6 @@ function renderGallery() {
 /* ----------------------------------------------------------
    6-8) Priority galleries, connectors, etc. (keeping same)
 -----------------------------------------------------------*/
-// ... [Keeping all the priority gallery, secondary gallery, and connector functions exactly as they were]
 const PHOTO_SOURCES = {
   about: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f9ff" width="400" height="300"/%3E%3Ccircle fill="%233b82f6" cx="200" cy="150" r="60"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="24" font-weight="bold"%3EAbout%3C/text%3E%3C/svg%3E',
   jobs: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23fff0f8" width="400" height="300"/%3E%3Crect fill="%23ff0082" x="150" y="100" width="100" height="100"/%3E%3Ctext x="200" y="160" text-anchor="middle" fill="white" font-size="24" font-weight="bold"%3EJobs%3C/text%3E%3C/svg%3E',
@@ -613,7 +656,7 @@ function initHeader() {
       e.preventDefault();
       const lang = btn.getAttribute('data-lang') || btn.getAttribute('data-lang-code');
       if (!lang) return;
-      setLang(lang);
+      setLang(normalizeLang(lang));
     });
   });
 
@@ -664,9 +707,9 @@ function initHeader() {
 
   // Smooth scroll for any in-page anchors
   $$('a[href^="#"]').forEach((a) => {
+    if (a.getAttribute('href') === '#') return;
     on(a, 'click', (e) => {
       const id = a.getAttribute('href');
-      if (!id || id === '#') return;
       const el = $(id);
       if (!el) return;
       e.preventDefault();
@@ -711,8 +754,8 @@ function initContactForm() {
   on(form, 'submit', (e) => {
     e.preventDefault();
     const name = $('#name')?.value?.trim() || '';
-    const fn = I18N[currentLang].contactThanks || I18N.ja.contactThanks || (() => 'ありがとうございました。');
-    const msg = typeof fn === 'function' ? fn(name || (currentLang === 'ja' ? '応募者' : 'Candidate')) : fn;
+    const fn = I18N[currentLang].contactThanks || I18N.jp.contactThanks || (() => 'ありがとうございました。');
+    const msg = typeof fn === 'function' ? fn(name || (currentLang === 'jp' ? '応募者' : 'Candidate')) : fn;
     alert(msg);
     form.reset();
   });
@@ -730,8 +773,8 @@ function initChatGPTSection() {
       try {
         await navigator.clipboard.writeText(ta.value);
         const original = btnCopy.textContent;
-        if (currentLang === 'ja') btnCopy.textContent = 'コピーしました！';
-        else if (currentLang === 'ko') btnCopy.textContent = '복사했습니다!';
+        if (currentLang === 'jp') btnCopy.textContent = 'コピーしました！';
+        else if (currentLang === 'kr') btnCopy.textContent = '복사했습니다!';
         else btnCopy.textContent = 'Copied!';
         setTimeout(() => (btnCopy.textContent = original), 1400);
       } catch (e) {
@@ -784,7 +827,7 @@ function normalizeIconSizes() {
    14) Boot sequence / ブートシーケンス
 -----------------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', () => {
-  // 0) Initialize language from hash or default to JP
+  // 0) Initialize language from query parameter or default to JP
   currentLang = normalizeLang(getInitialLang());
   updateLangURL(currentLang);
 
@@ -798,7 +841,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3) Hero typewriter
   const heroNode  = $('#heroType');
   const heroTexts = I18N[currentLang].heroTexts || [];
-  typewriter(heroNode, heroTexts);
+  if (heroNode && heroTexts.length > 0) {
+    typewriter(heroNode, heroTexts);
+  }
 
   // 4) Carousels
   makeCarousel('#benefitSlides', '#bPrev', '#bNext');
