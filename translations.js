@@ -497,25 +497,31 @@
       // TA Team (from PPT slides 21-24, matching your about-tp.html content)
       team: [
         {
+          name: 'Joseph',
+          role: 'Recruiter',
+          img: 'assets/team/kenta.jpg',
+          bio: 'キャリア相談、お気軽にどうぞ。',
+        },     
+         {
           name: 'Maho',
           role: 'TA | Japan Market',
           img: 'assets/team/maho.jpg',
           bio: '初めての海外就職も、日本語で伴走します。',
         },
         {
-          name: 'Kenta',
+          name: 'Akito',
           role: 'Recruiter',
           img: 'assets/team/kenta.jpg',
           bio: 'キャリア相談、お気軽にどうぞ。',
         },
         {
-          name: 'Aya',
+          name: 'Koyori',
           role: 'Coordinator',
           img: 'assets/team/aya.jpg',
           bio: '渡航手続きや現地生活もフォローします。',
         },
         {
-          name: 'Leo',
+          name: 'Maya',
           role: 'Sourcer',
           img: 'assets/team/leo.jpg',
           bio: 'ご希望のプロジェクトを一緒に探します。',
