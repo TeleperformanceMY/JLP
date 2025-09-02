@@ -10,52 +10,48 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
   <!-- Open Graph -->
   <meta property="og:title" content="TP Japan — 暮らすように、海外で働く。" />
   <meta property="og:description" content="日本語スピーカー向け：福利厚生、勤務地、面接、移住サポート、応募方法。" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="TPLogo11.png" />
   <meta property="og:locale" content="ja_JP" />
+  <link rel="canonical" href="https://your-domain.example/jlp/index.html" />
 </head>
 
 <body>
   <a class="visually-hidden" href="#main">メインへスキップ</a>
 
   <!-- =========================================================
-       Header / ヘッダー
+       Header
   ========================================================== -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="TP ホーム">
-        <img src="TPLogo11.png" alt="TP ロゴ" class="brand-logo" id="logoImg" 
-             onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23fff0f8%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%22100%22 y=%22100%22 text-anchor=%22middle%22 fill=%22%23ff0082%22 font-size=%2248%22 font-weight=%22bold%22%3ETP%3C/text%3E%3C/svg%3E';" />
+        <img src="TPLogo11.png" alt="TP ロゴ" class="brand-logo" id="logoImg" />
         <div class="brand-text">
           <div class="t" data-i18n="brand.title">TP</div>
           <div class="s" data-i18n="brand.sub">Malaysia · Thailand — 日本語採用</div>
         </div>
       </a>
 
+      <!-- Desktop nav: keep concise -->
       <nav class="site-nav" aria-label="主ナビゲーション">
         <a href="about-tp.html" data-i18n="nav.about">会社紹介</a>
-        <a href="jobs-and-benefits.html" data-i18n="nav.jobs">求人・福利厚生</a>
+        <a href="open-jobs.html" data-i18n="nav.jobs">求人情報</a>
+        <a href="salary-benefits.html" data-i18n="nav.benefits">給与・福利厚生</a>
         <a href="relocation-visa.html" data-i18n="nav.relocation">移住・ビザ</a>
-        <a href="why-malaysia-thailand.html" data-i18n="nav.why">勤務先都市</a>
         <a href="interview-process.html" data-i18n="nav.process">面接プロセス</a>
+        <a href="why-malaysia-thailand.html" data-i18n="nav.why">勤務先都市</a>
       </nav>
 
       <div class="header-actions">
-        <!-- Show all languages; JP default / すべての言語を表示; JPデフォルト -->
-        <div class="lang-switch" role="group" aria-label="言語切替">
-          <button class="btn lang-btn is-active" data-lang="ja" aria-current="true">日本語</button>
-          <button class="btn lang-btn" data-lang="en">EN</button>
-          <button class="btn lang-btn" data-lang="ko">한국어</button>
-        </div>
-
         <a class="btn primary" target="_blank"
            href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE"
            data-i18n="cta.apply">ご応募はこちら</a>
 
-        <!-- Mobile hamburger / モバイルハンバーガー -->
+        <!-- Mobile hamburger -->
         <button id="menuBtn" class="hamburger" aria-label="メニューを開く" aria-controls="drawer" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -63,7 +59,7 @@
     </div>
   </header>
 
-  <!-- Drawer (mobile) / ドロワー（モバイル） -->
+  <!-- Drawer (mobile) -->
   <div id="scrim" class="scrim" hidden></div>
   <aside id="drawer" class="drawer" aria-hidden="true">
     <header class="drawer-head">
@@ -72,19 +68,27 @@
     </header>
     <nav class="drawer-nav" aria-label="モバイルナビ">
       <a href="index.html" class="d-link" aria-current="page">ホーム</a>
-      <a href="about-tp.html" class="d-link" data-i18n="drawer.about">会社紹介</a>
-      <a href="jobs-and-benefits.html" class="d-link" data-i18n="drawer.jobs">求人・給与/福利厚生</a>
-      <a href="relocation-visa.html" class="d-link" data-i18n="drawer.relocation">移住・ビザ</a>
-      <a href="interview-process.html" class="d-link" data-i18n="drawer.process">面接プロセス</a>
-      <a href="why-malaysia-thailand.html" class="d-link" data-i18n="drawer.why">勤務先都市</a>
-      <a href="faq.html" class="d-link" data-i18n="drawer.faq">FAQ</a>
+      <a href="about-tp.html" class="d-link">会社紹介</a>
+      <a href="open-jobs.html" class="d-link">求人情報</a>
+      <a href="salary-benefits.html" class="d-link">給与・福利厚生</a>
+      <a href="relocation-visa.html" class="d-link">移住・ビザ</a>
+      <a href="interview-process.html" class="d-link">面接プロセス</a>
+      <a href="why-malaysia-thailand.html" class="d-link">勤務先都市</a>
+      <a href="casual-interview.html" class="d-link">カジュアル面談</a>
+      <a href="testimonials.html" class="d-link">社員の声</a>
+      <a href="office-environment.html" class="d-link">働く環境</a>
+      <a href="career-growth.html" class="d-link">キャリア・語学</a>
+      <a href="cost-of-living.html" class="d-link">生活コスト</a>
+      <a href="daily-life-malaysia.html" class="d-link">マレーシアの生活</a>
+      <a href="meet-the-ta-team.html" class="d-link">採用チーム</a>
+      <a href="area-around-office.html" class="d-link">オフィス周辺</a>
+      <a href="blog.html" class="d-link">ブログ</a>
+      <a href="line-updates.html" class="d-link">LINE 更新</a>
+      <a href="culture-events.html" class="d-link">文化・イベント</a>
+      <a href="faq.html" class="d-link">FAQ</a>
+      <a href="external-raf.html" class="d-link">外部RAF</a>
     </nav>
     <div class="drawer-foot">
-      <div class="lang-switch mobile">
-        <button class="btn lang-btn is-active" data-lang="ja">日本語</button>
-        <button class="btn lang-btn" data-lang="en">EN</button>
-        <button class="btn lang-btn" data-lang="ko">한국어</button>
-      </div>
       <a class="btn primary" target="_blank"
          href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">
         <span data-i18n="cta.apply">ご応募はこちら</span>
@@ -94,7 +98,7 @@
 
   <main id="main">
     <!-- =========================================================
-         HERO / ヒーロー
+         HERO
     ========================================================== -->
     <section class="hero">
       <div class="container hero-inner">
@@ -106,7 +110,7 @@
           </p>
           <div class="typewriter" id="heroType"></div>
           <div class="hero-ctas">
-            <a class="btn primary" href="jobs-and-benefits.html" data-i18n="cta.viewJobs">求人を見る</a>
+            <a class="btn primary" href="open-jobs.html" data-i18n="cta.viewJobs">求人を見る</a>
             <a class="btn ghost" href="relocation-visa.html" data-i18n="cta.relocation">移住サポート</a>
           </div>
           <ul class="stats" aria-label="Quick facts">
@@ -116,9 +120,8 @@
           </ul>
         </div>
         <div class="hero-media">
-          <!-- SVG placeholder instead of external image / 外部画像の代わりにSVGプレースホルダー -->
-          <img id="heroCover" 
-               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 440 320'%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e0f2ff'/%3E%3Cstop offset='100%25' style='stop-color:%23fff0f8'/%3E%3C/linearGradient%3E%3Crect fill='url(%23g1)' width='440' height='320'/%3E%3Crect fill='%233b82f6' x='60' y='180' width='60' height='140'/%3E%3Crect fill='%23ff0082' x='140' y='140' width='80' height='180'/%3E%3Crect fill='%233b82f6' x='240' y='160' width='60' height='160'/%3E%3Crect fill='%23ff0082' x='320' y='170' width='50' height='150'/%3E%3Ccircle fill='%23fbbf24' cx='380' cy='50' r='25'/%3E%3Ctext x='220' y='100' text-anchor='middle' fill='%23ff0082' font-size='32' font-weight='bold'%3ETP%3C/text%3E%3C/svg%3E" 
+          <img id="heroCover"
+               src="assets/hero/hero-kl.jpg"
                alt="KLスカイライン" />
         </div>
       </div>
@@ -126,24 +129,24 @@
     </section>
 
     <!-- =========================================================
-         9× Priority（写真タイル）/ 優先順位（写真タイル）
+         Priority Icon Tiles (photo-decor ready)
     ========================================================== -->
     <section class="icon-grid priority">
       <div class="container">
         <div class="section-head">
-          <h2 class="h2" data-i18n="priority.gallery.title">優先メニュー（見やすいギャラリー）</h2>
-          <p class="h2-sub" data-i18n="priority.gallery.sub">9つの主要トピックをタイルで表示</p>
+          <h2 class="h2" data-i18n="priority.gallery.title">優先メニュー</h2>
+          <p class="h2-sub" data-i18n="priority.gallery.sub">9つの主要トピック</p>
         </div>
 
         <div class="grid cols-3 cols-2-md cols-1-sm">
-          <a class="icon-card" href="about-tp.html" aria-label="About">
+          <a class="icon-card" href="about-tp.html">
             <span class="icon">🏢</span>
             <span class="meta">
               <span class="title" data-i18n="prio.about.t">About TP</span>
               <span class="desc" data-i18n="prio.about.d">テレパフォーマンスとは</span>
             </span>
           </a>
-          <a class="icon-card" href="jobs-and-benefits.html">
+          <a class="icon-card" href="open-jobs.html">
             <span class="icon">💼</span>
             <span class="meta">
               <span class="title" data-i18n="prio.jobs.t">求人を見る</span>
@@ -204,8 +207,7 @@
     </section>
 
     <!-- =========================================================
-         "TPが選ばれる理由" （動的 why1/why2）
-         Why TP is chosen (dynamic why1/why2)
+         Why TP (dynamic)
     ========================================================== -->
     <section id="why" class="why">
       <div class="container">
@@ -214,18 +216,13 @@
           <p class="h2-sub" data-i18n="priority.sub">グローバルな環境、日本語ポジション多数、手厚い移住サポート</p>
         </div>
 
-        <div class="grid cols-3 cols-2-md cols-1-sm" id="whyList1">
-          <!-- render by app.js from CONTENT[currentLang].why1 -->
-        </div>
-
-        <div class="grid cols-3 cols-2-md cols-1-sm u-mt16" id="whyList2">
-          <!-- render by app.js from CONTENT[currentLang].why2 -->
-        </div>
+        <div class="grid cols-3 cols-2-md cols-1-sm" id="whyList1"></div>
+        <div class="grid cols-3 cols-2-md cols-1-sm u-mt16" id="whyList2"></div>
       </div>
     </section>
 
     <!-- =========================================================
-         勤務先都市（動的）/ Work Cities (dynamic)
+         Cities (dynamic)
     ========================================================== -->
     <section id="cities">
       <div class="container">
@@ -234,9 +231,7 @@
           <p class="h2-sub">マレーシア（クアラルンプール／ペナン）、タイ（バンコク）</p>
         </div>
 
-        <div class="grid cols-3 cols-1-sm" id="citiesCards">
-          <!-- render by app.js from CONTENT[currentLang].cities -->
-        </div>
+        <div class="grid cols-3 cols-1-sm" id="citiesCards"></div>
 
         <div class="u-center u-mt16">
           <a class="btn ghost" href="why-malaysia-thailand.html" data-i18n="cta.learnMore">もっと見る</a>
@@ -245,8 +240,7 @@
     </section>
 
     <!-- =========================================================
-         福利厚生ハイライト（矢印は上・左右正方向）
-         Benefits Highlights / 福利厚生ハイライト
+         Benefits (carousel)
     ========================================================== -->
     <section id="benefits">
       <div class="container">
@@ -262,19 +256,17 @@
         </div>
 
         <div class="carousel-wrap">
-          <div id="benefitSlides" class="slides">
-            <!-- render by app.js from CONTENT[currentLang].benefits -->
-          </div>
+          <div id="benefitSlides" class="slides"></div>
         </div>
 
         <div class="u-center u-mt12">
-          <a class="btn ghost" href="jobs-and-benefits.html" data-i18n="cta.learnMore">福利厚生を詳しく</a>
+          <a class="btn ghost" href="salary-benefits.html" data-i18n="cta.learnMore">福利厚生を詳しく</a>
         </div>
       </div>
     </section>
 
     <!-- =========================================================
-         面接プロセス（短）/ Interview Process (short)
+         Interview process (short)
     ========================================================== -->
     <section id="process">
       <div class="container">
@@ -284,9 +276,7 @@
         </div>
 
         <div class="card reveal">
-          <ol class="timeline" id="processList">
-            <!-- render by app.js from CONTENT[currentLang].processSteps -->
-          </ol>
+          <ol class="timeline" id="processList"></ol>
           <div class="u-center u-mt12">
             <a class="btn ghost" href="interview-process.html" data-i18n="cta.learnMore">詳細を見る</a>
           </div>
@@ -295,7 +285,7 @@
     </section>
 
     <!-- =========================================================
-         移住・ビザ（短）/ Relocation & Visa (short)
+         Relocation (short)
     ========================================================== -->
     <section id="visa">
       <div class="container">
@@ -326,7 +316,7 @@
     </section>
 
     <!-- =========================================================
-         応募方法＋現在の募集 / How to Apply + Current Openings
+         Apply + openings
     ========================================================== -->
     <section id="apply">
       <div class="container">
@@ -343,7 +333,7 @@
               <li>Eコマース、旅行、ホテル、金融、SNS、ITなど多様な業界</li>
               <li>KPI・SLAに準じた品質、正確なログ入力、連携・エスカレーション</li>
             </ul>
-            <div class="badge">応募資格：日本語ビジネスレベル以上（JLPT N2 目安）</div>
+            <div class="badge u-mt12">応募資格：日本語ビジネスレベル以上（JLPT N2 目安）</div>
           </article>
 
           <aside class="card reveal">
@@ -357,9 +347,7 @@
             <div class="u-mt12" style="display:flex;gap:10px;flex-wrap:wrap">
               <a class="btn primary" target="_blank"
                  href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE"
-                 data-i18n="cta.apply">
-                ご応募はこちら
-              </a>
+                 data-i18n="cta.apply">ご応募はこちら</a>
               <a class="btn ghost" target="_blank" href="https://forms.office.com/e/2UvpbweQww" data-i18n="cta.casual">カジュアル面談</a>
               <a class="btn ghost" target="_blank" href="https://line.me/R/ti/p/@286nmdsd?from=page&searchId=286nmdsd">LINEで最新情報</a>
             </div>
@@ -369,7 +357,7 @@
     </section>
 
     <!-- =========================================================
-         オフィス紹介（動的）/ Office Introduction (dynamic)
+         Offices (dynamic)
     ========================================================== -->
     <section id="offices">
       <div class="container">
@@ -377,11 +365,7 @@
           <h2 class="h2" data-i18n="nav.office">働く環境</h2>
           <p class="h2-sub">アクセス良好で快適なワークプレイス</p>
         </div>
-
-        <div class="grid cols-3 cols-1-sm" id="officeCards">
-          <!-- render by app.js from CONTENT[currentLang].offices -->
-        </div>
-
+        <div class="grid cols-3 cols-1-sm" id="officeCards"></div>
         <div class="u-center u-mt12">
           <a class="btn ghost" href="about-tp.html" data-i18n="cta.learnMore">オフィスを見る</a>
         </div>
@@ -389,7 +373,7 @@
     </section>
 
     <!-- =========================================================
-         生活ギャラリー（動的）/ Lifestyle Gallery (dynamic)
+         Lifestyle gallery (dynamic)
     ========================================================== -->
     <section id="lifestyle">
       <div class="container">
@@ -397,14 +381,12 @@
           <h2 class="h2">仕事だけじゃない。アクティブな毎日。</h2>
           <p class="h2-sub">カフェ、ビーチ、ハイキング、近隣諸国へ週末旅行も</p>
         </div>
-        <div class="grid cols-4 cols-2-md cols-1-sm" id="gallery">
-          <!-- render by app.js from CONTENT[currentLang].galleryImgs -->
-        </div>
+        <div class="grid cols-4 cols-2-md cols-1-sm" id="gallery"></div>
       </div>
     </section>
 
     <!-- =========================================================
-         社員の声（動的）/ Employee Voices (dynamic)
+         Voices (dynamic)
     ========================================================== -->
     <section id="voices">
       <div class="container">
@@ -412,16 +394,12 @@
           <h2 class="h2" data-i18n="nav.testimonials">社員の声</h2>
           <p class="h2-sub">実際に働くメンバーの"リアルな感想"</p>
         </div>
-
-        <div class="grid cols-3 cols-2-md cols-1-sm" id="voiceGrid">
-          <!-- render by app.js from CONTENT[currentLang].voices -->
-        </div>
+        <div class="grid cols-3 cols-2-md cols-1-sm" id="voiceGrid"></div>
       </div>
     </section>
 
     <!-- =========================================================
-         採用チーム（動的：translations.js の team をそのまま表示）
-         TA Team (dynamic: display team from translations.js)
+         TA Team (dynamic)
     ========================================================== -->
     <section id="team">
       <div class="container">
@@ -429,17 +407,12 @@
           <h2 class="h2" data-i18n="nav.team">採用チーム</h2>
           <p class="h2-sub">応募から入社まで、日本語で伴走します</p>
         </div>
-
-        <div class="grid cols-4 cols-2-md cols-1-sm" id="teamGrid">
-          <!-- DO NOT hardcode members here.
-               app.js → renderTeam() pulls window.CONTENT[currentLang].team.
-               Update names, roles, and images only in translations.js. -->
-        </div>
+        <div class="grid cols-4 cols-2-md cols-1-sm" id="teamGrid"></div>
       </div>
     </section>
 
     <!-- =========================================================
-         Mini FAQ（動的）/ Mini FAQ (dynamic)
+         Mini FAQ (dynamic)
     ========================================================== -->
     <section id="mini-faq">
       <div class="container">
@@ -448,19 +421,15 @@
           <p class="h2-sub">詳細はFAQページでも随時更新しています</p>
         </div>
 
-        <div class="card faq reveal" id="faqList">
-          <!-- render by app.js from CONTENT[currentLang].faq -->
-        </div>
+        <div class="card faq reveal" id="faqList"></div>
         <div class="u-center u-mt12">
           <a class="btn ghost" href="faq.html">FAQページへ</a>
         </div>
       </div>
     </section>
 
-<!-- This is the CORRECTED footer section - keeping original structure, fixing only errors -->
-
     <!-- =========================================================
-         Ask ChatGPT Section (keeping existing structure)
+         Ask ChatGPT
     ========================================================== -->
     <section id="ask-chatgpt">
       <div class="container">
@@ -474,14 +443,14 @@
           <div class="u-mt12" style="display:flex;gap:10px;flex-wrap:wrap">
             <button id="copyPromptBtn" class="btn" data-i18n="chatgpt.copy">プロンプトをコピー</button>
             <button id="openChatGPTBtn" class="btn ghost" data-i18n="chatgpt.open">ChatGPT を開く</button>
-            <span class="subtle" data-i18n="chatgpt.note">※ 言語を切り替えるとプロンプトも切り替わります。</span>
+            <span class="subtle" data-i18n="chatgpt.note">※ AIアシスタントに相談できます。</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =========================================================
-         Contact Section (keeping existing structure)
+         Contact
     ========================================================== -->
     <section id="contact">
       <div class="container">
@@ -504,7 +473,7 @@
             </div>
             <div class="u-mt12">
               <label for="msg" data-i18n="form.message.label">ご相談内容</label>
-              <textarea id="msg" name="msg" rows="6" data-i18n-placeholder="form.message.placeholder" placeholder="気になる求人、移住、英語レベル、入社時期など"></textarea>
+              <textarea id="msg" name="message" rows="6" data-i18n-placeholder="form.message.placeholder" placeholder="気になる求人、移住、英語レベル、入社時期など"></textarea>
             </div>
             <div class="u-mt12" style="display:flex;gap:10px;flex-wrap:wrap">
               <button class="btn primary" type="submit" data-i18n="form.submit">送信</button>
@@ -528,33 +497,44 @@
     </section>
 
     <!-- =========================================================
-         Footer (keeping original with TP watermark)
+         Footer (brand card)
     ========================================================== -->
-    <footer class="site-footer footer-watermark">
-      <div class="footer-bg-letters" aria-hidden="true">TP</div>
-      <div class="container footer-inner">
-        <div class="footer-grid">
-          <div>
-            <h4 class="u-mt0">Teleperformance Japan Recruiting — Malaysia &amp; Thailand</h4>
-            <p class="subtle">© <span id="year">2025</span> Teleperformance. All rights reserved.</p>
+    <footer class="site-footer site-footer--brandcard">
+      <div class="container">
+        <div class="f-brandcard card">
+          <div class="f-brandcard__head">
+            <img src="TPLogo11.png" alt="TP ロゴ" class="f-brandcard__logo" />
+            <div class="f-brandcard__titlewrap">
+              <div class="f-brandcard__title">TP</div>
+              <div class="f-brandcard__sub">Malaysia · Thailand — 日本語採用</div>
+            </div>
           </div>
-          <ul class="footer-links">
-            <li><a href="about-tp.html" data-i18n="footer.about">会社紹介</a></li>
-            <li><a href="relocation-visa.html" data-i18n="nav.relocation">移住・ビザ</a></li>
-            <li><a href="interview-process.html" data-i18n="nav.process">面接プロセス</a></li>
-            <li><a href="jobs-and-benefits.html" data-i18n="nav.jobs">求人・福利厚生</a></li>
-            <li><a href="why-malaysia-thailand.html" data-i18n="nav.why">勤務先都市</a></li>
-            <li><a target="_blank"
-                   href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE"
-                   data-i18n="cta.apply">ご応募はこちら</a></li>
-          </ul>
+          <p class="f-brandcard__desc">テレパフォーマンスは、日本語スピーカーの海外キャリアを就労ビザと移住サポートで伴走します。</p>
+          <div class="f-badges">
+            <span class="pill">🏆 Great Place to Work®</span>
+            <span class="pill">🌍 Diversity &amp; Inclusion</span>
+          </div>
         </div>
+
+        <div class="f-quick">
+          <h4 class="f-quick__title">クイックリンク</h4>
+          <div class="f-quick__buttons">
+            <a href="faq.html" class="btn ghost" style="width:100%;">FAQ</a>
+            <a href="open-jobs.html" class="btn primary" style="width:100%;">求人を見る</a>
+          </div>
+          <div class="f-quick__links">
+            <a href="about-tp.html">会社紹介</a>
+            <a href="relocation-visa.html">移住・ビザ</a>
+            <a href="interview-process.html">面接プロセス</a>
+            <a href="salary-benefits.html">給与・福利厚生</a>
+          </div>
+        </div>
+
+        <div class="f-copy">© <span id="year"></span> Teleperformance. All rights reserved.</div>
       </div>
     </footer>
 
-    <!-- =========================================================
-         Floating action buttons (keeping both buttons)
-    ========================================================== -->
+    <!-- Floating buttons -->
     <div id="floatBar" class="float-bar" aria-hidden="false">
       <button id="toTopBtn" class="to-top" type="button" aria-label="ページ上部へ">↑</button>
       <a class="btn primary apply-float"
@@ -564,10 +544,17 @@
   </main>
 
   <noscript>
-    <div class="noscript">JavaScript を有効にすると表示や言語切替がより快適になります。</div>
+    <div class="noscript">JavaScript を有効にすると表示や言語処理がより快適になります。</div>
   </noscript>
 
-  <!-- JS / JavaScript -->
+  <!-- Config (optional) -->
+  <script>
+    // If you have a backend endpoint, set it here; or set FORMSPREE_ID = "xxxxxx"
+    // window.FORM_ENDPOINT = "https://your.api/contact";
+    // window.FORMSPREE_ID = "abcdwxyz";
+  </script>
+
+  <!-- JS -->
   <script src="translations.js" defer></script>
   <script src="app.js" defer></script>
 </body>
