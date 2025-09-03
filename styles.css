@@ -736,7 +736,7 @@ section { padding-block: 28px; }
 #gallery img {
   height: 180px; width: 100%; object-fit: cover;
   border-radius: 10px; border: 1px solid var(--line);
-  box-shadow: var(--shadow-md); /* Strong shadow / 強いシャドウ */
+  box-shadow: var(--shadow-md); /* Strong shadow / より強いシャドウ */
 }
 #gallery img:hover {
   box-shadow: var(--shadow-lg);
