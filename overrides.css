@@ -1,83 +1,52 @@
-/* JLP Enhancements – Japanese vibe overrides */
+/* ========================================================================
+   TP Japan Microsite — Visual Overrides (polish + JP vibe)
+   - Gentle gradients, slightly softer corners, micro-shadow tuning
+   - Extra rules to keep benefits in grid mode even if JS tries to slide
+========================================================================= */
 
+/* Softer global rounding + subtle page background grain */
+:root{
+  --r-16: 16px;
+  --r-20: 20px;
+}
 
-/* Redesigned Reasons */
-.reasons-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
-@media (max-width:900px){ .reasons-grid { grid-template-columns:repeat(2,1fr);} }
-@media (max-width:560px){ .reasons-grid { grid-template-columns:1fr;} }
-.reason-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; box-shadow:var(--shadow-1); display:grid; grid-template-columns:40px 1fr; gap:10px; }
-.reason-card .ri { inline-size:40px; block-size:40px; display:grid; place-items:center; border-radius:10px; background:var(--brand-50); border:1px solid var(--line); font-size:20px; }
-.reason-card h4{ margin:0 0 4px; font-weight:900; }
-.reason-card p{ margin:0; color:var(--muted); }
+/* Header hover accent (sakura tint) */
+.site-nav a:hover{
+  background: linear-gradient(180deg, #fff, #fff0f8);
+  border-color: #ffd1ea;
+}
 
+/* Buttons: lifted feel */
+.btn.primary{ box-shadow: 0 10px 26px rgba(255,0,130,.22); }
+.btn.primary:hover{ box-shadow: 0 14px 30px rgba(255,0,130,.28); }
+.btn.ghost:hover{ box-shadow: 0 10px 24px rgba(3,18,40,.06); }
 
-/* Cities – modern cards */
-.cities-modern { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-@media (max-width:980px){ .cities-modern { grid-template-columns:repeat(2,1fr);} }
-@media (max-width:640px){ .cities-modern { grid-template-columns:1fr;} }
-.city-modern { position:relative; background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:var(--shadow-1); }
-.city-modern img { width:100%; height:200px; object-fit:cover; display:block; }
-.city-modern .meta { padding:12px; }
-.city-modern .tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
-.city-modern .tag { font-size:12px; border:1px solid var(--line); border-radius:999px; padding:4px 8px; background:#fff; box-shadow:var(--shadow-1); font-weight:800; }
-.city-modern .badge { position:absolute; inset:12px 12px auto auto; background:var(--brand); color:#fff; font-weight:900; padding:6px 10px; border-radius:999px; box-shadow:var(--shadow-2); }
+/* Hero title letter-spacing for JP */
+.hero-title{ letter-spacing: .02em; }
 
+/* Icon emojis a bit larger on small screens */
+@media (max-width: 720px){ .icon-card .icon{ font-size:26px; } }
 
-/* Benefits – grid (no scrolling) */
-#benefits[data-mode="grid"] .carousel-wrap { overflow:visible; }
-#benefits[data-mode="grid"] #benefitSlides { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; transform:none !important; }
-#benefits[data-mode="grid"] .slide { min-width:unset; }
-@media (max-width:980px){ #benefits[data-mode="grid"] #benefitSlides { grid-template-columns:repeat(2,1fr);} }
-@media (max-width:560px){ #benefits[data-mode="grid"] #benefitSlides { grid-template-columns:1fr;} }
-#benefits[data-mode="grid"] .carousel-controls { display:none; }
+/* Videos: stronger shadow + rounded iframe top corners */
+.videos-grid .video-card{ box-shadow: 0 18px 34px rgba(3,18,40,.10); }
+.videos-grid iframe, .videos-grid .thumb{ border-radius: 12px 12px 0 0; }
 
+/* Benefits: force grid mode immunity */
+#benefits[data-mode="grid"] #benefitSlides{ transform: none !important; }
+#benefits[data-mode="grid"] .slides{ transform: none !important; }
 
-/* Videos grid */
-.videos-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
-@media (max-width:980px){ .videos-grid { grid-template-columns:repeat(2,1fr);} }
-@media (max-width:640px){ .videos-grid { grid-template-columns:1fr;} }
-.video-card { background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow-1); overflow:hidden; }
-.video-card iframe { display:block; width:100%; aspect-ratio:16/9; border:0; }
-.video-card .vc { padding:10px; }
-.video-card .vt { font-weight:900; }
-.video-card .vd { font-size:13px; color:var(--muted); margin-top:4px; }
+/* Footer brand mark glow */
+.f-brandcard__mark{
+  box-shadow: 0 10px 28px rgba(255,0,130,.25), inset 0 -4px 10px rgba(0,0,0,.10);
+}
 
+/* Floating CTA gradient */
+.float-bar .apply-float{
+  border: none; color:#fff;
+  background-image: linear-gradient(90deg, #ff5cab, #ff0082);
+}
 
-/* Apply + Openings – locations with photos */
-.locations-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-@media (max-width:980px){ .locations-grid { grid-template-columns:repeat(2,1fr);} }
-@media (max-width:640px){ .locations-grid { grid-template-columns:1fr;} }
-.loc-card { position:relative; background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:var(--shadow-1); }
-.loc-card img { width:100%; height:160px; object-fit:cover; display:block; }
-.loc-card .meta { padding:12px; display:grid; gap:6px; }
-.loc-card .coming { position:absolute; inset:12px auto auto 12px; background:#0b1b33; color:#fff; padding:4px 8px; border-radius:8px; font-weight:900; opacity:.9; }
-
-
-/* Lifestyle – masonry feel */
-#lifestyle .grid { grid-auto-rows: 8px; }
-#gallery img { border-radius:14px; border:1px solid var(--line); box-shadow:var(--shadow-1); }
-
-
-/* Voices – ensure JP names */
-.voice-name { font-weight:900; margin-top:8px; }
-
-
-/* Contact – TP watermark and JP site style */
-#contact .container { position:relative; overflow:hidden; }
-#contact .container::after { content:"TP"; position:absolute; right:-6%; bottom:-14%; font-weight:900; font-size:240px; line-height:1; color:rgba(11,27,51,.06); letter-spacing:8px; pointer-events:none; }
-
-
-/* Footer – richer layout */
-.site-footer.site-footer--brandcard .container { border:none; box-shadow:none; }
-.site-footer .f-brandcard { background:linear-gradient(180deg,#fff, var(--washi,#fff)); }
-.footer-pro .f-quick__links a { background:#fff; border-color:color-mix(in srgb, var(--brand), #e5ebf2 70%); }
-.footer-pro .pill { background: var(--brand-50); border-color: color-mix(in srgb, var(--brand), #fff 60%); }
-
-
-/* Mini FAQ – optional ChatGPT swirl mark */
-.faq.chatgpt-mark { position:relative; }
-.faq.chatgpt-mark::before { content:""; position:absolute; inset:-10px -10px auto auto; width:46px; height:46px; opacity:.1; background:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Cpath d=%22M32 6a10 10 0 0 1 9.8 7.6 10 10 0 0 1 12.6 13.5 10 10 0 0 1-4.3 19.3H23A10 10 0 0 1 12 36V24A10 10 0 0 1 22 14a10 10 0 0 1 10-8z%22 fill=%22%230b1b33%22/%3E%3C/svg%3E') center/contain no-repeat; }
-
-
-/* Floating bar – add LINE button room */
-.float-bar { grid-auto-flow: row; }
+/* Contact watermark: lighter on mobile */
+@media (max-width: 720px){
+  #contact .container::before{ opacity:.10; transform: translateY(26%); }
+}
