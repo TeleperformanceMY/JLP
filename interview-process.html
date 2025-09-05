@@ -1,68 +1,61 @@
 <!doctype html>
-<html lang="ja" data-lang="ja">
+<html lang="ja" data-lang="jp">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>面接プロセス | TP 日本語スピーカー採用</title>
-  <meta name="description" content="TPの面接プロセス（書類選考・スクリーニング・オンラインテスト・一次/二次面接・オファー・入社前手続き）を詳しく解説。準備チェックリスト、評価ポイント、よくある質問も。" />
-  <link rel="icon" href="TPLogo11.png" type="image/png" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-  <!-- Accent / font overrides (non-destructive) -->
-  <style>
-    :root{
-      --accent:#ff0082;      /* TP Pink */
-      --accent-2:#780096;    /* TP Purple fallback for contrast spots */
-      --surface:#fff7fb;     /* subtle pink surface wash */
-    }
-    body{ font-family:"Noto Sans JP","Calibri Light","Inter",system-ui,sans-serif; }
-    /* Floating Apply button next to top arrow (keeps your original #toTop) */
-    .apply-fab{
-      position:fixed; right:72px; bottom:18px; z-index:120;
-      display:inline-flex; align-items:center; gap:8px; padding:10px 14px;
-      border-radius:999px; border:1px solid var(--line); text-decoration:none; font-weight:800;
-      box-shadow:var(--shadow-sm);
-    }
-    @media (max-width:580px){
-      .apply-fab{ right:64px; bottom:14px; padding:8px 12px; }
-    }
-  </style>
+  <title>面接プロセス | TP Japan — 暮らすように、海外で働く。</title>
+  <meta name="description" content="応募から内定・ビザ申請までの流れを日本語でご案内。オンライン面談、簡単な英語/適性チェック（案件により）、必要書類、所要期間の目安など。" />
   <meta name="theme-color" content="#ff0082" />
-  <meta property="og:title" content="面接プロセス | TP 日本語スピーカー採用" />
-  <meta property="og:description" content="オンライン完結の選考ステップ、合格のコツ、チェックリスト、FAQ をまとめました。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="photos/TPLogo11.png" type="image/png" />
+  <meta property="og:image" content="photos/TPLogo11.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/overrides.css" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="面接プロセス | TP Japan — 暮らすように、海外で働く。" />
+  <meta property="og:description" content="応募から内定・ビザ申請までの流れ、必要書類、よくある質問をシンプルに解説します。" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="TPLogo11.png" />
   <meta property="og:locale" content="ja_JP" />
 </head>
+
 <body>
   <a class="visually-hidden" href="#main">メインへスキップ</a>
 
-  <!-- =========================================================
-       Header (shared, ids match app.js)
-  ========================================================== -->
+  <!-- ==================== Header ==================== -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="TP ホーム">
-        <img src="TPLogo11.png" alt="TP ロゴ" class="brand-logo" />
+        <img src="photos/TPLogo11.png" alt="TP ロゴ" class="brand-logo" id="logoImg" />
         <div class="brand-text">
-          <div class="t" data-i18n="brand.title">TP</div>
-          <div class="s" data-i18n="brand.sub">Malaysia · Thailand — 日本語採用</div>
+          <div class="t">TP</div>
+          <div class="s">Malaysia · Thailand — 日本語採用</div>
         </div>
       </a>
 
-      <nav class="site-nav" aria-label="Primary">
-        <a href="jobs-and-benefits.html" data-i18n="nav.jobs">求人</a>
-        <a href="relocation-visa.html" data-i18n="nav.relocation">移住・ビザ</a>
-        <a href="why-malaysia-thailand.html" data-i18n="nav.why">マレーシア・タイの魅力</a>
-        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
-        <a class="btn primary" target="_blank" rel="noopener"
-           href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE"
-           data-i18n="cta.apply">ご応募はこちら</a>
+      <nav class="site-nav" aria-label="主ナビゲーション">
+        <a href="about-tp.html">会社紹介</a>
+        <a href="open-jobs.html">求人一覧</a>
+        <a href="salary-and-benefits.html">給与・福利厚生</a>
+        <a href="relocation-visa.html">移住・ビザ</a>
+        <a href="why-malaysia-thailand.html">勤務先都市</a>
+        <a href="interview-process.html" aria-current="page">面接プロセス</a>
+        <a href="faq.html">FAQ</a>
       </nav>
 
       <div class="header-actions">
-        <button id="langBtn" class="btn ghost" aria-live="polite">EN</button>
+        <div class="lang-switch" role="group" aria-label="言語切替" style="display:none">
+          <button class="btn lang-btn is-active" data-lang="ja" aria-current="true">日本語</button>
+          <button class="btn lang-btn" data-lang="en">EN</button>
+          <button class="btn lang-btn" data-lang="ko">한국어</button>
+        </div>
+
+        <a class="btn primary" target="_blank"
+           href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">
+          ご応募はこちら
+        </a>
+
         <button id="menuBtn" class="hamburger" aria-label="メニューを開く" aria-controls="drawer" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -77,346 +70,316 @@
       <strong>TP</strong>
       <button id="closeDrawer" class="btn ghost" aria-label="メニューを閉じる">✕</button>
     </header>
-    <nav class="drawer-nav" aria-label="Mobile">
-      <a href="about.html" class="d-link" data-i18n="drawer.about">会社紹介</a>
-      <a href="jobs-and-benefits.html" class="d-link" data-i18n="drawer.jobs">求人・給与/福利厚生</a>
-      <a href="relocation-visa.html" class="d-link" data-i18n="drawer.relocation">移住・ビザ</a>
-      <a href="interview-process.html" class="d-link" aria-current="page" data-i18n="drawer.process">面接プロセス</a>
-      <a href="why-malaysia-thailand.html" class="d-link" data-i18n="drawer.why">マレーシア・タイの魅力</a>
-      <a href="casual-interview.html" class="d-link" data-i18n="drawer.casual">カジュアル面談</a>
-      <a href="testimonials.html" class="d-link" data-i18n="drawer.testimonials">社員の声</a>
-      <a href="office-environment.html" class="d-link" data-i18n="drawer.office">働く環境</a>
-      <a href="career-growth.html" class="d-link" data-i18n="drawer.career">キャリア・語学</a>
-      <a href="faq.html" class="d-link" data-i18n="drawer.faq">FAQ</a>
+    <nav class="drawer-nav" aria-label="モバイルナビ">
+      <a href="index.html" class="d-link">ホーム</a>
+      <a href="about-tp.html" class="d-link">会社紹介</a>
+      <a href="open-jobs.html" class="d-link">求人一覧</a>
+      <a href="salary-and-benefits.html" class="d-link">給与・福利厚生</a>
+      <a href="relocation-visa.html" class="d-link">移住・ビザ</a>
+      <a href="interview-process.html" class="d-link" aria-current="page">面接プロセス</a>
+      <a href="why-malaysia-thailand.html" class="d-link">勤務先都市</a>
+      <a href="faq.html" class="d-link">FAQ</a>
+      <a href="testimonials.html" class="d-link">社員の声</a>
+      <a href="office-environment.html" class="d-link">働く環境</a>
+      <a href="career-growth.html" class="d-link">キャリア・語学</a>
+      <a href="casual-interview.html" class="d-link">カジュアル面談</a>
     </nav>
     <div class="drawer-foot">
-      <a class="btn primary" target="_blank" rel="noopener"
-         href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE"
-         data-i18n="cta.apply">ご応募はこちら</a>
+      <a class="btn primary" target="_blank"
+         href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">
+        ご応募はこちら
+      </a>
     </div>
   </aside>
 
+  <!-- Slide-up Apply Bar -->
+  <div class="apply-bar" aria-hidden="true">
+    <div class="container apply-bar__inner">
+      <span class="apply-bar__text">海外キャリアに一歩。今すぐ応募</span>
+      <div class="apply-bar__actions">
+        <a class="btn primary" target="_blank"
+           href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">ご応募はこちら</a>
+        <a class="btn ghost" target="_blank" href="https://forms.office.com/e/2UvpbweQww">カジュアル面談</a>
+      </div>
+    </div>
+  </div>
+
   <main id="main">
-    <!-- =========================================================
-         Page Hero
-    ========================================================== -->
+    <!-- ==================== HERO ==================== -->
     <section class="hero">
       <div class="container hero-inner">
         <div class="hero-copy">
-          <div class="eyebrow">Interview Process</div>
+          <p class="eyebrow">Interview Process</p>
           <h1 class="hero-title">面接プロセス</h1>
           <p class="lead">
-            すべてオンラインで完結。スケジュールは柔軟に調整、合否はスピーディーにご案内します。
-            初めての海外就職でも分かりやすいステップにしました。
+            応募から内定・ビザ申請まで、基本はオンラインで完結。<br />
+            日本語でしっかりサポートします。
           </p>
           <div class="hero-ctas">
-            <a class="btn primary" href="#flow">全体の流れ</a>
-            <a class="btn ghost" href="#prep">事前準備のコツ</a>
+            <a class="btn primary" href="open-jobs.html">求人一覧を見る</a>
+            <a class="btn ghost" href="relocation-visa.html">移住・ビザサポート</a>
           </div>
           <ul class="stats" aria-label="Quick facts">
-            <li class="stat"><strong>100%</strong><span>オンライン実施</span></li>
-            <li class="stat"><strong>1–2</strong><span>面接回数（目安）</span></li>
-            <li class="stat"><strong>JP/EN</strong><span>言語サポート</span></li>
+            <li class="stat"><strong>所要目安</strong><span>応募〜内定：1〜3週間</span></li>
+            <li class="stat"><strong>形式</strong><span>オンライン面談中心</span></li>
+            <li class="stat"><strong>言語</strong><span>日本語＋英語（案件により）</span></li>
           </ul>
         </div>
         <div class="hero-media">
-          <img src="assets/hero/interview.jpg" alt="オンライン面接イメージ" id="heroCover" />
+          <img id="heroCover"
+               alt="Interview Process"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 440 320'%3E%3Crect fill='%23fff0f8' width='440' height='320'/%3E%3Crect fill='%23ff0082' rx='10' ry='10' x='60' y='120' width='320' height='80'/%3E%3Ctext x='220' y='168' text-anchor='middle' fill='white' font-size='24' font-weight='bold'%3EProcess%3C/text%3E%3C/svg%3E" />
         </div>
       </div>
+      <div class="hero-bg"></div>
     </section>
 
-    <!-- =========================================================
-         Flow (timeline)
-    ========================================================== -->
-    <section id="flow">
+    <!-- ==================== 基本の流れ（動的） ==================== -->
+    <section id="process-flow">
       <div class="container">
         <div class="section-head">
-          <h2 class="h2">全体の流れ（目安）</h2>
-          <p class="h2-sub">候補者体験がスムーズになるよう、連絡は日本語でサポートします</p>
+          <h2 class="h2">基本の流れ</h2>
+          <p class="h2-sub">案件により一部順序や内容が異なる場合があります</p>
         </div>
 
         <div class="card reveal">
-          <ol class="timeline">
-            <li>
-              <strong>① 書類選考</strong>
-              <div class="subtle u-mt8">履歴書（日本語/英語）と職務経歴を確認。適性ポジションを検討します。</div>
-            </li>
-            <li>
-              <strong>② オンラインスクリーニング</strong>
-              <div class="subtle u-mt8">日本語レベル、簡単なコミュニケーション確認、希望条件のヒアリング。</div>
-            </li>
-            <li>
-              <strong>③ オンラインテスト</strong>
-              <div class="subtle u-mt8">（必要に応じて）言語・タイピング・ロール別の基礎テスト。</div>
-            </li>
-            <li>
-              <strong>④ 一次面接（採用チーム）</strong>
-              <div class="subtle u-mt8">ご経歴と志望動機、海外就業の意向を中心に。日本語で安心。</div>
-            </li>
-            <li>
-              <strong>⑤ 二次面接（現場マネージャー）</strong>
-              <div class="subtle u-mt8">配属候補プロジェクトの内容・適性・コミュニケーションを確認。</div>
-            </li>
-            <li>
-              <strong>⑥ オファー・条件提示</strong>
-              <div class="subtle u-mt8">合意後、ビザ申請・渡航手配へ。入社日・研修開始日をご案内。</div>
-            </li>
+          <ol class="timeline" id="processList">
+            <!-- window.CONTENT.jp.processSteps から生成 / フォールバックあり -->
           </ol>
-          <p class="quote u-mt12">※ プロジェクトや拠点により、順序や回数が前後する場合があります。</p>
         </div>
       </div>
     </section>
 
-    <!-- =========================================================
-         Each Step details (cards)
-    ========================================================== -->
-    <section id="steps">
+    <!-- ==================== 面接のポイント ==================== -->
+    <section id="interview-tips">
       <div class="container">
         <div class="section-head">
-          <h2 class="h2">ステップ別ガイド</h2>
-          <p class="h2-sub">準備ポイントや合格のヒントをまとめました</p>
+          <h2 class="h2">面接のポイント</h2>
+          <p class="h2-sub">よく見られる項目と準備のコツ</p>
         </div>
 
-        <div class="grid cols-3 cols-2-md cols-1-sm">
-          <!-- Step: Screening -->
+        <div class="grid cols-3 cols-1-sm">
           <article class="card reveal">
-            <img src="assets/interview/screening.jpg" alt="スクリーニング" style="height:140px;width:100%;object-fit:cover;border-radius:10px;border:1px solid var(--line)" />
-            <h3 class="u-mt12">オンラインスクリーニング</h3>
-            <ul class="subtle" style="padding-left:18px">
-              <li>自己紹介：職務経歴・得意分野・希望勤務地</li>
-              <li>日本語/英語の使用割合、シフトの希望</li>
-              <li>入社可能時期、ビザ関連の質問</li>
-            </ul>
-            <div class="badge u-mt12">💡 1分自己紹介を準備</div>
+            <h3 class="u-mt0">コミュニケーション</h3>
+            <p class="subtle">状況の要約、問題の切り分け、相手への確認など、丁寧な説明ができるか。</p>
           </article>
-
-          <!-- Step: Tests -->
           <article class="card reveal">
-            <img src="assets/interview/test.jpg" alt="オンラインテスト" style="height:140px;width:100%;object-fit:cover;border-radius:10px;border:1px solid var(--line)" />
-            <h3 class="u-mt12">オンラインテスト</h3>
-            <ul class="subtle" style="padding-left:18px">
-              <li>言語：読解/リスニング（案件により）</li>
-              <li>タイピング：JP/EN いずれか</li>
-              <li>ケース問題：CS/旅行/ITなど</li>
-            </ul>
-            <div class="badge u-mt12">💡 事前に環境テスト</div>
+            <h3 class="u-mt0">基本ITリテラシー</h3>
+            <p class="subtle">PC基本操作、ショートカット、Webツール（メール/チャット/チケット）経験。</p>
           </article>
-
-          <!-- Step: Interview 1 -->
           <article class="card reveal">
-            <img src="assets/interview/round1.jpg" alt="一次面接" style="height:140px;width:100%;object-fit:cover;border-radius:10px;border:1px solid var(--line)" />
-            <h3 class="u-mt12">一次面接（採用）</h3>
-            <ul class="subtle" style="padding-left:18px">
-              <li>志望動機・キャリアの方向性</li>
-              <li>コミュニケーション・対人応対</li>
-              <li>海外就業の意向・生活面の確認</li>
-            </ul>
-            <div class="badge u-mt12">💡 STARで回答構成</div>
-          </article>
-
-          <!-- Step: Interview 2 -->
-          <article class="card reveal">
-            <img src="assets/interview/round2.jpg" alt="二次面接" style="height:140px;width:100%;object-fit:cover;border-radius:10px;border:1px solid var(--line)" />
-            <h3 class="u-mt12">二次面接（現場）</h3>
-            <ul class="subtle" style="padding-left:18px">
-              <li>配属候補の業務理解</li>
-              <li>KPI・働き方のすり合わせ</li>
-              <li>ケーススタディ・ロールプレイ</li>
-            </ul>
-            <div class="badge u-mt12">💡 質問を3つ用意</div>
-          </article>
-
-          <!-- Step: Offer -->
-          <article class="card reveal">
-            <img src="assets/interview/offer.jpg" alt="オファー" style="height:140px;width:100%;object-fit:cover;border-radius:10px;border:1px solid var(--line)" />
-            <h3 class="u-mt12">オファー・入社前</h3>
-            <ul class="subtle" style="padding-left:18px">
-              <li>条件確認・合意</li>
-              <li>EP申請の書類準備</li>
-              <li>渡航・到着後宿泊の手配</li>
-            </ul>
-            <div class="badge u-mt12">💡 合意後はスピード重視</div>
-          </article>
-
-          <!-- Step: Onboarding -->
-          <article class="card reveal">
-            <img src="assets/interview/onboarding.jpg" alt="オンボーディング" style="height:140px;width:100%;object-fit:cover;border-radius:10px;border:1px solid var(--line)" />
-            <h3 class="u-mt12">オンボーディング</h3>
-            <ul class="subtle" style="padding-left:18px">
-              <li>初日オリエンテーション</li>
-              <li>研修開始（CS基礎/ツール）</li>
-              <li>GoFluentなどの学習セットアップ</li>
-            </ul>
-            <div class="badge u-mt12">💡 初週は余裕ある予定に</div>
+            <h3 class="u-mt0">英語力（案件により）</h3>
+            <p class="subtle">読み書き中心・テンプレ利用可のケースが多いです。面接は日本語がメイン。</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- =========================================================
-         Preparation (checklist + what we evaluate)
-    ========================================================== -->
-    <section id="prep">
+    <!-- ==================== 必要書類 / 事前準備 ==================== -->
+    <section id="requirements">
       <div class="container">
         <div class="section-head">
-          <h2 class="h2">事前準備のコツ</h2>
-          <p class="h2-sub">環境・内容・心構えの3点セットで、当日のパフォーマンスを最大化</p>
+          <h2 class="h2">必要書類・事前準備</h2>
+          <p class="h2-sub">応募時にすべて揃っていなくてもOK。面談でご案内します。</p>
         </div>
 
-        <div class="grid cols-2 cols-1-sm">
+        <div class="grid cols-3 cols-1-sm">
           <article class="card reveal">
-            <h3 class="u-mt0">チェックリスト</h3>
-            <ul style="padding-left:18px">
-              <li>静かな場所・安定したネット回線</li>
-              <li>カメラ・マイクの事前テスト、明るさ・画角の確認</li>
-              <li>履歴書の要点を1〜2分で説明できるよう整理</li>
-              <li>志望動機（なぜTP/なぜ海外/なぜその職種）</li>
-              <li>シフト・入社時期・勤務地の希望を明確に</li>
-              <li>逆質問を最低3つ用意</li>
+            <h3 class="u-mt0">履歴書 / 職務経歴</h3>
+            <ul class="subtle" style="padding-left:18px">
+              <li>日本語（英語レジュメはあれば尚可）</li>
+              <li>連絡先、学歴、職歴、スキル</li>
             </ul>
-            <div class="badge u-mt12">💡 面接リンクは5分前に開く</div>
           </article>
-
           <article class="card reveal">
-            <h3 class="u-mt0">評価ポイント</h3>
-            <ul style="padding-left:18px">
-              <li>コミュニケーション：傾聴・要点の整理・共感</li>
-              <li>カスタマーマインド：誠実さ・課題解決姿勢</li>
-              <li>多文化適応：柔軟性・チームでの協働</li>
-              <li>ポテンシャル：学習意欲・成長余地</li>
-              <li>シフト/移住の現実性：就業への準備状況</li>
+            <h3 class="u-mt0">語学レベル</h3>
+            <ul class="subtle" style="padding-left:18px">
+              <li>日本語：ビジネスレベル（目安：N2以上）</li>
+              <li>英語：案件により基礎的な読み書き</li>
             </ul>
-            <div class="badge u-mt12">💡 STAR（状況→課題→行動→結果）で回答</div>
+          </article>
+          <article class="card reveal">
+            <h3 class="u-mt0">本人確認</h3>
+            <ul class="subtle" style="padding-left:18px">
+              <li>パスポート（期限に余裕があるもの）</li>
+              <li>学歴証明（卒業証書等／後日で可）</li>
+            </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- =========================================================
-         Sample Q&A / Role-play prompts
-    ========================================================== -->
-    <section id="samples">
+    <!-- ==================== 進行イメージ（目安） ==================== -->
+    <section id="timeline">
       <div class="container">
         <div class="section-head">
-          <h2 class="h2">想定質問と回答のヒント</h2>
-          <p class="h2-sub">直近の経験・成果をベースに、具体例で話すと伝わりやすい</p>
+          <h2 class="h2">進行イメージ（スケジュール目安）</h2>
+          <p class="h2-sub">個人差・案件差がありますが、参考の流れです</p>
         </div>
 
-        <div class="grid cols-3 cols-2-md cols-1-sm">
-          <article class="card reveal">
-            <h3 class="u-mt0">自己紹介</h3>
-            <p class="subtle">「ご経歴と得意分野を1分でお願いします」</p>
-            <ul style="padding-left:18px">
-              <li>最終職歴・役割・成果を簡潔に</li>
-              <li>強み：対人応対/IT素養/英語等</li>
-              <li>海外就業の動機とTP志望</li>
-            </ul>
-          </article>
+        <div class="grid cols-4 cols-2-md cols-1-sm">
+          <div class="card reveal">
+            <h3 class="u-mt0">Day 0–2</h3>
+            <p class="subtle">応募・書類確認／一次ご案内</p>
+          </div>
+          <div class="card reveal">
+            <h3 class="u-mt0">Day 3–7</h3>
+            <p class="subtle">オンライン面談（日本語）＋簡易チェック</p>
+          </div>
+          <div class="card reveal">
+            <h3 class="u-mt0">Day 7–14</h3>
+            <p class="subtle">内定・オファー条件確認</p>
+          </div>
+          <div class="card reveal">
+            <h3 class="u-mt0">Day 14–</h3>
+            <p class="subtle">EP申請・渡航準備（移住サポートに連携）</p>
+          </div>
+        </div>
 
-          <article class="card reveal">
-            <h3 class="u-mt0">クレーム応対</h3>
-            <p class="subtle">「配送遅延に不満の顧客、どう対応？」</p>
-            <ul style="padding-left:18px">
-              <li>共感 → 事実確認 → 代替案の提示</li>
-              <li>KPI（初回解決）を意識</li>
-              <li>ログの正確記録</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <h3 class="u-mt0">業務理解</h3>
-            <p class="subtle">「このプロジェクトで大切だと思う点は？」</p>
-            <ul style="padding-left:18px">
-              <li>顧客体験とブランド保護</li>
-              <li>品質指標（CSAT/NPS/QA）</li>
-              <li>チーム連携とエスカレーション</li>
-            </ul>
-          </article>
+        <div class="u-center u-mt12">
+          <a class="btn ghost" href="relocation-visa.html">移住・ビザの流れを見る</a>
         </div>
       </div>
     </section>
 
-    <!-- =========================================================
-         Mini FAQ (toggle)
-    ========================================================== -->
+    <!-- ==================== よくある質問（抜粋） ==================== -->
     <section id="mini-faq">
       <div class="container">
         <div class="section-head">
-          <h2 class="h2">よくある質問</h2>
-          <p class="h2-sub">詳細はFAQページでも随時更新しています</p>
+          <h2 class="h2">よくある質問（抜粋）</h2>
+          <p class="h2-sub">詳細はFAQページもご覧ください</p>
         </div>
 
-        <div class="card faq reveal">
-          <button class="q" type="button">英語に自信がありません。応募できますか？</button>
-          <div class="a" style="display:none">はい、日本語中心の案件からスタート可能です。入社後の学習支援もあります。</div>
+        <div class="card faq reveal" id="faqList">
+          <!-- app.js が全体で使うIDと揃えています（任意で差し替え） -->
+        </div>
 
-          <button class="q u-mt12" type="button">面接はすべてオンラインですか？</button>
-          <div class="a" style="display:none">はい、原則オンラインで完結します。デバイス・ネット環境のみご準備ください。</div>
-
-          <button class="q u-mt12" type="button">合否はどれくらいでわかりますか？</button>
-          <div class="a" style="display:none">できる限り早くご連絡します（数日目安）。状況により前後します。</div>
-
-          <div class="u-mt12">
-            <a class="btn ghost" href="faq.html">FAQページへ</a>
-          </div>
+        <div class="u-center u-mt12">
+          <a class="btn ghost" href="faq.html">FAQページへ</a>
         </div>
       </div>
     </section>
 
-    <!-- =========================================================
-         CTA Band
-    ========================================================== -->
-    <section class="cta-band">
+    <!-- ==================== CTA ==================== -->
+    <section id="cta-apply">
       <div class="container">
-        <div class="card reveal" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
-          <div>
-            <h3 class="u-mt0">事前に相談できます（日本語OK）</h3>
-            <p class="subtle u-mt8">面接準備や適性の見極め、移住の疑問もまとめて</p>
-          </div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn primary" href="casual-interview.html">カジュアル面談</a>
-            <a class="btn ghost" href="jobs-and-benefits.html">募集中の求人を見る</a>
-          </div>
+        <div class="section-head">
+          <h2 class="h2">応募・相談はこちら</h2>
+          <p class="h2-sub">不明点は日本語でお気軽にどうぞ</p>
+        </div>
+
+        <div class="u-center" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <a class="btn primary" href="open-jobs.html">求人一覧へ</a>
+          <a class="btn ghost" target="_blank" href="https://forms.office.com/e/2UvpbweQww">カジュアル面談</a>
+          <a class="btn ghost" target="_blank" href="https://line.me/R/ti/p/@286nmdsd?from=page&searchId=286nmdsd">LINEで最新情報</a>
         </div>
       </div>
     </section>
 
-    <!-- =========================================================
-         Footer (shared)
-    ========================================================== -->
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <p class="copy">© <span id="year"></span> TP — Malaysia & Thailand</p>
-        <ul class="footer-links">
-          <li><a href="about.html" data-i18n="footer.about">会社紹介</a></li>
-          <li><a href="privacy.html" data-i18n="footer.privacy">プライバシー</a></li>
-          <li><a href="contact.html" data-i18n="footer.contact">お問い合わせ</a></li>
-        </ul>
+    <!-- ==================== Footer ==================== -->
+    <footer class="site-footer site-footer--brandcard">
+      <div class="container">
+        <div class="f-brandcard card">
+          <div class="f-brandcard__head">
+            <div class="f-brandcard__mark" aria-hidden="true">TP</div>
+            <div class="f-brandcard__titlewrap">
+              <div class="f-brandcard__title">TP</div>
+              <div class="f-brandcard__sub">Malaysia · Thailand — 日本語採用</div>
+            </div>
+          </div>
+          <p class="f-brandcard__desc">テレパフォーマンスは、日本語スピーカーの海外キャリアを就労ビザと移住サポートで伴走します。</p>
+          <div class="f-badges">
+            <span class="pill">🏆 Great Place to Work®</span>
+            <span class="pill">🌍 Diversity &amp; Inclusion</span>
+          </div>
+        </div>
+
+        <div class="f-quick">
+          <h4 class="f-quick__title">クイックリンク</h4>
+          <div class="f-quick__buttons">
+            <a href="open-jobs.html" class="btn ghost" style="width:100%;">求人一覧</a>
+            <a href="salary-and-benefits.html" class="btn primary" style="width:100%;">給与・福利厚生</a>
+          </div>
+          <div class="f-quick__links">
+            <a href="relocation-visa.html">移住・ビザ</a>
+            <a href="why-malaysia-thailand.html">勤務先都市</a>
+            <a href="faq.html">FAQ</a>
+          </div>
+        </div>
+
+        <div class="f-copy">
+          © <span id="year"></span> Teleperformance. All rights reserved.
+        </div>
       </div>
     </footer>
 
-    <!-- Floating apply (mobile) -->
-    <div class="apply-bar" id="applyBar" role="region" aria-label="応募バー">
-      <a class="btn ghost" href="faq.html">FAQ</a>
-      <a class="btn primary" target="_blank" rel="noopener"
-         href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">ご応募はこちら</a>
+    <!-- Floating buttons -->
+    <div id="floatBar" class="float-bar" aria-hidden="false">
+      <button id="toTopBtn" class="to-top" type="button" aria-label="ページ上部へ">↑</button>
+      <a class="btn primary apply-float" target="_blank" rel="noopener"
+         href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">
+        ご応募はこちら
+      </a>
     </div>
-
-    <!-- Back-to-top (keep your original) -->
-    <a id="toTop" class="btn ghost to-top" href="#main" aria-label="トップへ">▲</a>
-    <!-- Apply Now next to the arrow (added, keeps original arrow untouched) -->
-    <a class="apply-fab btn primary" target="_blank" rel="noopener"
-       href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE"
-       data-i18n="cta.apply">Apply Now</a>
   </main>
 
-  <noscript>
-    <div class="noscript">
-      JavaScript を有効にすると表示や言語切替がより快適になります。
-    </div>
-  </noscript>
+  <noscript><div class="noscript">JavaScript を有効にすると表示がより快適になります。</div></noscript>
 
-  <script src="translations.js" defer></script>
-  <script src="app.js" defer></script>
+  <!-- ==================== JS ==================== -->
+  <script src="assets/translations.js" defer></script>
+  <script src="assets/app.js" defer></script>
+  <script src="assets/enhancements.js" defer></script>
+
+  <!-- Page bootstrap: process + mini FAQ (CONTENT から取得、なければフォールバック) -->
+  <script>
+  (function () {
+    const $  = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+    // ---- Process steps ----
+    const steps = (window.CONTENT && window.CONTENT.jp && window.CONTENT.jp.processSteps) || [];
+    const list  = $("#processList");
+    if (list) {
+      const fallback = [
+        "応募フォーム送信",
+        "オンライン面談（日本語）",
+        "英語・適性チェック（案件により）",
+        "内定・オファー説明",
+        "ビザ申請・渡航準備"
+      ];
+      const data = Array.isArray(steps) && steps.length ? steps : fallback;
+      list.innerHTML = "";
+      data.forEach((t, i) => {
+        const li = document.createElement("li");
+        li.className = "timeline__item";
+        li.innerHTML = `
+          <div class="timeline__num">${i + 1}</div>
+          <div class="timeline__body">
+            <h4 class="u-mt0">${t}</h4>
+            <p class="subtle">詳細は担当より日本語でご案内します。</p>
+          </div>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    // ---- Mini FAQ (re-use global CONTENT.jp.faq) ----
+    const faqWrap = $("#faqList");
+    if (faqWrap) {
+      const faqs = (window.CONTENT && window.CONTENT.jp && window.CONTENT.jp.faq) || [];
+      const fallback = [
+        { q: "英語はどのくらい必要？", a: "案件により異なります。読み書き中心のケースが多いです。" },
+        { q: "オンラインで完結しますか？", a: "面談〜内定まで基本はオンラインで進みます。" }
+      ];
+      const items = Array.isArray(faqs) && faqs.length ? faqs : fallback;
+      faqWrap.innerHTML = items.map(f => `
+        <details class="faq__item">
+          <summary class="faq__q">${f.q}</summary>
+          <div class="faq__a">${f.a}</div>
+        </details>
+      `).join("");
+    }
+  })();
+  </script>
 </body>
 </html>
