@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>求人一覧 | TP Japan — 暮らすように、海外で働く。</title>
-  <meta name="description" content="現在募集中の日本語スピーカー向けポジション（マレーシア・タイ）。勤務地、業務内容、応募方法、カジュアル面談の案内。" />
+  <meta name="description" content="現在募集中の日本語ポジション一覧。勤務地（KL/ペナン/バンコク）、雇用形態、応募リンクなど。" />
   <meta name="theme-color" content="#ff0082" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,8 +13,9 @@
   <meta property="og:image" content="photos/TPLogo11.png" />
   <link rel="stylesheet" href="assets/styles.css" />
   <link rel="stylesheet" href="assets/overrides.css" />
+  <!-- Open Graph -->
   <meta property="og:title" content="求人一覧 | TP Japan — 暮らすように、海外で働く。" />
-  <meta property="og:description" content="日本語スピーカー向けの現在募集中の職種一覧。勤務地や仕事内容、応募方法をご案内します。" />
+  <meta property="og:description" content="日本語スピーカー向けの最新求人を掲載しています。" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ja_JP" />
 </head>
@@ -22,7 +23,6 @@
 <body>
   <a class="visually-hidden" href="#main">メインへスキップ</a>
 
-  <!-- Header -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="TP ホーム">
@@ -62,7 +62,6 @@
     </div>
   </header>
 
-  <!-- Drawer (mobile) -->
   <div id="scrim" class="scrim" hidden></div>
   <aside id="drawer" class="drawer" aria-hidden="true">
     <header class="drawer-head">
@@ -91,160 +90,88 @@
     </div>
   </aside>
 
-  <!-- Slide-up Apply Bar -->
   <div class="apply-bar" aria-hidden="true">
     <div class="container apply-bar__inner">
       <span class="apply-bar__text">海外キャリアに一歩。今すぐ応募</span>
       <div class="apply-bar__actions">
         <a class="btn primary" target="_blank"
-           href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">
-          ご応募はこちら
-        </a>
+           href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">ご応募はこちら</a>
         <a class="btn ghost" target="_blank" href="https://forms.office.com/e/2UvpbweQww">カジュアル面談</a>
       </div>
     </div>
   </div>
 
   <main id="main">
-    <!-- Hero -->
+    <!-- HERO -->
     <section class="hero">
       <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">Open Jobs</p>
-          <h1 class="hero-title">現在の募集</h1>
-          <p class="lead">
-            日本語対応のポジションを、KL・ペナン・バンコクで通年採用中。<br />
-            英語レベルやバックグラウンドに合わせて、最適な配属をご提案します。
-          </p>
+          <p class="eyebrow">Open Positions</p>
+          <h1 class="hero-title">求人一覧</h1>
+          <p class="lead">日本語対応のポジションを中心に掲載しています。勤務地やキーワードで絞り込みができます。</p>
           <div class="hero-ctas">
-            <a class="btn primary" target="_blank"
-               href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">
-              応募ページを開く
-            </a>
-            <a class="btn ghost" href="salary-and-benefits.html">給与・福利厚生</a>
+            <a class="btn primary" href="salary-and-benefits.html">給与・福利厚生</a>
+            <a class="btn ghost" href="relocation-visa.html">移住・ビザサポート</a>
           </div>
-          <ul class="stats" aria-label="Quick facts">
-            <li class="stat"><strong>勤務地</strong><span>KL / ペナン / バンコク</span></li>
-            <li class="stat"><strong>雇用形態</strong><span>正社員（フルタイム）</span></li>
-            <li class="stat"><strong>言語</strong><span>日本語（N2 目安）</span></li>
-          </ul>
         </div>
         <div class="hero-media">
           <img id="heroCover"
-               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 440 320'%3E%3Crect fill='%23eaf2ff' width='440' height='320'/%3E%3Ctext x='220' y='170' text-anchor='middle' fill='%233b82f6' font-size='28' font-weight='bold'%3EOpen%20Jobs%3C/text%3E%3C/svg%3E"
-               alt="求人一覧" />
+               alt="Open Jobs"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 440 320'%3E%3Crect fill='%23fff0f8' width='440' height='320'/%3E%3Crect fill='%23ff0082' rx='10' ry='10' x='60' y='120' width='320' height='80'/%3E%3Ctext x='220' y='168' text-anchor='middle' fill='white' font-size='24' font-weight='bold'%3EOpen Jobs%3C/text%3E%3C/svg%3E" />
         </div>
       </div>
       <div class="hero-bg"></div>
     </section>
 
-    <!-- 注目の求人（任意：簡易カード。静的説明＋外部リンク） -->
-    <section id="featured">
+    <!-- Filters -->
+    <section id="filters">
       <div class="container">
-        <div class="section-head">
-          <h2 class="h2">注目の求人</h2>
-          <p class="h2-sub">配属はスキル・適性・募集状況によりご案内します</p>
-        </div>
-
-        <div class="grid cols-3 cols-2-md cols-1-sm">
-          <article class="card">
-            <h3 class="u-mt0">カスタマーサポート（日本語）</h3>
-            <p class="subtle">大手Eコマース・旅行・ITなど。チャット/メール中心の問い合わせ対応。</p>
-            <div class="u-mt12" style="display:flex;gap:10px;flex-wrap:wrap">
-              <a class="btn primary" target="_blank"
-                 href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">応募</a>
-              <a class="btn ghost" href="salary-and-benefits.html">給与/福利厚生</a>
+        <div class="card">
+          <div class="grid cols-3 cols-1-sm">
+            <div>
+              <label class="subtle" for="filterLocation">勤務地</label>
+              <select id="filterLocation">
+                <option value="">すべて</option>
+                <option>クアラルンプール</option>
+                <option>ペナン</option>
+                <option>バンコク</option>
+              </select>
             </div>
-          </article>
-
-          <article class="card">
-            <h3 class="u-mt0">コンテンツレビュアー</h3>
-            <p class="subtle">SNS・プラットフォームの安全性維持のための審査業務。トレーニングあり。</p>
-            <div class="u-mt12" style="display:flex;gap:10px;flex-wrap:wrap">
-              <a class="btn primary" target="_blank"
-                 href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">応募</a>
-              <a class="btn ghost" href="salary-and-benefits.html">給与/福利厚生</a>
+            <div>
+              <label class="subtle" for="filterKeyword">キーワード</label>
+              <input id="filterKeyword" type="search" placeholder="例：カスタマー／コンテンツ／テクサポ" />
             </div>
-          </article>
-
-          <article class="card">
-            <h3 class="u-mt0">テクニカルサポート（初級）</h3>
-            <p class="subtle">ITガジェット/ソフトの問い合わせ一次対応。マニュアル完備、研修充実。</p>
-            <div class="u-mt12" style="display:flex;gap:10px;flex-wrap:wrap">
-              <a class="btn primary" target="_blank"
-                 href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">応募</a>
-              <a class="btn ghost" href="salary-and-benefits.html">給与/福利厚生</a>
+            <div>
+              <label class="subtle" for="filterTag">タグ</label>
+              <select id="filterTag">
+                <option value="">すべて</option>
+                <option value="N2以上">N2以上</option>
+                <option value="未経験歓迎">未経験歓迎</option>
+                <option value="シフト制">シフト制</option>
+              </select>
             </div>
-          </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 現在募集中のポジション（動的：CONTENT.jp.currentOpenings） -->
-    <section id="openings">
+    <!-- Jobs Grid -->
+    <section id="jobs">
       <div class="container">
         <div class="section-head">
-          <h2 class="h2" id="openingsTitle">現在募集中のポジション</h2>
-          <p class="h2-sub">一覧は随時更新されます</p>
+          <h2 class="h2">現在の募集</h2>
+          <p class="h2-sub">コンテンツは随時更新されます。応募前のカジュアル面談も歓迎です。</p>
         </div>
 
-        <!-- Leave empty; app.js → renderOpenings() will populate. -->
-        <ul id="openingsList" class="linklist"></ul>
+        <div id="jobsGrid" class="grid cols-3 cols-2-md cols-1-sm">
+          <!-- populated below -->
+        </div>
 
         <div class="u-center u-mt12" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
           <a class="btn primary" target="_blank"
-             href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">
-            応募ページを開く
-          </a>
-          <a class="btn ghost" href="casual-interview.html">カジュアル面談</a>
-          <a class="btn ghost" href="salary-and-benefits.html">給与・福利厚生</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 応募条件と提出書類（説明のみ） -->
-    <section id="requirements">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="h2">応募条件と提出書類</h2>
-          <p class="h2-sub">学歴不問・職種未経験OKのポジションあり</p>
-        </div>
-
-        <div class="grid cols-2 cols-1-sm">
-          <div class="card">
-            <h3 class="u-mt0">応募条件（例）</h3>
-            <ul class="subtle" style="padding-left:18px">
-              <li>日本語：ビジネスレベル（目安：JLPT N2 以上）</li>
-              <li>英語：社内コミュニケーションに抵抗がないレベル（配属先により差異あり）</li>
-              <li>シフト勤務に柔軟（プロジェクトにより土日祝/夜間の可能性あり）</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3 class="u-mt0">提出書類（例）</h3>
-            <ul class="subtle" style="padding-left:18px">
-              <li>履歴書（日本語）※職歴詳細・希望勤務地を明記</li>
-              <li>職務経歴書（該当する場合）</li>
-              <li>英語CV（プロジェクトにより提出をお願いする場合あり）</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- よくある質問（動的） -->
-    <section id="mini-faq">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="h2">よくある質問</h2>
-          <p class="h2-sub">選考や配属、住まい、ビザなど</p>
-        </div>
-
-        <!-- Leave empty: app.js → renderFaq() will populate. -->
-        <div class="card faq" id="faqList"></div>
-
-        <div class="u-center u-mt12">
-          <a class="btn ghost" href="faq.html">FAQページへ</a>
+             href="https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE">代表求人を開く</a>
+          <a class="btn ghost" target="_blank" href="https://forms.office.com/e/2UvpbweQww">カジュアル面談</a>
+          <a class="btn ghost" target="_blank" href="https://line.me/R/ti/p/@286nmdsd?from=page&searchId=286nmdsd">LINEで最新情報</a>
         </div>
       </div>
     </section>
@@ -271,12 +198,11 @@
           <h4 class="f-quick__title">クイックリンク</h4>
           <div class="f-quick__buttons">
             <a href="salary-and-benefits.html" class="btn ghost" style="width:100%;">給与・福利厚生</a>
-            <a href="casual-interview.html" class="btn primary" style="width:100%;">カジュアル面談</a>
+            <a href="relocation-visa.html" class="btn primary" style="width:100%;">移住・ビザ</a>
           </div>
           <div class="f-quick__links">
-            <a href="relocation-visa.html">移住・ビザ</a>
-            <a href="interview-process.html">面接プロセス</a>
             <a href="why-malaysia-thailand.html">勤務先都市</a>
+            <a href="interview-process.html">面接プロセス</a>
             <a href="faq.html">FAQ</a>
           </div>
         </div>
@@ -287,7 +213,6 @@
       </div>
     </footer>
 
-    <!-- Floating buttons -->
     <div id="floatBar" class="float-bar" aria-hidden="false">
       <button id="toTopBtn" class="to-top" type="button" aria-label="ページ上部へ">↑</button>
       <a class="btn primary apply-float" target="_blank" rel="noopener"
@@ -297,13 +222,71 @@
     </div>
   </main>
 
-  <noscript>
-    <div class="noscript">JavaScript を有効にすると表示や操作がより快適になります。</div>
-  </noscript>
+  <noscript><div class="noscript">JavaScript を有効にすると表示がより快適になります。</div></noscript>
 
-  <!-- JS -->
   <script src="assets/translations.js" defer></script>
   <script src="assets/app.js" defer></script>
   <script src="assets/enhancements.js" defer></script>
+
+  <!-- Page bootstrap: render jobs from CONTENT.jp.jobs (with safe fallback) -->
+  <script>
+  (function(){
+    const $ = (s, r=document) => r.querySelector(s);
+    const grid = $("#jobsGrid");
+    if (!grid) return;
+
+    function card(j){
+      const tags = (j.tags || []).map(t => `<span class="pill">${t}</span>`).join(" ");
+      const link = j.link && j.link !== "#" ? j.link :
+        "https://careerseng-teleperformance.icims.com/jobs/49026/customer-service-representative---japanese-speaking-%28kl%29/job?mode=job&iis=LANDINGPAGE";
+      return `
+        <article class="card job-card" data-loc="${j.location || ''}" data-tags="${(j.tags||[]).join(',')}">
+          <h3 class="u-mt0">${j.title || "日本語ポジション"}</h3>
+          <ul class="subtle job-meta">
+            <li><strong>勤務地：</strong>${j.location || "-"}</li>
+            <li><strong>雇用形態：</strong>${j.type || "フルタイム"}</li>
+            <li><strong>シフト：</strong>${j.shift || "-"}</li>
+            <li><strong>給与目安：</strong>${j.range || "案件により"}</li>
+          </ul>
+          <div class="job-tags">${tags}</div>
+          <div class="u-mt12" style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn primary" target="_blank" rel="noopener" href="${link}">応募ページへ</a>
+            <a class="btn ghost" target="_blank" rel="noopener" href="https://forms.office.com/e/2UvpbweQww">カジュアル面談</a>
+          </div>
+        </article>
+      `;
+    }
+
+    const jobs = (window.CONTENT && window.CONTENT.jp && window.CONTENT.jp.jobs) || [];
+    const data = Array.isArray(jobs) && jobs.length ? jobs : [
+      { title:"カスタマーサービス（日本語）", location:"クアラルンプール", type:"フルタイム", shift:"シフト制", range:"例：現地通貨レンジ", tags:["N2以上","未経験歓迎"] },
+      { title:"カスタマーサービス（日本語）", location:"ペナン", type:"フルタイム", shift:"シフト制", range:"例：現地通貨レンジ", tags:["N2以上"] },
+      { title:"カスタマーサービス（日本語）", location:"バンコク", type:"フルタイム", shift:"シフト制", range:"例：現地通貨レンジ", tags:["N2以上"] }
+    ];
+
+    grid.innerHTML = data.map(card).join("");
+
+    // Simple filters
+    const fLoc = $("#filterLocation");
+    const fKey = $("#filterKeyword");
+    const fTag = $("#filterTag");
+
+    function applyFilters(){
+      const loc = (fLoc && fLoc.value) || "";
+      const key = (fKey && fKey.value.trim().toLowerCase()) || "";
+      const tag = (fTag && fTag.value) || "";
+
+      grid.querySelectorAll(".job-card").forEach(card => {
+        const txt = card.textContent.toLowerCase();
+        const okLoc = !loc || card.getAttribute("data-loc") === loc;
+        const okKey = !key || txt.includes(key);
+        const tags = (card.getAttribute("data-tags") || "").split(",");
+        const okTag = !tag || tags.includes(tag);
+        card.style.display = (okLoc && okKey && okTag) ? "" : "none";
+      });
+    }
+    [fLoc, fKey, fTag].forEach(el => el && el.addEventListener("input", applyFilters));
+  })();
+  </script>
 </body>
 </html>
