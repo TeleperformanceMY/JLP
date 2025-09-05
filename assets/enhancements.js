@@ -1,91 +1,188 @@
-/* JLP Enhancements JS (loads after app.js) */
-}
+/* assets/enhancements.js */
+(() => {
+  if (window.__enhanced__) return; // idempotent
+  window.__enhanced__ = true;
 
+  const $  = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
-/* Apply + openings (locations with photos + 2 coming soon) */
-function redesignApply(){
-const sec = $('#apply .container'); if (!sec) return;
-const photos = {
-KL: 'photos/kl.jpg', Penang: 'photos/penang.jpg', Bangkok: 'photos/bangkok.jpg',
-Johor: 'photos/johor.jpg', ChiangMai: 'photos/chiangmai.jpg'
-};
-const html = `
-<div class="section-head"><h2 class="h2">現在の募集と応募方法</h2><p class="h2-sub">勤務地別に探す</p></div>
-<div class="locations-grid">
-${[
-{n:'クアラルンプール', k:'KL', img:photos.KL, soon:false},
-{n:'ペナン', k:'Penang', img:photos.Penang, soon:false},
-{n:'バンコク', k:'Bangkok', img:photos.Bangkok, soon:false},
-{n:'ジョホールバル', k:'Johor', img:photos.Johor, soon:true},
-{n:'チェンマイ', k:'ChiangMai', img:photos.ChiangMai, soon:true}
-].map(x=>`
-<article class="loc-card reveal">
-${x.soon?'<span class="coming">近日公開</span>':''}
-<img src="${x.img}" alt="${x.n}">
-<div class="meta">
-<strong>${x.n}</strong>
-<div class="subtle">日本語サポート／多国籍チーム</div>
-${x.soon?'<span class="pill">準備中</span>':`<div style="display:flex;gap:8px;flex-wrap:wrap">
-<a class="btn primary" target="_blank" href="${LINKS.apply||'#'}">応募</a>
-<a class="btn ghost" target="_blank" href="${LINKS.casual||'https://forms.office.com/e/2UvpbweQww'}">カジュアル面談</a>
-</div>`}
-</div>
-</article>`).join('')}
-</div>`;
-const gridParent = $('#apply .grid');
-if (gridParent) gridParent.replaceWith(document.createRange().createContextualFragment(html));
-}
+  // ---------- Footer year ----------
+  const y = $("#year");
+  if (y) y.textContent = new Date().getFullYear();
 
+  // ---------- Drawer / Scrim ----------
+  const drawer = $("#drawer");
+  const scrim  = $("#scrim");
+  const menuBtn = $("#menuBtn");
+  const closeBtn = $("#closeDrawer");
 
-/* Office cards micro redesign – add class hooks only (CSS handles look) */
-function tweakOffice(){ const oc=$('#officeCards'); if(oc) oc.classList.add('office-modern'); }
+  function openDrawer() {
+    if (!drawer || !scrim) return;
+    drawer.setAttribute("aria-hidden", "false");
+    scrim.hidden = false;
+    menuBtn && menuBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  }
+  function closeDrawer() {
+    if (!drawer || !scrim) return;
+    drawer.setAttribute("aria-hidden", "true");
+    scrim.hidden = true;
+    menuBtn && menuBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+  menuBtn && menuBtn.addEventListener("click", openDrawer);
+  closeBtn && closeBtn.addEventListener("click", closeDrawer);
+  scrim && scrim.addEventListener("click", closeDrawer);
+  // close drawer on ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && drawer && drawer.getAttribute("aria-hidden") === "false") {
+      closeDrawer();
+    }
+  });
 
+  // ---------- Slide-up Apply Bar & To top ----------
+  const applyBar = $(".apply-bar");
+  const floatBar = $("#floatBar");
+  const toTopBtn = $("#toTopBtn");
 
-/* Lifestyle mosaic */
-function tweakLifestyle(){ const g=$('#gallery'); if(g) g.classList.add('masonry'); }
+  let lastY = 0;
+  function onScroll() {
+    const y = window.scrollY || window.pageYOffset;
+    if (applyBar) {
+      // Show when user has scrolled a bit and is scrolling down
+      const down = y > lastY;
+      applyBar.setAttribute("aria-hidden", !(y > 220 && down));
+    }
+    if (floatBar && toTopBtn) {
+      // Show the to-top when far enough
+      toTopBtn.style.opacity = y > 360 ? "1" : "0";
+      toTopBtn.style.pointerEvents = y > 360 ? "auto" : "none";
+    }
+    lastY = y;
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 
+  toTopBtn && toTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
-/* Voices – JP names if provided */
-function tweakVoices(){
-const data = C.voices || [];
-const root = $('#voiceGrid'); if (!root || !data.length) return;
-root.innerHTML='';
-data.forEach(v=>{
-const el = document.createElement('div');
-el.className = 'card reveal';
-const who = v.who_jp || v.name_jp || v.who || '';
-el.innerHTML = `<p class="quote" style="margin-top:0">${v.quote||''}</p><div class="voice-name">${who}</div>`;
-root.appendChild(el);
-});
-}
+  // ---------- Reveal on scroll ----------
+  const reveals = $$(".reveal");
+  if ("IntersectionObserver" in window && reveals.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-visible");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add("is-visible"));
+  }
 
+  // ---------- Videos grid (YouTube) ----------
+  // Reads window.CONTENT.jp.videos = [{id,title,channel?,duration?}, ...]
+  const videosGrid = $("#videosGrid");
+  if (videosGrid) {
+    const V = (window.CONTENT && window.CONTENT.jp && window.CONTENT.jp.videos) || [];
+    const fallback = [
+      { id: "dQw4w9WgXcQ", title: "TP オフィス紹介（サンプル）" },
+      { id: "M7lc1UVf-VE", title: "社員の声ダイジェスト（サンプル）" },
+      { id: "ysz5S6PUM-U", title: "カルチャー＆イベント（サンプル）" }
+    ];
+    const data = Array.isArray(V) && V.length ? V : fallback;
 
-/* Mini FAQ – soft ChatGPT mark */
-function markFAQ(){ const f=$('#mini-faq .faq'); if (f) f.classList.add('chatgpt-mark'); }
+    videosGrid.innerHTML = "";
+    data.forEach(v => {
+      const fig = document.createElement("figure");
+      fig.className = "card video-card reveal";
+      fig.innerHTML = `
+        <div class="video-thumb" data-yid="${v.id}">
+          <img loading="lazy" alt="${v.title || "video"}"
+               src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" />
+          <button class="play-btn" aria-label="再生">▶</button>
+        </div>
+        <figcaption class="video-cap">
+          <div class="video-title">${v.title || ""}</div>
+          ${v.channel ? `<div class="video-meta">${v.channel}${v.duration ? "・" + v.duration : ""}</div>` : ""}
+        </figcaption>
+      `;
+      videosGrid.appendChild(fig);
+    });
 
+    // click-to-embed to keep page light
+    videosGrid.addEventListener("click", (e) => {
+      const box = e.target.closest(".video-thumb");
+      if (!box) return;
+      const id = box.getAttribute("data-yid");
+      if (!id) return;
+      const wrapper = document.createElement("div");
+      wrapper.className = "video-embed";
+      wrapper.innerHTML = `
+        <iframe
+          src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0"
+          title="YouTube video"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>`;
+      box.replaceWith(wrapper);
+    });
+  }
 
-/* Floating bar – add LINE quick link if provided */
-function addLineToFab(){
-const bar = $('#floatBar'); if(!bar) return;
-if (LINKS.line && !$('#lineFab')){
-const a = document.createElement('a');
-a.id='lineFab'; a.className='btn ghost'; a.href=LINKS.line; a.target='_blank'; a.rel='noopener'; a.textContent='LINE で相談';
-bar.insertBefore(a, $('.apply-float'));
-}
-}
+  // ---------- ChatGPT prompt copy/open ----------
+  const chatTxt = $("#chatgptPrompt");
+  const copyBtn = $("#copyPromptBtn");
+  const openBtn = $("#openChatGPTBtn");
+  if (chatTxt && !chatTxt.value) {
+    // Minimal prompt; you can expand in content-jp.json if you want
+    chatTxt.value =
+`あなたはTP（Teleperformance）の日本語採用について情報提供するアシスタントです。
+候補者が知りたい: 勤務地（KL/ペナン/バンコク）、給与/福利厚生、移住・ビザ、面接プロセス、応募方法。
+日本語で、簡潔に、公式情報に基づいて答えてください。`;
+  }
+  copyBtn && copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(chatTxt.value);
+      copyBtn.textContent = "コピーしました";
+      setTimeout(() => (copyBtn.textContent = "プロンプトをコピー"), 1600);
+    } catch {
+      // Fallback
+      chatTxt.select();
+      document.execCommand("copy");
+    }
+  });
+  openBtn && openBtn.addEventListener("click", () => {
+    window.open("https://chat.openai.com/", "_blank", "noopener");
+  });
 
+  // ---------- Disable carousel controls when in grid mode ----------
+  const benefits = document.querySelector("section#benefits");
+  if (benefits && benefits.dataset.mode === "grid") {
+    const ctrls = $$(".carousel-controls .ctrl", benefits);
+    ctrls.forEach(b => {
+      b.setAttribute("disabled", "true");
+      b.style.opacity = "0.35";
+      b.style.pointerEvents = "none";
+      b.title = "グリッド表示では操作できません";
+    });
+  }
 
-document.addEventListener('DOMContentLoaded', ()=>{
-setNav();
-redesignReasons();
-redesignCities();
-gridBenefits();
-renderVideos();
-redesignApply();
-tweakOffice();
-tweakLifestyle();
-tweakVoices();
-markFAQ();
-addLineToFab();
-});
+  // ---------- Basic contact form client-side check ----------
+  const form = $("#contactForm");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name  = $("#name", form)?.value.trim();
+      const email = $("#email", form)?.value.trim();
+      if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert("お名前と正しいメールアドレスをご入力ください。");
+        return;
+      }
+      alert("送信ありがとうございました！担当よりご連絡します。");
+      form.reset();
+    });
+  }
 })();
