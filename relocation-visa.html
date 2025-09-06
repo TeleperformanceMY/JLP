@@ -416,4 +416,110 @@
       { t: '生活の立ち上げ', d: 'SIM/交通/銀行口座（必要に応じて案内）' },
     ];
     function fillPanel(list, elId) {
-      const el = document.getElementById(elId
+      const el = document.getElementById(elId);
+      if (!el) return;
+      el.innerHTML = '';
+      list.forEach(x => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h4 class="u-mt0">${x.t}</h4><p class="subtle" style="margin:0">${x.d || ''}</p>`;
+        el.appendChild(card);
+      });
+    }
+    fillPanel(cmpMY, 'panelMY');
+    fillPanel(cmpTH, 'panelTH');
+
+    // Tabs behavior
+    const tabs = $$('.tabs .tab');
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabs.forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('is-active'); btn.setAttribute('aria-selected', 'true');
+        const t = btn.dataset.tab;
+        $$('.tab-panel').forEach(p => p.classList.remove('is-active'));
+        document.getElementById(`panel-${t}`).classList.add('is-active');
+      });
+    });
+
+    // Checklist
+    const docs = J.checklist || [
+      'パスポート（有効期限にご注意）',
+      '顔写真データ（規定サイズ）',
+      '履歴書（日本語/英語）',
+      '学歴証明（英文/日本語・要件により）',
+      '職歴証明（あれば）',
+      '無犯罪証明/健康診断（国/ポジションにより）',
+    ];
+    const docList = $('#docList');
+    if (docList) {
+      docList.innerHTML = '';
+      docs.forEach(d => {
+        const li = document.createElement('li');
+        li.innerHTML = `<label><input type="checkbox" /> <span>${d}</span></label>`;
+        docList.appendChild(li);
+      });
+    }
+
+    // Support grid
+    const support = J.support || [
+      { t: '就労ビザ申請サポート', d: '必要書類の案内、提出・手続きのサポート' },
+      { t: '片道航空券の手配', d: '入社スケジュールに合わせて会社が手配' },
+      { t: '到着後ホテル', d: '規定日数の宿泊をカバー（詳細はオファー時に）' },
+      { t: '生活立ち上げガイド', d: 'SIM/交通/住居探しの初動をサポート' },
+      { t: '日本語での伴走', d: '不明点は日本語でいつでも相談OK' },
+      { t: 'オンボーディング', d: '出社初日〜研修のご案内' },
+    ];
+    const sGrid = $('#supportGrid');
+    if (sGrid) {
+      sGrid.innerHTML = '';
+      support.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h4 class="u-mt0">${s.t}</h4><p class="subtle" style="margin:0">${s.d || ''}</p>`;
+        sGrid.appendChild(card);
+      });
+    }
+
+    // Arrival tips
+    const tips = J.tips || [
+      { t: '通信', d: '空港/市内でプリペイドSIM。eSIM対応も普及' },
+      { t: '交通', d: 'KL: LRT/MRT, Grab。BKK: BTS/MRT, Grab など' },
+      { t: '支払い', d: '現地キャッシュ + クレカ/QR決済（店舗により）' },
+    ];
+    const tGrid = $('#tipsGrid');
+    if (tGrid) {
+      tGrid.innerHTML = '';
+      tips.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h4 class="u-mt0">${s.t}</h4><p class="subtle" style="margin:0">${s.d || ''}</p>`;
+        tGrid.appendChild(card);
+      });
+    }
+
+    // Mini FAQ
+    const faqs = (J.faq && J.faq.slice(0, 4)) || [
+      { q: '英語はどのくらい必要ですか？', a: '配属先により異なります。日本語中心のポジションもあります。' },
+      { q: '住居探しはサポートしてもらえますか？', a: '情報提供・初動の案内を行います。契約は各自で進めます。' },
+      { q: '家族帯同は可能ですか？', a: '国やビザ種別により異なります。個別にご相談ください。' },
+      { q: '費用負担はどこまで？', a: '片道航空券・到着後ホテル等の範囲はオファー時に明記します。' },
+    ];
+    const faqMini = $('#faqMini');
+    if (faqMini) {
+      faqMini.innerHTML = '';
+      faqs.forEach(item => {
+        const d = document.createElement('details');
+        const s = document.createElement('summary');
+        s.textContent = item.q;
+        const p = document.createElement('p');
+        p.className = 'subtle';
+        p.style.margin = '0 0 8px 0';
+        p.textContent = item.a;
+        d.appendChild(s); d.appendChild(p);
+        faqMini.appendChild(d);
+      });
+    }
+  })();
+  </script>
+</body>
+</html>
